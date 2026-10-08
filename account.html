@@ -36,9 +36,7 @@ body{
     font-size:42px;
     background:#0b0910;
     border:2px solid #b45cff;
-    box-shadow:
-        0 0 20px #8b2cff,
-        0 0 40px #8b2cff44;
+    box-shadow:0 0 20px #8b2cff,0 0 40px #8b2cff44;
 }
 
 .title{
@@ -144,9 +142,7 @@ body{
     border-radius:22px;
     background:linear-gradient(145deg,#18121f,#0c0b10);
     border:1px solid #3a2d47;
-    box-shadow:
-        0 10px 35px #000,
-        0 0 25px #7d32b518;
+    box-shadow:0 10px 35px #000,0 0 25px #7d32b518;
     z-index:999;
 }
 
@@ -173,20 +169,13 @@ body{
 
 <div class="header">
 
-    <div class="profile-logo">
-        👤
-    </div>
+    <div class="profile-logo">👤</div>
 
-    <div class="title">
-        PROFILE
-    </div>
+    <div class="title">PROFILE</div>
 
-    <div class="active">
-        ● ACTIVE
-    </div>
+    <div class="active">● ACTIVE</div>
 
 </div>
-
 
 <div class="container">
 
@@ -194,72 +183,35 @@ body{
         ACCOUNT INFORMATION
     </div>
 
-
     <div class="info-button purple">
-        <div>
-            👤 USER ID
-        </div>
-
-        <span id="userId">
-            Creating...
-        </span>
+        <div>👤 USER ID</div>
+        <span id="userId">Loading...</span>
     </div>
-
 
     <div class="info-button gold">
-        <div>
-            🏆 CURRENT RANK
-        </div>
-
-        <span id="rank">
-            🥉 BRONZE
-        </span>
+        <div>🏆 CURRENT RANK</div>
+        <span id="rank">🥉 BRONZE</span>
     </div>
-
 
     <div class="info-button red">
-        <div>
-            📦 TOTAL ORDERS
-        </div>
-
-        <span id="totalOrders">
-            0
-        </span>
+        <div>📦 TOTAL ORDERS</div>
+        <span id="totalOrders">0</span>
     </div>
-
 
     <div class="info-button gold">
-        <div>
-            💰 TOTAL DEPOSIT
-        </div>
-
-        <span id="totalDeposit">
-            ৳0
-        </span>
+        <div>💰 TOTAL DEPOSIT</div>
+        <span id="totalDeposit">৳0</span>
     </div>
-
 
     <div class="info-button purple">
-        <div>
-            👥 TOTAL USERS
-        </div>
-
-        <span>
-            100,397
-        </span>
+        <div>👥 TOTAL USERS</div>
+        <span>100,397</span>
     </div>
-
 
     <div class="info-button purple">
-        <div>
-            ℹ️ INFO
-        </div>
-
-        <span>
-            Crazy Like Shop
-        </span>
+        <div>ℹ️ INFO</div>
+        <span>Crazy Like Shop</span>
     </div>
-
 
     <div id="status" class="status">
         Connecting...
@@ -267,81 +219,68 @@ body{
 
 </div>
 
-
 <div class="bottom-nav">
 
-    <a class="nav-btn" href="index.html">
-        🏠
-    </a>
-
-    <a class="nav-btn" href="orders.html">
-        🧾
-    </a>
-
-    <a class="nav-btn" href="shop.html">
-        🛒
-    </a>
-
-    <a class="nav-btn" href="deposit.html">
-        💳
-    </a>
-
-    <a class="nav-btn active-nav" href="account.html">
-        👤
-    </a>
+    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="orders.html">🧾</a>
+    <a class="nav-btn" href="shop.html">🛒</a>
+    <a class="nav-btn" href="deposit.html">💳</a>
+    <a class="nav-btn active-nav" href="account.html">👤</a>
 
 </div>
 
-
 <script>
-
-/* ==========================================
-   TELEGRAM MINI APP
-========================================== */
-
-let telegramUserId = "";
-
-try{
-
-    if(
-        window.Telegram &&
-        window.Telegram.WebApp
-    ){
-
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
-
-        const user =
-            Telegram.WebApp.initDataUnsafe &&
-            Telegram.WebApp.initDataUnsafe.user;
-
-        if(user && user.id){
-
-            telegramUserId =
-                String(user.id);
-
-        }
-
-    }
-
-}catch(error){
-
-    console.log(error);
-
-}
-
-
-/* ==========================================
-   FIREBASE
-========================================== */
 
 const FIREBASE_URL =
     "https://crazy-like-shop-default-rtdb.firebaseio.com";
 
+let telegramUserId = "";
 
-/* ==========================================
+
+/* ===============================
+   TELEGRAM
+================================ */
+
+function getTelegramUser(){
+
+    try{
+
+        if(
+            !window.Telegram ||
+            !window.Telegram.WebApp
+        ){
+
+            return null;
+        }
+
+        const tg = window.Telegram.WebApp;
+
+        tg.ready();
+        tg.expand();
+
+        if(
+            !tg.initDataUnsafe ||
+            !tg.initDataUnsafe.user ||
+            !tg.initDataUnsafe.user.id
+        ){
+
+            return null;
+        }
+
+        return tg.initDataUnsafe.user;
+
+    }catch(error){
+
+        console.log(error);
+
+        return null;
+    }
+}
+
+
+/* ===============================
    CREATE CRAZY ID
-========================================== */
+================================ */
 
 function createCrazyId(){
 
@@ -352,64 +291,113 @@ function createCrazyId(){
 
     for(let i = 0; i < 6; i++){
 
-        const randomIndex =
+        code += chars[
             Math.floor(
                 Math.random() * chars.length
-            );
-
-        code += chars[randomIndex];
-
+            )
+        ];
     }
 
     return "CRAZY_" + code;
-
 }
 
 
-/* ==========================================
-   LOAD / CREATE USER
-========================================== */
+/* ===============================
+   RANK
+================================ */
+
+function setRank(totalDeposit){
+
+    let rank = "🥉 BRONZE";
+
+    if(totalDeposit >= 10000000000){
+
+        rank = "👑 MASTER";
+
+    }else if(totalDeposit >= 10000){
+
+        rank = "🔴 HEROIC";
+
+    }else if(totalDeposit >= 1000){
+
+        rank = "💎 DIAMOND";
+
+    }else if(totalDeposit >= 500){
+
+        rank = "🥈 SILVER";
+
+    }else if(totalDeposit >= 100){
+
+        rank = "🥉 BRONZE";
+    }
+
+    document.getElementById("rank").textContent = rank;
+}
+
+
+/* ===============================
+   LOAD USER
+================================ */
 
 async function loadUser(){
 
-    if(!telegramUserId){
+    const status =
+        document.getElementById("status");
 
-        document.getElementById(
-            "status"
-        ).textContent =
-            "❌ Telegram account not detected";
+    const userIdBox =
+        document.getElementById("userId");
+
+
+    /* GET TELEGRAM USER */
+
+    const tgUser =
+        getTelegramUser();
+
+
+    if(!tgUser){
+
+        userIdBox.textContent = "Unavailable";
+
+        status.textContent =
+            "❌ Open this page from Telegram Mini App";
 
         return;
     }
 
 
+    telegramUserId =
+        String(tgUser.id);
+
+
+    status.textContent =
+        "Checking account...";
+
+
     try{
 
-        const userPath =
-            encodeURIComponent(
-                telegramUserId
-            );
-
-
-        const getUrl =
+        const url =
             FIREBASE_URL +
             "/users/" +
-            userPath +
+            encodeURIComponent(
+                telegramUserId
+            ) +
             ".json";
 
 
-        /* GET USER */
+        /* =========================
+           GET USER
+        ========================== */
 
         const response =
-            await fetch(getUrl);
+            await fetch(url);
 
 
         if(!response.ok){
 
             throw new Error(
-                "Firebase read failed"
+                "Firebase HTTP " +
+                response.status
             );
-
         }
 
 
@@ -417,25 +405,29 @@ async function loadUser(){
             await response.json();
 
 
-        /* ==================================
+        /* =========================
            EXISTING USER
-        ================================== */
+        ========================== */
 
-        if(oldUser){
+        if(
+            oldUser &&
+            oldUser.crazy_id
+        ){
 
-            document.getElementById(
-                "userId"
-            ).textContent =
-                oldUser.crazy_id || "UNKNOWN";
+            userIdBox.textContent =
+                oldUser.crazy_id;
+
+
+            const deposit =
+                Number(
+                    oldUser.total_deposit || 0
+                );
 
 
             document.getElementById(
                 "totalDeposit"
             ).textContent =
-                "৳" +
-                Number(
-                    oldUser.total_deposit || 0
-                );
+                "৳" + deposit;
 
 
             document.getElementById(
@@ -446,26 +438,23 @@ async function loadUser(){
                 );
 
 
-            setRank(
-                Number(
-                    oldUser.total_deposit || 0
-                )
-            );
+            setRank(deposit);
 
 
-            document.getElementById(
-                "status"
-            ).textContent =
+            status.textContent =
                 "Account loaded ✓";
-
 
             return;
         }
 
 
-        /* ==================================
-           NEW USER
-        ================================== */
+        /* =========================
+           CREATE NEW USER
+        ========================== */
+
+        status.textContent =
+            "Creating account...";
+
 
         const newCrazyId =
             createCrazyId();
@@ -491,11 +480,9 @@ async function loadUser(){
         };
 
 
-        /* SAVE USER */
-
         const saveResponse =
             await fetch(
-                getUrl,
+                url,
                 {
                     method:"PUT",
 
@@ -515,16 +502,29 @@ async function loadUser(){
         if(!saveResponse.ok){
 
             throw new Error(
-                "Firebase write failed"
+                "Firebase write HTTP " +
+                saveResponse.status
             );
-
         }
 
 
-        document.getElementById(
-            "userId"
-        ).textContent =
-            newCrazyId;
+        const savedUser =
+            await saveResponse.json();
+
+
+        if(
+            !savedUser ||
+            !savedUser.crazy_id
+        ){
+
+            throw new Error(
+                "Firebase did not save user"
+            );
+        }
+
+
+        userIdBox.textContent =
+            savedUser.crazy_id;
 
 
         document.getElementById(
@@ -542,84 +542,28 @@ async function loadUser(){
         setRank(0);
 
 
-        document.getElementById(
-            "status"
-        ).textContent =
+        status.textContent =
             "New account created ✓";
 
+
+    }catch(error){
+
+        console.error(error);
+
+
+        userIdBox.textContent =
+            "Error";
+
+
+        status.textContent =
+            "❌ " + error.message;
     }
-
-    catch(error){
-
-        console.log(error);
-
-        document.getElementById(
-            "status"
-        ).textContent =
-            "❌ Firebase connection/error";
-
-    }
-
 }
 
 
-/* ==========================================
-   RANK
-========================================== */
-
-function setRank(totalDeposit){
-
-    let rank =
-        "🥉 BRONZE";
-
-
-    if(totalDeposit >= 10000000000){
-
-        rank =
-            "👑 MASTER";
-
-    }
-
-    else if(totalDeposit >= 10000){
-
-        rank =
-            "🔴 HEROIC";
-
-    }
-
-    else if(totalDeposit >= 1000){
-
-        rank =
-            "💎 DIAMOND";
-
-    }
-
-    else if(totalDeposit >= 500){
-
-        rank =
-            "🥈 SILVER";
-
-    }
-
-    else if(totalDeposit >= 100){
-
-        rank =
-            "🥉 BRONZE";
-
-    }
-
-
-    document.getElementById(
-        "rank"
-    ).textContent =
-        rank;
-
-}
-
-
-/* ==========================================
+/* ===============================
    START
-========================================== */
+================================ */
 
 loadUser();
 
