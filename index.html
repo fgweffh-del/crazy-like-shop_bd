@@ -1,12 +1,613 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crazy Like Shop</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CRAZY LIKE SHOP</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+    background:
+        radial-gradient(circle at 20% 10%,rgba(126,45,255,.25),transparent 30%),
+        radial-gradient(circle at 90% 20%,rgba(255,190,50,.12),transparent 28%),
+        linear-gradient(145deg,#050507,#0b0715,#050507);
+}
+
+/* TOP */
+
+.top{
+    padding:25px 20px 20px;
+    text-align:center;
+}
+
+.crown{
+    font-size:38px;
+    filter:drop-shadow(0 0 15px rgba(255,193,7,.8));
+}
+
+.logo{
+    margin-top:5px;
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:1px;
+    background:linear-gradient(90deg,#fff,#c78cff,#ffd86b);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.vip{
+    display:inline-block;
+    margin-top:9px;
+    padding:5px 14px;
+    border-radius:30px;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:2px;
+    color:#ffd86b;
+    border:1px solid rgba(255,216,107,.45);
+    background:rgba(255,216,107,.08);
+    box-shadow:0 0 18px rgba(255,193,7,.12);
+}
+
+/* HERO */
+
+.hero{
+    margin:5px 16px 20px;
+    padding:24px 20px;
+    border-radius:24px;
+    border:1px solid rgba(190,120,255,.25);
+    background:
+        linear-gradient(135deg,
+        rgba(102,35,180,.28),
+        rgba(20,15,30,.72));
+    box-shadow:
+        0 0 35px rgba(113,42,255,.12),
+        inset 0 1px rgba(255,255,255,.06);
+}
+
+.hero-title{
+    font-size:21px;
+    font-weight:800;
+}
+
+.hero-text{
+    margin-top:8px;
+    color:#aaa4b8;
+    font-size:13px;
+    line-height:1.5;
+}
+
+.status{
+    margin-top:17px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#b8ffcb;
+    font-size:11px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#32e875;
+    box-shadow:0 0 12px #32e875;
+}
+
+/* MENU */
+
+.container{
+    padding:0 16px 25px;
+}
+
+.section-title{
+    margin:10px 3px 12px;
+    font-size:14px;
+    color:#c9c3d4;
+    font-weight:bold;
+    letter-spacing:.5px;
+}
+
+.menu{
+    display:grid;
+    gap:13px;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:17px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(20,17,27,.78);
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.25),
+        inset 0 1px rgba(255,255,255,.04);
+    transition:.2s;
+}
+
+.card:active{
+    transform:scale(.97);
+}
+
+.card::after{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    right:-50px;
+    top:-50px;
+    background:rgba(150,70,255,.12);
+    border-radius:50%;
+    filter:blur(15px);
+}
+
+.icon{
+    position:relative;
+    z-index:2;
+    width:55px;
+    height:55px;
+    min-width:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:17px;
+    font-size:25px;
+    background:linear-gradient(145deg,#2b1747,#15101d);
+    border:1px solid rgba(190,120,255,.25);
+    box-shadow:
+        0 0 20px rgba(143,65,255,.15),
+        inset 0 1px rgba(255,255,255,.06);
+}
+
+.info{
+    position:relative;
+    z-index:2;
+    flex:1;
+}
+
+.title{
+    font-size:16px;
+    font-weight:800;
+}
+
+.desc{
+    margin-top:5px;
+    color:#898292;
+    font-size:11px;
+}
+
+.arrow{
+    position:relative;
+    z-index:2;
+    color:#8c819a;
+    font-size:25px;
+}
+
+/* PREMIUM */
+
+.premium-title{
+    margin-top:25px;
+    margin-bottom:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.premium-title span:first-child{
+    font-size:15px;
+    font-weight:800;
+}
+
+.hot{
+    color:#ffd45e;
+    font-size:10px;
+    font-weight:bold;
+}
+
+/* PACKAGE */
+
+.package{
+    position:relative;
+    overflow:hidden;
+    padding:19px;
+    margin-bottom:13px;
+    border-radius:21px;
+    border:1px solid rgba(255,205,80,.18);
+    background:
+        linear-gradient(145deg,
+        rgba(35,25,18,.95),
+        rgba(18,15,23,.95));
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.3),
+        0 0 25px rgba(255,183,0,.05);
+}
+
+.package::before{
+    content:"VIP";
+    position:absolute;
+    right:-22px;
+    top:13px;
+    transform:rotate(35deg);
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#ffd45e;
+    opacity:.7;
+}
+
+.package-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.package-icon{
+    width:45px;
+    height:45px;
+    border-radius:14px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(145deg,#3a2410,#17110b);
+    border:1px solid rgba(255,210,80,.22);
+    font-size:21px;
+}
+
+.package-name{
+    font-weight:800;
+    font-size:15px;
+}
+
+.package-small{
+    margin-top:4px;
+    color:#8e8795;
+    font-size:10px;
+}
+
+.price{
+    margin-top:15px;
+    font-size:14px;
+    color:#ffd45e;
+    font-weight:bold;
+}
+
+.buy{
+    width:100%;
+    margin-top:14px;
+    padding:13px;
+    border:none;
+    border-radius:13px;
+    color:#160d00;
+    font-size:13px;
+    font-weight:900;
+    background:linear-gradient(90deg,#ffd15a,#fff0a1,#e9a927);
+    box-shadow:0 0 22px rgba(255,198,58,.18);
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    padding:15px 20px 28px;
+    color:#57515f;
+    font-size:10px;
+}
+
+.footer strong{
+    color:#8e8498;
+}
+
+/* DESKTOP */
+
+@media(min-width:700px){
+
+    body{
+        max-width:600px;
+        margin:auto;
+    }
+
+}
+
+</style>
 </head>
+
 <body>
-    <h1>🔥 CRAZY LIKE SHOP</h1>
-    <p>Mini App Connected Successfully!</p>
+
+<!-- HEADER -->
+
+<div class="top">
+
+    <div class="crown">👑</div>
+
+    <div class="logo">
+        CRAZY LIKE SHOP
+    </div>
+
+    <div class="vip">
+        ✦ VIP PREMIUM SHOP ✦
+    </div>
+
+</div>
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+    <div class="hero-title">
+        Welcome, Premium Member 👋
+    </div>
+
+    <div class="hero-text">
+        Buy premium services instantly with
+        fast delivery and secure ordering.
+    </div>
+
+    <div class="status">
+        <div class="dot"></div>
+        Shop is online
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="section-title">
+        SHOP MENU
+    </div>
+
+    <div class="menu">
+
+        <!-- SHOP -->
+
+        <div class="card" onclick="openShop()">
+
+            <div class="icon">
+                🔥
+            </div>
+
+            <div class="info">
+
+                <div class="title">
+                    CRAZY LIKE SHOP
+                </div>
+
+                <div class="desc">
+                    Premium likes & services
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <!-- DEPOSIT -->
+
+        <div class="card" onclick="deposit()">
+
+            <div class="icon">
+                💰
+            </div>
+
+            <div class="info">
+
+                <div class="title">
+                    DEPOSIT
+                </div>
+
+                <div class="desc">
+                    Add balance to your account
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <!-- ORDERS -->
+
+        <div class="card" onclick="orders()">
+
+            <div class="icon">
+                📦
+            </div>
+
+            <div class="info">
+
+                <div class="title">
+                    MY ORDERS
+                </div>
+
+                <div class="desc">
+                    Track your orders
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PREMIUM -->
+
+    <div class="premium-title">
+
+        <span>
+            👑 PREMIUM PACKAGES
+        </span>
+
+        <span class="hot">
+            ✦ VIP
+        </span>
+
+    </div>
+
+
+    <!-- PACKAGE -->
+
+    <div class="package">
+
+        <div class="package-head">
+
+            <div class="package-icon">
+                🔥
+            </div>
+
+            <div>
+
+                <div class="package-name">
+                    Crazy Premium Like
+                </div>
+
+                <div class="package-small">
+                    High quality • Fast delivery
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="price">
+            PREMIUM PACKAGE
+        </div>
+
+        <button class="buy" onclick="comingSoon()">
+            BUY NOW  ›
+        </button>
+
+    </div>
+
+
+    <!-- PACKAGE -->
+
+    <div class="package">
+
+        <div class="package-head">
+
+            <div class="package-icon">
+                ⚡
+            </div>
+
+            <div>
+
+                <div class="package-name">
+                    Crazy VIP Service
+                </div>
+
+                <div class="package-small">
+                    Secure • Reliable • Premium
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="price">
+            VIP PACKAGE
+        </div>
+
+        <button class="buy" onclick="comingSoon()">
+            BUY NOW  ›
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="footer">
+    <strong>CRAZY LIKE SHOP</strong><br>
+    Premium Service • Secure Ordering
+</div>
+
+
+<script>
+
+let tg = window.Telegram?.WebApp;
+
+if(tg){
+    tg.ready();
+    tg.expand();
+}
+
+
+/* SHOP */
+
+function openShop(){
+
+    alert(
+        "🔥 CRAZY LIKE SHOP\n\n" +
+        "Premium packages will be available here."
+    );
+
+}
+
+
+/* DEPOSIT */
+
+function deposit(){
+
+    alert(
+        "💰 DEPOSIT\n\n" +
+        "Deposit system will be connected soon."
+    );
+
+}
+
+
+/* ORDERS */
+
+function orders(){
+
+    alert(
+        "📦 MY ORDERS\n\n" +
+        "Your orders will appear here."
+    );
+
+}
+
+
+/* BUY */
+
+function comingSoon(){
+
+    alert(
+        "👑 VIP PACKAGE\n\n" +
+        "Premium package system is coming soon."
+    );
+
+}
+
+</script>
+
 </body>
-</html>
+    </html>
