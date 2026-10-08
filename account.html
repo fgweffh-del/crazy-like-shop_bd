@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,initial-scale=1.0">
+content="width=device-width,initial-scale=1.0">
 
 <title>Crazy Like Shop - Account</title>
 
@@ -25,10 +25,6 @@ body{
     min-height:100vh;
     padding-bottom:90px;
 }
-
-/* =========================
-   HEADER
-========================= */
 
 .header{
     text-align:center;
@@ -65,8 +61,7 @@ body{
 
     color:#d59cff;
 
-    text-shadow:
-        0 0 12px #9b35ff;
+    text-shadow:0 0 12px #9b35ff;
 }
 
 .active{
@@ -89,15 +84,9 @@ body{
         0 0 12px rgba(57,255,104,.5);
 }
 
-
-/* =========================
-   CONTAINER
-========================= */
-
 .container{
     width:92%;
     max-width:600px;
-
     margin:auto;
 }
 
@@ -111,13 +100,7 @@ body{
     letter-spacing:2px;
 }
 
-
-/* =========================
-   INFO BUTTON
-========================= */
-
 .info-button{
-
     width:100%;
 
     min-height:68px;
@@ -141,25 +124,15 @@ body{
     gap:15px;
 
     font-size:15px;
-
     font-weight:bold;
 }
 
 .info-button span{
-
     text-align:right;
-
     word-break:break-all;
-
 }
 
-
-/* =========================
-   PURPLE
-========================= */
-
 .purple{
-
     border-color:#a43cff;
 
     box-shadow:
@@ -167,17 +140,10 @@ body{
 }
 
 .purple span{
-
     color:#c98cff;
 }
 
-
-/* =========================
-   GOLD
-========================= */
-
 .gold{
-
     border-color:#ffd23f;
 
     box-shadow:
@@ -185,17 +151,10 @@ body{
 }
 
 .gold span{
-
     color:#ffd84d;
 }
 
-
-/* =========================
-   RED
-========================= */
-
 .red{
-
     border-color:#ff3d4f;
 
     box-shadow:
@@ -203,17 +162,10 @@ body{
 }
 
 .red span{
-
     color:#ff6573;
 }
 
-
-/* =========================
-   ERROR
-========================= */
-
 .error{
-
     text-align:center;
 
     margin:15px;
@@ -223,13 +175,7 @@ body{
     font-size:12px;
 }
 
-
-/* =========================
-   BOTTOM NAV
-========================= */
-
 .bottom-nav{
-
     position:fixed;
 
     bottom:10px;
@@ -271,15 +217,12 @@ body{
 }
 
 .nav-btn{
-
     width:52px;
-
     height:52px;
 
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     border-radius:17px;
@@ -290,7 +233,6 @@ body{
 }
 
 .active-nav{
-
     background:#2d173d;
 
     border:1px solid #75468f;
@@ -307,9 +249,7 @@ body{
 <body>
 
 
-<!-- =========================
-     PROFILE HEADER
-========================= -->
+<!-- PROFILE -->
 
 <div class="header">
 
@@ -328,9 +268,7 @@ body{
 </div>
 
 
-<!-- =========================
-     ACCOUNT INFORMATION
-========================= -->
+<!-- ACCOUNT -->
 
 <div class="container">
 
@@ -339,7 +277,7 @@ body{
     </div>
 
 
-    <!-- USER ID -->
+    <!-- RANDOM USER ID -->
 
     <div class="info-button purple">
 
@@ -348,7 +286,7 @@ body{
         </div>
 
         <span id="userId">
-            Loading...
+            Creating...
         </span>
 
     </div>
@@ -399,7 +337,7 @@ body{
     </div>
 
 
-    <!-- TOTAL USERS -->
+    <!-- USERS -->
 
     <div class="info-button purple">
 
@@ -432,56 +370,41 @@ body{
 
 
 <div id="error"
-     class="error">
+class="error">
 </div>
 
 
-<!-- =========================
-     BOTTOM NAV
-========================= -->
+<!-- BOTTOM NAV -->
 
 <div class="bottom-nav">
 
     <a
-        class="nav-btn"
-        id="homeBtn"
-        href="index.html"
-    >
+    class="nav-btn"
+    href="index.html">
         🏠
     </a>
 
-
     <a
-        class="nav-btn"
-        id="ordersBtn"
-        href="orders.html"
-    >
+    class="nav-btn"
+    href="orders.html">
         🧾
     </a>
 
-
     <a
-        class="nav-btn"
-        id="shopBtn"
-        href="shop.html"
-    >
+    class="nav-btn"
+    href="shop.html">
         🛒
     </a>
 
-
     <a
-        class="nav-btn"
-        id="depositBtn"
-        href="deposit.html"
-    >
+    class="nav-btn"
+    href="deposit.html">
         💳
     </a>
 
-
     <a
-        class="nav-btn active-nav"
-        href="account.html"
-    >
+    class="nav-btn active-nav"
+    href="account.html">
         👤
     </a>
 
@@ -494,11 +417,6 @@ body{
    TELEGRAM MINI APP
 ========================================== */
 
-let telegramId = "";
-
-let tg = null;
-
-
 try{
 
     if(
@@ -506,77 +424,50 @@ try{
         window.Telegram.WebApp
     ){
 
-        tg =
-            window.Telegram.WebApp;
+        Telegram.WebApp.ready();
 
-        tg.ready();
-
-        tg.expand();
-
-
-        /*
-         * Telegram Mini App থেকে
-         * আসল Telegram User ID
-         */
-
-        if(
-            tg.initDataUnsafe &&
-            tg.initDataUnsafe.user &&
-            tg.initDataUnsafe.user.id
-        ){
-
-            telegramId =
-                String(
-                    tg.initDataUnsafe.user.id
-                );
-
-        }
+        Telegram.WebApp.expand();
 
     }
 
 }catch(error){
 
-    telegramId = "";
+}
+
+
+/* ==========================================
+   RANDOM CRAZY USER ID
+========================================== */
+
+let crazyUserId = "";
+
+
+/* ==========================================
+   GET OLD USER ID
+========================================== */
+
+try{
+
+    crazyUserId =
+        localStorage.getItem(
+            "CRAZY_USER_ID"
+        );
+
+}catch(error){
+
+    crazyUserId = "";
 
 }
 
 
 /* ==========================================
-   CREATE CRAZY USER ID
+   CREATE NEW RANDOM USER
 ========================================== */
 
-function createCrazyId(id){
-
-    let number = 0;
-
-
-    /*
-     * Telegram ID থেকে
-     * একই user-এর জন্য
-     * একই code তৈরি হবে
-     */
-
-    for(
-        let i = 0;
-        i < id.length;
-        i++
-    ){
-
-        number =
-            (
-                number * 31
-            ) +
-            id.charCodeAt(i);
-
-        number =
-            number % 1000000007;
-
-    }
-
+if(!crazyUserId){
 
     const chars =
         "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
 
     let code = "";
 
@@ -587,112 +478,46 @@ function createCrazyId(id){
         i++
     ){
 
-        number =
-            (
-                number * 37
-                + 17
-            ) %
-            1000000007;
-
+        const randomIndex =
+            Math.floor(
+                Math.random() *
+                chars.length
+            );
 
         code +=
-            chars[
-                number % chars.length
-            ];
+            chars[randomIndex];
 
     }
 
 
-    return "CRAZY_" + code;
+    crazyUserId =
+        "CRAZY_" + code;
+
+
+    /* SAVE USER ID */
+
+    try{
+
+        localStorage.setItem(
+            "CRAZY_USER_ID",
+            crazyUserId
+        );
+
+    }catch(error){
+
+    }
 
 }
 
 
 /* ==========================================
-   SHOW CRAZY USER ID
+   SHOW USER ID
 ========================================== */
 
-if(telegramId){
-
-    const crazyUserId =
-        createCrazyId(
-            telegramId
-        );
-
-
-    document.getElementById(
-        "userId"
-    ).textContent =
-        crazyUserId;
-
-
-    document.getElementById(
-        "error"
-    ).textContent = "";
-
-
-}else{
-
-    document.getElementById(
-        "userId"
-    ).textContent =
-        "ID NOT FOUND";
-
-
-    document.getElementById(
-        "error"
-    ).textContent =
-        "Telegram Mini App-এর ভিতর থেকে Account খুলুন.";
-
-}
-
-
-/* ==========================================
-   KEEP USER ID WHILE NAVIGATING
-========================================== */
-
-function pageUrl(page){
-
-    if(telegramId){
-
-        return (
-            page +
-            "?user_id=" +
-            encodeURIComponent(
-                telegramId
-            )
-        );
-
-    }
-
-
-    return page;
-
-}
-
-
 document.getElementById(
-    "homeBtn"
-).href =
-    pageUrl("index.html");
-
-
-document.getElementById(
-    "ordersBtn"
-).href =
-    pageUrl("orders.html");
-
-
-document.getElementById(
-    "shopBtn"
-).href =
-    pageUrl("shop.html");
-
-
-document.getElementById(
-    "depositBtn"
-).href =
-    pageUrl("deposit.html");
+    "userId"
+).textContent =
+    crazyUserId;
 
 
 /* ==========================================
@@ -780,4 +605,4 @@ document.getElementById(
 
 </body>
 
-    </html>
+      </html>
