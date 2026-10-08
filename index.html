@@ -3,98 +3,375 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CRAZY LIKE SHOP</title>
+<title>Crazy Like Shop</title>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
 
 <style>
-*{box-sizing:border-box}
-body{
+*{
+    box-sizing:border-box;
     margin:0;
-    background:#08050d;
-    color:white;
-    font-family:Arial,sans-serif;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
 }
+
+body{
+    background:#050507;
+    color:#fff;
+    min-height:100vh;
+    padding-bottom:92px;
+}
+
 .container{
-    max-width:430px;
+    width:100%;
+    max-width:620px;
     margin:auto;
-    padding:25px 18px;
 }
+
+.top{
+    padding:24px 18px 20px;
+    text-align:center;
+    background:
+        radial-gradient(circle at 50% -20%,#9b3cff45,transparent 45%),
+        linear-gradient(180deg,#100b17,#07060a);
+    border-bottom:1px solid #30243b;
+}
+
+.crown{
+    font-size:34px;
+    filter:drop-shadow(0 0 12px #ffd45b);
+}
+
 .logo{
-    text-align:center;
-    font-size:48px;
-    margin-top:20px;
+    margin-top:5px;
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:.5px;
+    background:linear-gradient(90deg,#fff,#c66cff,#ffd45b);
+    -webkit-background-clip:text;
+    color:transparent;
 }
-.title{
-    text-align:center;
-    font-size:26px;
-    font-weight:bold;
-    color:#d8a7ff;
+
+.subtitle{
+    margin-top:7px;
+    color:#8e8797;
+    font-size:10px;
 }
-.sub{
-    text-align:center;
-    color:#999;
-    margin:8px 0 30px;
+
+/* LOGIN BOX */
+
+.login-box{
+    margin:18px auto 0;
+    max-width:420px;
 }
-.box{
-    background:#120b1d;
-    border:1px solid #43205f;
+
+.auth-box{
+    padding:14px;
     border-radius:18px;
-    padding:22px;
+    background:linear-gradient(135deg,#251531,#100c15);
+    border:1px solid #70478d;
 }
-input{
+
+.auth-title{
+    text-align:left;
+    margin-bottom:10px;
+    color:#fff;
+    font-size:13px;
+    font-weight:900;
+}
+
+.auth-input{
     width:100%;
-    padding:15px;
-    margin:8px 0;
-    border-radius:12px;
-    border:1px solid #4d2866;
-    background:#09060e;
-    color:white;
+    height:48px;
+    margin-top:8px;
+    padding:0 14px;
+    border-radius:13px;
+    border:1px solid #493255;
     outline:none;
-    font-size:15px;
+    background:#09070d;
+    color:#fff;
+    font-size:13px;
 }
-button{
+
+.auth-input:focus{
+    border-color:#a653d6;
+    box-shadow:0 0 12px #9b3cff20;
+}
+
+.auth-btn{
     width:100%;
-    padding:15px;
+    min-height:48px;
     margin-top:10px;
     border:0;
-    border-radius:12px;
-    background:linear-gradient(90deg,#7b2cff,#c05cff);
-    color:white;
-    font-weight:bold;
-    font-size:16px;
-}
-.switch{
-    text-align:center;
-    margin-top:18px;
-    color:#c38cff;
+    border-radius:14px;
+    background:linear-gradient(90deg,#742cff,#bd55ff);
+    color:#fff;
+    font-size:13px;
+    font-weight:900;
     cursor:pointer;
 }
-.message{
+
+.auth-btn:active{
+    transform:scale(.97);
+}
+
+.auth-switch{
+    margin-top:12px;
     text-align:center;
-    margin-top:15px;
-    min-height:20px;
-    color:#ffcf70;
+    color:#c66cff;
+    font-size:10px;
+    font-weight:bold;
+    cursor:pointer;
 }
-.shop{
+
+.auth-message{
+    min-height:15px;
+    margin-top:9px;
+    text-align:center;
+    color:#ffd45b;
+    font-size:9px;
+}
+
+.logged-user{
     display:none;
+    padding:13px 15px;
+    border-radius:17px;
+    background:#16101d;
+    border:1px solid #493255;
+    text-align:left;
 }
+
+.logged-title{
+    color:#8e8797;
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.logged-id{
+    margin-top:5px;
+    color:#ffd65b;
+    font-size:15px;
+    font-weight:900;
+}
+
+.logged-email{
+    margin-top:4px;
+    color:#77717f;
+    font-size:9px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
 .balance{
-    background:linear-gradient(135deg,#24103b,#12091d);
-    border:1px solid #6d3595;
-    border-radius:18px;
+    margin:18px auto 0;
+    max-width:420px;
+    padding:15px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-radius:19px;
+    background:linear-gradient(135deg,#241532,#100d15);
+    border:1px solid #503467;
+    box-shadow:0 0 25px #8d36ff14;
+}
+
+.balance-left{
+    text-align:left;
+}
+
+.balance-label{
+    color:#827b8c;
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.balance-value{
+    display:block;
+    margin-top:4px;
+    color:#ffd65b;
+    font-size:20px;
+    font-weight:900;
+}
+
+.balance-icon{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:15px;
+    background:#291637;
+    border:1px solid #70478d;
+    font-size:22px;
+}
+
+.content{
+    padding:18px;
+}
+
+.welcome{
     padding:22px;
-    margin-top:20px;
+    border-radius:23px;
+    background:
+        radial-gradient(circle at 100% 0%,#913cff45,transparent 42%),
+        radial-gradient(circle at 0% 100%,#ffd34b10,transparent 35%),
+        linear-gradient(145deg,#1d1427,#0c0a10);
+    border:1px solid #493255;
+    box-shadow:0 0 30px #8b36ff12;
 }
-.balance small{color:#aaa}
-.balance h1{
-    margin:8px 0 0;
-    color:#e5b7ff;
+
+.welcome-title{
+    font-size:20px;
+    font-weight:900;
 }
-.logout{
-    background:#25152f;
-    border:1px solid #713b8c;
+
+.welcome-text{
+    margin-top:8px;
+    color:#96909f;
+    font-size:10px;
+    line-height:1.7;
+}
+
+.online{
+    margin-top:13px;
+    color:#59ea98;
+    font-size:8px;
+    font-weight:bold;
+}
+
+.dot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    margin-right:5px;
+    border-radius:50%;
+    background:#55e993;
+    box-shadow:0 0 10px #55e993;
+}
+
+.live-section{
+    margin-top:22px;
+}
+
+.live-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:11px;
+}
+
+.live-title{
+    font-size:15px;
+    font-weight:900;
+}
+
+.live-count{
+    padding:5px 9px;
+    border-radius:12px;
+    color:#d9a2ff;
+    background:#9a3cff12;
+    border:1px solid #9a3cff35;
+    font-size:8px;
+    font-weight:bold;
+}
+
+.live-box{
+    width:100%;
+    padding:5px 14px;
+    border-radius:20px;
+    background:#0e0d12;
+    border:1px solid #29242f;
+}
+
+.live-row{
+    min-height:61px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-bottom:1px solid #25212b;
+}
+
+.live-row:last-child{
+    border-bottom:0;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    min-width:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:linear-gradient(145deg,#652b9c,#21142d);
+    border:1px solid #71458d;
+    font-size:17px;
+}
+
+.live-info{
+    flex:1;
+    min-width:0;
+}
+
+.live-name{
+    font-size:10px;
+    font-weight:bold;
+}
+
+.live-service{
+    margin-top:3px;
+    color:#716b78;
+    font-size:8px;
+}
+
+.success{
+    color:#59e995;
+    font-size:7px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.bottom-nav{
+    position:fixed;
+    left:50%;
+    bottom:10px;
+    transform:translateX(-50%);
+    width:calc(100% - 22px);
+    max-width:598px;
+    height:67px;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    padding:6px;
+    border-radius:22px;
+    background:linear-gradient(145deg,#18121f,#0c0b10);
+    border:1px solid #3a2d47;
+    box-shadow:0 10px 35px #000000cc;
+    z-index:999;
+}
+
+.nav-button{
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:0;
+    border-radius:17px;
+    background:transparent;
+    font-size:24px;
+    cursor:pointer;
+}
+
+.nav-button:active{
+    transform:scale(.86);
+}
+
+.nav-button.active{
+    background:linear-gradient(145deg,#422457,#21132c);
+    border:1px solid #75468f;
 }
 </style>
 </head>
@@ -103,153 +380,445 @@ button{
 
 <div class="container">
 
+<div class="top">
+
+<div class="crown">👑</div>
+
+<div class="logo">
+CRAZY LIKE SHOP
+</div>
+
+<div class="subtitle">
+Premium Like Service • Fast Delivery
+</div>
+
+
+<div class="login-box">
+
 <!-- LOGIN / REGISTER -->
-<div id="authPage">
 
-    <div class="logo">👑</div>
-    <div class="title">CRAZY LIKE SHOP</div>
-    <div class="sub">Premium Like Service • Fast Delivery</div>
+<div id="authBox" class="auth-box">
 
-    <div class="box">
+<div id="authTitle" class="auth-title">
+Login to your account
+</div>
 
-        <h2 id="formTitle">Login</h2>
+<input
+    id="nameInput"
+    class="auth-input"
+    type="text"
+    placeholder="Enter Name"
+    autocomplete="username"
+>
 
-        <input
-            id="name"
-            type="text"
-            placeholder="Enter Name"
-            autocomplete="username"
-        >
+<input
+    id="passwordInput"
+    class="auth-input"
+    type="password"
+    placeholder="Enter Password"
+    autocomplete="current-password"
+>
 
-        <input
-            id="password"
-            type="password"
-            placeholder="Enter Password"
-            autocomplete="current-password"
-        >
+<input
+    id="confirmInput"
+    class="auth-input"
+    type="password"
+    placeholder="Confirm Password"
+    autocomplete="new-password"
+    style="display:none;"
+>
 
-        <input
-            id="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
-            style="display:none"
-            autocomplete="new-password"
-        >
+<button
+    id="authButton"
+    class="auth-btn"
+    onclick="loginUser()"
+>
+Login
+</button>
 
-        <button id="mainButton" onclick="login()">
-            Login
-        </button>
+<div
+    id="switchButton"
+    class="auth-switch"
+    onclick="switchAuth()"
+>
+Create new account
+</div>
 
-        <div class="switch" onclick="toggleForm()" id="switchText">
-            Create new account
-        </div>
+<div
+    id="authMessage"
+    class="auth-message"
+></div>
 
-        <div class="message" id="message"></div>
-
-    </div>
 </div>
 
 
-<!-- SHOP -->
-<div id="shopPage" class="shop">
+<!-- LOGGED USER -->
 
-    <div class="logo">👑</div>
+<div id="loggedUser" class="logged-user">
 
-    <div class="title">
-        CRAZY LIKE SHOP
-    </div>
+<div class="logged-title">
+LOGGED IN
+</div>
 
-    <div class="sub">
-        Premium Like Service • Fast Delivery
-    </div>
+<div id="crazyId" class="logged-id">
+-
+</div>
 
-    <div class="balance">
-        <small>Welcome</small>
-        <h2 id="userName">User</h2>
-
-        <small>Balance</small>
-        <h1 id="userBalance">৳ 0.00</h1>
-    </div>
-
-    <div class="box" style="margin-top:18px">
-        <h3>🛒 Shop</h3>
-        <p style="color:#aaa">
-            Your shop products will appear here.
-        </p>
-
-        <button onclick="alert('Shop coming soon')">
-            🛒 Open Shop
-        </button>
-
-        <button class="logout" onclick="logout()">
-            🚪 Logout
-        </button>
-    </div>
+<div id="userEmail" class="logged-email">
+-
+</div>
 
 </div>
+
+</div>
+
+
+<div class="balance">
+
+<div class="balance-left">
+
+<div class="balance-label">
+YOUR BALANCE
+</div>
+
+<strong
+    id="balanceValue"
+    class="balance-value"
+>
+৳ 0.00
+</strong>
+
+</div>
+
+<div class="balance-icon">
+💰
+</div>
+
+</div>
+
+</div>
+
+
+<div class="content">
+
+<div class="welcome">
+
+<div class="welcome-title">
+Welcome to Crazy Shop 🔥
+</div>
+
+<div class="welcome-text">
+Premium service, fast delivery and secure
+ordering — everything in one place.
+</div>
+
+<div class="online">
+<span class="dot"></span>
+SHOP ONLINE
+</div>
+
+</div>
+
+
+<div class="live-section">
+
+<div class="live-header">
+
+<div class="live-title">
+🔴 LIVE ORDERS
+</div>
+
+<div class="live-count">
+10 ORDERS
+</div>
+
+</div>
+
+
+<div class="live-box">
+
+<div class="live-row">
+<div class="avatar">👤</div>
+<div class="live-info">
+<div class="live-name">Crazy User</div>
+<div class="live-service">Premium Like</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">👑</div>
+<div class="live-info">
+<div class="live-name">VIP Member</div>
+<div class="live-service">Like Service</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">🔥</div>
+<div class="live-info">
+<div class="live-name">Premium User</div>
+<div class="live-service">Crazy Like</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">⭐</div>
+<div class="live-info">
+<div class="live-name">Crazy VIP</div>
+<div class="live-service">Premium Like</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">💎</div>
+<div class="live-info">
+<div class="live-name">VIP User</div>
+<div class="live-service">Like Package</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">🚀</div>
+<div class="live-info">
+<div class="live-name">Crazy Member</div>
+<div class="live-service">Fast Like</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">💜</div>
+<div class="live-info">
+<div class="live-name">Premium Member</div>
+<div class="live-service">VIP Like</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">⚡</div>
+<div class="live-info">
+<div class="live-name">Crazy Customer</div>
+<div class="live-service">Fast Delivery</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">🏆</div>
+<div class="live-info">
+<div class="live-name">VIP Customer</div>
+<div class="live-service">Premium Service</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+<div class="live-row">
+<div class="avatar">💫</div>
+<div class="live-info">
+<div class="live-name">Crazy Premium</div>
+<div class="live-service">Crazy Like</div>
+</div>
+<div class="success">✓ SUCCESS</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="bottom-nav">
+
+<button class="nav-button active" onclick="goHome()">
+🏠
+</button>
+
+<button class="nav-button" onclick="goOrders()">
+🧾
+</button>
+
+<button class="nav-button" onclick="goShop()">
+🛒
+</button>
+
+<button class="nav-button" onclick="goDeposit()">
+💳
+</button>
+
+<button class="nav-button" onclick="goAccount()">
+👤
+</button>
 
 </div>
 
 
 <script>
+
 const firebaseConfig = {
+
     apiKey: "AIzaSyBYmNKdD9nR3aGb993LYhkeo_bnWPDFt54",
+
     authDomain: "crazy-like-shop.firebaseapp.com",
-    databaseURL: "https://crazy-like-shop-default-rtdb.firebaseio.com",
+
+    databaseURL:
+    "https://crazy-like-shop-default-rtdb.firebaseio.com",
+
     projectId: "crazy-like-shop",
-    storageBucket: "crazy-like-shop.firebasestorage.app",
+
+    storageBucket:
+    "crazy-like-shop.firebasestorage.app",
+
     messagingSenderId: "819697907791",
-    appId: "1:819697907791:web:c6159a0477113949ae923a",
+
+    appId:
+    "1:819697907791:web:c6159a0477113949ae923a",
+
     measurementId: "G-YHPWS2P85H"
 };
+
 
 firebase.initializeApp(firebaseConfig);
 
 const db = firebase.database();
 
+
+/* =========================
+   TELEGRAM MINI APP
+========================= */
+
+if(
+    window.Telegram &&
+    window.Telegram.WebApp
+){
+
+    Telegram.WebApp.ready();
+
+    Telegram.WebApp.expand();
+}
+
+
+/* =========================
+   AUTH MODE
+========================= */
+
 let registerMode = false;
 
 
 /* =========================
-   TOGGLE LOGIN / REGISTER
+   PASSWORD HASH
 ========================= */
 
-function toggleForm(){
+async function hashPassword(password){
+
+    const data =
+        new TextEncoder().encode(password);
+
+    const hash =
+        await crypto.subtle.digest(
+            "SHA-256",
+            data
+        );
+
+    return Array.from(
+        new Uint8Array(hash)
+    )
+    .map(
+        b => b.toString(16).padStart(2,"0")
+    )
+    .join("");
+}
+
+
+/* =========================
+   SWITCH LOGIN / REGISTER
+========================= */
+
+function switchAuth(){
 
     registerMode = !registerMode;
 
-    const title = document.getElementById("formTitle");
-    const button = document.getElementById("mainButton");
-    const confirm = document.getElementById("confirmPassword");
-    const switchText = document.getElementById("switchText");
-    const message = document.getElementById("message");
+    const title =
+        document.getElementById("authTitle");
+
+    const button =
+        document.getElementById("authButton");
+
+    const confirm =
+        document.getElementById("confirmInput");
+
+    const switchBtn =
+        document.getElementById("switchButton");
+
+    const message =
+        document.getElementById("authMessage");
+
 
     message.innerText = "";
 
+
     if(registerMode){
 
-        title.innerText = "Create Account";
+        title.innerText =
+            "Create your account";
 
-        button.innerText = "Create Account";
+        button.innerText =
+            "Create Account";
 
-        button.onclick = register;
+        button.onclick =
+            registerUser;
 
-        confirm.style.display = "block";
+        confirm.style.display =
+            "block";
 
-        switchText.innerText = "Already have an account? Login";
+        document.getElementById(
+            "passwordInput"
+        ).autocomplete =
+            "new-password";
+
+        switchBtn.innerText =
+            "Already have an account? Login";
 
     }else{
 
-        title.innerText = "Login";
+        title.innerText =
+            "Login to your account";
 
-        button.innerText = "Login";
+        button.innerText =
+            "Login";
 
-        button.onclick = login;
+        button.onclick =
+            loginUser;
 
-        confirm.style.display = "none";
+        confirm.style.display =
+            "none";
 
-        switchText.innerText = "Create new account";
+        document.getElementById(
+            "passwordInput"
+        ).autocomplete =
+            "current-password";
+
+        switchBtn.innerText =
+            "Create new account";
     }
+}
+
+
+/* =========================
+   NAME VALIDATION
+========================= */
+
+function validName(name){
+
+    return /^[a-zA-Z0-9_]{3,30}$/.test(name);
+
 }
 
 
@@ -257,34 +826,33 @@ function toggleForm(){
    REGISTER
 ========================= */
 
-async function register(){
+async function registerUser(){
 
     const name =
-        document.getElementById("name").value.trim();
+        document.getElementById(
+            "nameInput"
+        ).value.trim();
 
     const password =
-        document.getElementById("password").value;
+        document.getElementById(
+            "passwordInput"
+        ).value;
 
     const confirm =
-        document.getElementById("confirmPassword").value;
+        document.getElementById(
+            "confirmInput"
+        ).value;
 
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "authMessage"
+        );
 
 
-    if(name.length < 3){
-
-        message.innerText =
-            "❌ Name must be at least 3 characters";
-
-        return;
-    }
-
-
-    if(!/^[a-zA-Z0-9_]+$/.test(name)){
+    if(!validName(name)){
 
         message.innerText =
-            "❌ Only letters, numbers and _ allowed";
+            "❌ Name: 3-30 letters, numbers or _ only";
 
         return;
     }
@@ -315,23 +883,35 @@ async function register(){
     try{
 
         /*
-        Name-টাই Firebase UID/key
+        Name = UID
         */
 
         const userRef =
-            db.ref("users/" + name);
+            db.ref(
+                "users/" +
+                name
+            );
+
 
         const snapshot =
-            await userRef.once("value");
+            await userRef.once(
+                "value"
+            );
 
 
         if(snapshot.exists()){
 
             message.innerText =
-                "❌ This name is already registered";
+                "❌ This Name is already registered";
 
             return;
         }
+
+
+        const passwordHash =
+            await hashPassword(
+                password
+            );
 
 
         const userData = {
@@ -340,7 +920,8 @@ async function register(){
 
             name: name,
 
-            password: password,
+            password_hash:
+                passwordHash,
 
             balance: 0,
 
@@ -348,23 +929,41 @@ async function register(){
 
             total_orders: 0,
 
-            created_at: Date.now()
+            created_at:
+                Date.now()
 
         };
 
 
-        await userRef.set(userData);
+        await userRef.set(
+            userData
+        );
+
+
+        /*
+        Remember login
+        */
+
+        localStorage.setItem(
+            "crazy_like_uid",
+            name
+        );
 
 
         message.innerText =
-            "✅ Account created successfully";
+            "✅ Account created";
 
 
-        setTimeout(function(){
+        setTimeout(
+            function(){
 
-            openShop(userData);
+                loadUser(
+                    name
+                );
 
-        },800);
+            },
+            500
+        );
 
 
     }catch(error){
@@ -372,7 +971,8 @@ async function register(){
         console.log(error);
 
         message.innerText =
-            "❌ " + error.message;
+            "❌ " +
+            error.message;
     }
 }
 
@@ -381,22 +981,37 @@ async function register(){
    LOGIN
 ========================= */
 
-async function login(){
+async function loginUser(){
 
     const name =
-        document.getElementById("name").value.trim();
+        document.getElementById(
+            "nameInput"
+        ).value.trim();
 
     const password =
-        document.getElementById("password").value;
+        document.getElementById(
+            "passwordInput"
+        ).value;
 
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "authMessage"
+        );
 
 
-    if(!name || !password){
+    if(!validName(name)){
 
         message.innerText =
-            "❌ Enter name and password";
+            "❌ Enter a valid Name";
+
+        return;
+    }
+
+
+    if(!password){
+
+        message.innerText =
+            "❌ Enter your password";
 
         return;
     }
@@ -409,10 +1024,16 @@ async function login(){
     try{
 
         const userRef =
-            db.ref("users/" + name);
+            db.ref(
+                "users/" +
+                name
+            );
+
 
         const snapshot =
-            await userRef.once("value");
+            await userRef.once(
+                "value"
+            );
 
 
         if(!snapshot.exists()){
@@ -424,11 +1045,24 @@ async function login(){
         }
 
 
-        const userData =
+        const data =
             snapshot.val();
 
 
-        if(userData.password !== password){
+        /*
+        New accounts use password_hash
+        */
+
+        const passwordHash =
+            await hashPassword(
+                password
+            );
+
+
+        if(
+            data.password_hash !==
+            passwordHash
+        ){
 
             message.innerText =
                 "❌ Wrong password";
@@ -437,11 +1071,17 @@ async function login(){
         }
 
 
+        localStorage.setItem(
+            "crazy_like_uid",
+            name
+        );
+
+
         message.innerText =
             "✅ Login successful";
 
 
-        openShop(userData);
+        loadUser(name);
 
 
     }catch(error){
@@ -449,59 +1089,242 @@ async function login(){
         console.log(error);
 
         message.innerText =
-            "❌ " + error.message;
+            "❌ " +
+            error.message;
     }
 }
 
 
 /* =========================
-   OPEN SHOP
+   LOAD USER
 ========================= */
 
-function openShop(userData){
+async function loadUser(uid){
 
-    document.getElementById("authPage").style.display =
-        "none";
+    try{
 
-    document.getElementById("shopPage").style.display =
-        "block";
-
-
-    document.getElementById("userName").innerText =
-        userData.name;
+        const ref =
+            db.ref(
+                "users/" +
+                uid
+            );
 
 
-    document.getElementById("userBalance").innerText =
-        "৳ " + Number(userData.balance || 0).toFixed(2);
+        const snapshot =
+            await ref.once(
+                "value"
+            );
+
+
+        if(!snapshot.exists()){
+
+            localStorage.removeItem(
+                "crazy_like_uid"
+            );
+
+            return;
+        }
+
+
+        const data =
+            snapshot.val();
+
+
+        document.getElementById(
+            "authBox"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "loggedUser"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "crazyId"
+        ).innerText =
+            data.uid ||
+            uid;
+
+
+        document.getElementById(
+            "userEmail"
+        ).innerText =
+            "UID: " +
+            (data.uid || uid);
+
+
+        const amount =
+            Number(
+                data.balance || 0
+            );
+
+
+        document.getElementById(
+            "balanceValue"
+        ).innerText =
+            "৳ " +
+            amount.toFixed(2);
+
+
+    }catch(error){
+
+        console.log(error);
+    }
 }
 
 
 /* =========================
-   LOGOUT
+   AUTO LOGIN
 ========================= */
 
-function logout(){
+window.addEventListener(
+    "load",
+    function(){
 
-    document.getElementById("shopPage").style.display =
-        "none";
+        const uid =
+            localStorage.getItem(
+                "crazy_like_uid"
+            );
 
-    document.getElementById("authPage").style.display =
-        "block";
 
-    document.getElementById("name").value = "";
+        if(uid){
 
-    document.getElementById("password").value = "";
+            loadUser(uid);
 
-    document.getElementById("confirmPassword").value = "";
+        }
 
-    document.getElementById("message").innerText =
-        "";
+    }
+);
 
-    registerMode = false;
 
-    toggleForm();
+/* =========================
+   CHECK LOGIN
+========================= */
+
+function checkLogin(){
+
+    const uid =
+        localStorage.getItem(
+            "crazy_like_uid"
+        );
+
+
+    if(!uid){
+
+        alert(
+            "🔐 Please login first."
+        );
+
+        return false;
+    }
+
+
+    return true;
 }
+
+
+/* =========================
+   HOME
+========================= */
+
+function goHome(){
+
+    window.location.href =
+        "index.html";
+}
+
+
+/* =========================
+   ORDERS
+========================= */
+
+function goOrders(){
+
+    if(!checkLogin())
+        return;
+
+
+    const uid =
+        localStorage.getItem(
+            "crazy_like_uid"
+        );
+
+
+    window.location.href =
+        "orders.html?uid=" +
+        encodeURIComponent(uid);
+}
+
+
+/* =========================
+   SHOP
+========================= */
+
+function goShop(){
+
+    if(!checkLogin())
+        return;
+
+
+    const uid =
+        localStorage.getItem(
+            "crazy_like_uid"
+        );
+
+
+    window.location.href =
+        "shop.html?uid=" +
+        encodeURIComponent(uid);
+}
+
+
+/* =========================
+   DEPOSIT
+========================= */
+
+function goDeposit(){
+
+    if(!checkLogin())
+        return;
+
+
+    const uid =
+        localStorage.getItem(
+            "crazy_like_uid"
+        );
+
+
+    window.location.href =
+        "deposit.html?uid=" +
+        encodeURIComponent(uid);
+}
+
+
+/* =========================
+   ACCOUNT
+========================= */
+
+function goAccount(){
+
+    if(!checkLogin())
+        return;
+
+
+    const uid =
+        localStorage.getItem(
+            "crazy_like_uid"
+        );
+
+
+    window.location.href =
+        "account.html?uid=" +
+        encodeURIComponent(uid);
+}
+
 </script>
 
 </body>
-        </html>
+    </html>
