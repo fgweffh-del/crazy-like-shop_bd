@@ -3,96 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Deposit</title>
+<title>Crazy Like Deposit</title>
 
 <style>
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:#050507;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 50% 0%,#8b32d633,transparent 38%),
+        #050507;
     color:#fff;
-    min-height:100vh;
+    padding-bottom:95px;
 }
 
-.page{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:20px 14px;
-}
-
-.card{
+.container{
     width:100%;
     max-width:620px;
     margin:auto;
-    padding:25px 18px;
+    padding:18px 15px 30px;
+}
 
-    border-radius:26px;
+/* BACK */
 
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            #9b3cff30,
-            transparent 45%
-        ),
-        linear-gradient(
-            145deg,
-            #1d1326,
-            #09080c
-        );
+.back-btn{
+    width:100%;
+    height:46px;
+    margin-bottom:20px;
 
-    border:1px solid #4d3260;
+    border:1px solid #8b32bd;
+    border-radius:14px;
 
-    box-shadow:
-        0 0 45px #8b36ff18;
+    background:linear-gradient(
+        90deg,
+        #17101e,
+        #25102f
+    );
+
+    color:#d99cff;
+    font-size:13px;
+    font-weight:900;
+
+    box-shadow:0 0 15px #9b32ff44;
+}
+
+.back-btn:active{
+    transform:scale(.97);
 }
 
 /* HEADER */
 
 .header{
     text-align:center;
+    margin-bottom:25px;
 }
 
-.bkash-logo{
-    width:72px;
-    height:72px;
+.logo{
+    width:78px;
+    height:78px;
     margin:auto;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:20px;
+    border-radius:50%;
 
-    background:#e2136e;
+    background:
+        linear-gradient(
+            145deg,
+            #8b32bd,
+            #21102d
+        );
 
-    color:#fff;
-
-    font-size:27px;
-    font-weight:900;
+    border:2px solid #b65ce0;
 
     box-shadow:
-        0 0 25px #e2136e55;
+        0 0 18px #9b32ff,
+        0 0 40px #9b32ff44;
+
+    font-size:36px;
 }
 
 .title{
-    margin-top:13px;
+    margin-top:11px;
 
-    font-size:25px;
+    font-size:24px;
     font-weight:900;
 
     background:
         linear-gradient(
             90deg,
             #fff,
-            #c66cff,
+            #c978ff,
             #ffd45b
         );
 
@@ -103,418 +111,442 @@ body{
 .subtitle{
     margin-top:6px;
 
-    color:#8b8392;
-    font-size:9px;
-}
-
-/* NUMBER */
-
-.number-box{
-    margin-top:22px;
-    padding:19px;
-
-    text-align:center;
-
-    border-radius:18px;
-
-    background:#0b090d;
-    border:1px solid #3d2b46;
-}
-
-.number-label{
-    color:#817887;
-    font-size:8px;
+    color:#918899;
+    font-size:10px;
     letter-spacing:1px;
 }
 
-.number{
-    margin-top:8px;
+/* MAIN */
 
-    color:#ffd45b;
-
-    font-size:24px;
-    font-weight:900;
-    letter-spacing:1px;
-}
-
-.copy{
-    margin-top:11px;
-
-    padding:8px 16px;
-
-    border:1px solid #664171;
-    border-radius:10px;
-
-    background:#24132f;
-
-    color:#d09aff;
-
-    font-size:8px;
-    font-weight:bold;
-}
-
-/* INSTRUCTION */
-
-.instruction{
-    margin-top:15px;
-    padding:17px;
-
-    border-radius:17px;
-
-    background:#110e14;
-    border:1px solid #302635;
-}
-
-.instruction-title{
-    font-size:12px;
-    font-weight:900;
-}
-
-.instruction-text{
-    margin-top:9px;
-
-    color:#89818e;
-
-    font-size:9px;
-    line-height:1.8;
-}
-
-/* VERIFY */
-
-.verify-title{
-    margin-top:19px;
-
-    font-size:11px;
-    font-weight:900;
-}
-
-input{
+.deposit-box{
     width:100%;
-    height:51px;
 
-    margin-top:8px;
-    padding:0 14px;
+    padding:20px;
 
-    border-radius:14px;
-
-    background:#08070a;
-    border:1px solid #3c2c45;
-
-    color:#fff;
-    outline:none;
-
-    font-size:12px;
-}
-
-input:focus{
-    border-color:#9b3cff;
-}
-
-.verify{
-    width:100%;
-    height:51px;
-
-    margin-top:11px;
-
-    border:0;
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #7130a5,
-            #a13cff
-        );
-
-    color:#fff;
-
-    font-size:11px;
-    font-weight:900;
-}
-
-.status{
-    display:none;
-
-    margin-top:12px;
-    padding:13px;
-
-    text-align:center;
-
-    border-radius:13px;
-
-    background:#101611;
-    border:1px solid #2b593d;
-
-    color:#59e995;
-
-    font-size:9px;
-}
-
-/* CONTACT */
-
-.contact{
-    margin-top:16px;
-    padding:15px;
-
-    text-align:center;
-
-    border-radius:16px;
+    border-radius:20px;
 
     background:
         linear-gradient(
             145deg,
-            #151018,
-            #0d0b10
+            #17101e,
+            #0b090e
         );
 
-    border:1px solid #35273d;
+    border:1px solid #422c50;
+
+    box-shadow:
+        0 0 25px #8b32d622;
 }
 
-.contact-title{
-    font-size:10px;
+.main-title{
+    text-align:center;
+
+    color:#d99cff;
+
+    font-size:16px;
     font-weight:900;
+
+    margin-bottom:8px;
 }
 
-.contact-text{
-    margin-top:6px;
-
-    color:#827a89;
-
-    font-size:8px;
-    line-height:1.6;
-}
-
-.whatsapp{
-    display:inline-block;
-
-    margin-top:9px;
-    padding:8px 15px;
-
-    border-radius:10px;
-
-    background:#173b27;
-    border:1px solid #2d734b;
-
-    color:#64e59a;
-
-    font-size:9px;
-    font-weight:bold;
-
-    text-decoration:none;
-}
-
-/* BACK */
-
-.back{
-    width:100%;
-    height:44px;
-
-    margin-top:10px;
-
-    border:1px solid #302638;
-    border-radius:13px;
-
-    background:#121016;
+.main-text{
+    text-align:center;
 
     color:#aaa;
 
-    font-size:10px;
+    font-size:11px;
+
+    line-height:1.8;
+
+    margin-bottom:18px;
+}
+
+/* ADMIN BUTTON */
+
+.admin-btn{
+    width:100%;
+    min-height:62px;
+
+    margin-top:13px;
+
+    padding:10px 16px;
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    text-align:left;
+}
+
+.admin-btn:active{
+    transform:scale(.97);
+}
+
+/* WHATSAPP */
+
+.whatsapp{
+    border:1px solid #25d366;
+
+    background:
+        linear-gradient(
+            90deg,
+            #082016,
+            #0b110e
+        );
+
+    box-shadow:
+        0 0 18px #25d36644;
+}
+
+/* TELEGRAM */
+
+.telegram{
+    border:1px solid #229ed9;
+
+    background:
+        linear-gradient(
+            90deg,
+            #071a25,
+            #0b1014
+        );
+
+    box-shadow:
+        0 0 18px #229ed944;
+}
+
+/* ICON */
+
+.icon{
+    width:45px;
+
+    flex-shrink:0;
+
+    font-size:26px;
+
+    text-align:center;
+}
+
+/* TEXT */
+
+.btn-text{
+    margin-left:8px;
+
+    font-size:14px;
+    font-weight:900;
+}
+
+.btn-number{
+    display:block;
+
+    margin-top:4px;
+
+    color:#aaa;
+
+    font-size:11px;
+
+    font-weight:normal;
+}
+
+/* INFO TEXT */
+
+.info-box{
+    margin-top:18px;
+
+    padding:16px;
+
+    border-radius:15px;
+
+    background:#0a080d;
+
+    border:1px solid #51305f;
+
+    color:#aaa;
+
+    font-size:11px;
+
+    line-height:1.8;
+
+    text-align:center;
+}
+
+/* NAV */
+
+.bottom-nav{
+    position:fixed;
+
+    left:50%;
+    bottom:10px;
+
+    transform:translateX(-50%);
+
+    width:calc(100% - 20px);
+    max-width:600px;
+
+    height:68px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+
+    background:
+        linear-gradient(
+            145deg,
+            #19111f,
+            #09080d
+        );
+
+    border:1px solid #3c2948;
+
+    border-radius:22px;
+
+    box-shadow:0 10px 35px #000;
+
+    z-index:999;
+}
+
+.nav-btn{
+    width:52px;
+    height:52px;
+
+    border:0;
+    border-radius:17px;
+
+    background:transparent;
+
+    font-size:24px;
+}
+
+.nav-btn.active{
+    background:#382047;
+
+    border:1px solid #8549a6;
+
+    box-shadow:
+        0 0 15px #9b32ff55;
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
+<div class="container">
 
-    <div class="card">
+    <!-- BACK -->
 
-        <!-- HEADER -->
+    <button
+        class="back-btn"
+        type="button"
+        onclick="location.href='index.html'">
 
-        <div class="header">
+        ← BACK TO HOME
 
-            <div class="bkash-logo">
-                bK
-            </div>
+    </button>
 
-            <div class="title">
-                bKash DEPOSIT
-            </div>
 
-            <div class="subtitle">
-                Fast • Secure • Automatic Balance
-            </div>
+    <!-- HEADER -->
 
+    <div class="header">
+
+        <div class="logo">
+            💳
+        </div>
+
+        <div class="title">
+            DEPOSIT
+        </div>
+
+        <div class="subtitle">
+            ADMIN PAYMENT SUPPORT
+        </div>
+
+    </div>
+
+
+    <!-- DEPOSIT -->
+
+    <div class="deposit-box">
+
+        <div class="main-title">
+            💰 DEPOSIT MONEY
+        </div>
+
+        <div class="main-text">
+            Deposit করতে নিচের যেকোনো Admin-এর
+            সাথে যোগাযোগ করুন।
+            <br>
+            Payment details Admin-এর কাছ থেকে নিন।
         </div>
 
 
-        <!-- NUMBER -->
+        <!-- WHATSAPP -->
 
-        <div class="number-box">
+        <button
+            class="admin-btn whatsapp"
+            type="button"
+            onclick="window.open(
+                'https://wa.me/8801846882853',
+                '_blank'
+            )">
 
-            <div class="number-label">
-                SEND MONEY TO THIS NUMBER
-            </div>
+            <span class="icon">
+                🟢
+            </span>
 
-            <div class="number">
-                01957941357
-            </div>
+            <span class="btn-text">
 
-            <button class="copy" onclick="copyNumber()">
-                📋 COPY NUMBER
-            </button>
+                WHATSAPP ADMIN
 
-        </div>
+                <span class="btn-number">
+                    01846882853
+                </span>
 
+            </span>
 
-        <!-- INSTRUCTION -->
-
-        <div class="instruction">
-
-            <div class="instruction-title">
-                📌 DEPOSIT INSTRUCTIONS
-            </div>
-
-            <div class="instruction-text">
-
-                1️⃣ Open your bKash app.<br>
-
-                2️⃣ Select <b>Send Money</b>.<br>
-
-                3️⃣ Send your desired amount to the number above.<br>
-
-                4️⃣ After successful payment, copy your
-                <b>Transaction ID</b>.<br>
-
-                5️⃣ Enter the Transaction ID below and press
-                <b>VERIFY PAYMENT</b>.<br>
-
-                6️⃣ After successful verification, your balance
-                will be added automatically.
-
-            </div>
-
-        </div>
-
-
-        <!-- VERIFY -->
-
-        <div class="verify-title">
-            🧾 TRANSACTION ID
-        </div>
-
-        <input
-            id="txid"
-            type="text"
-            placeholder="Enter your Transaction ID"
-            autocomplete="off"
-        >
-
-        <button class="verify" onclick="verifyTransaction()">
-            ✓ VERIFY PAYMENT
         </button>
 
-        <div class="status" id="status">
-            ⏳ Verifying payment...
-        </div>
 
+        <!-- TELEGRAM NAZIM -->
 
-        <!-- CONTACT -->
+        <button
+            class="admin-btn telegram"
+            type="button"
+            onclick="window.open(
+                'https://t.me/Nazim684',
+                '_blank'
+            )">
 
-        <div class="contact">
+            <span class="icon">
+                ✈️
+            </span>
 
-            <div class="contact-title">
-                ⚠️ TRANSACTION PROBLEM?
-            </div>
+            <span class="btn-text">
 
-            <div class="contact-text">
-                Transaction verify না হলে বা কোনো সমস্যা হলে
-                আমাদের WhatsApp-এ যোগাযোগ করুন।
-            </div>
+                TELEGRAM ADMIN
 
-            <a
-                class="whatsapp"
-                href="https://wa.me/8801846882853"
-                target="_blank"
-            >
-                💬 WhatsApp: 01846882853
-            </a>
+                <span class="btn-number">
+                    @Nazim684
+                </span>
 
-        </div>
+            </span>
 
-
-        <button class="back" onclick="goHome()">
-            ← BACK TO HOME
         </button>
+
+
+        <!-- TELEGRAM A1NX -->
+
+        <button
+            class="admin-btn telegram"
+            type="button"
+            onclick="window.open(
+                'https://t.me/a1nx_f',
+                '_blank'
+            )">
+
+            <span class="icon">
+                ✈️
+            </span>
+
+            <span class="btn-text">
+
+                TELEGRAM ADMIN
+
+                <span class="btn-number">
+                    @a1nx_f
+                </span>
+
+            </span>
+
+        </button>
+
+
+        <!-- INFO -->
+
+        <div class="info-box">
+
+            ℹ️ Deposit করার জন্য উপরের
+            WhatsApp অথবা Telegram Admin-এর
+            সাথে যোগাযোগ করুন।
+
+            <br><br>
+
+            Payment করার আগে Admin-এর কাছ থেকে
+            সঠিক payment details নিয়ে নিন।
+
+        </div>
 
     </div>
 
 </div>
 
 
+<!-- BOTTOM NAV -->
+
+<div class="bottom-nav">
+
+    <button
+        class="nav-btn"
+        onclick="location.href='index.html'">
+
+        🏠
+
+    </button>
+
+    <button
+        class="nav-btn"
+        onclick="location.href='orders.html'">
+
+        🧾
+
+    </button>
+
+    <button
+        class="nav-btn"
+        onclick="location.href='shop.html'">
+
+        🛒
+
+    </button>
+
+    <button
+        class="nav-btn active"
+        onclick="location.href='deposit.html'">
+
+        💳
+
+    </button>
+
+    <button
+        class="nav-btn"
+        onclick="location.href='account.html'">
+
+        👤
+
+    </button>
+
+</div>
+
+
 <script>
 
-if(window.Telegram && window.Telegram.WebApp){
+/* TELEGRAM MINI APP */
+
+if(
+    window.Telegram &&
+    window.Telegram.WebApp
+){
 
     Telegram.WebApp.ready();
+
     Telegram.WebApp.expand();
-
-}
-
-
-function copyNumber(){
-
-    const number = "01957941357";
-
-    if(navigator.clipboard){
-
-        navigator.clipboard.writeText(number);
-
-    }
-
-    alert("✅ bKash number copied");
-
-}
-
-
-function verifyTransaction(){
-
-    const txid =
-        document.getElementById("txid").value.trim();
-
-    if(txid === ""){
-
-        alert("❌ Please enter Transaction ID");
-        return;
-
-    }
-
-    const status =
-        document.getElementById("status");
-
-    status.style.display = "block";
-
-    status.innerHTML =
-        "⏳ Verifying payment...";
-
-    /*
-      এখানে Telegram bot-এর /dp system
-      connect করতে হবে।
-
-      HTML নিজে Firebase থেকে transaction
-      verify করে balance add করবে না।
-    */
-
-}
-
-
-function goHome(){
-
-    window.location.href = "index.html";
 
 }
 
 </script>
 
 </body>
-              </html>
+</html>
