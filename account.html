@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width,initial-scale=1.0">
+
 <title>Crazy Like Shop - Account</title>
 
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -20,6 +26,10 @@ body{
     padding-bottom:90px;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .header{
     text-align:center;
     padding:28px 15px 20px;
@@ -29,123 +39,227 @@ body{
     width:82px;
     height:82px;
     margin:auto;
+
     border-radius:50%;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-size:42px;
+
     background:#0b0910;
+
     border:2px solid #b45cff;
-    box-shadow:0 0 20px #8b2cff;
+
+    box-shadow:
+        0 0 20px #8b2cff,
+        0 0 40px #8b2cff44;
 }
 
 .title{
     margin-top:12px;
+
     font-size:25px;
     font-weight:bold;
+
     color:#d59cff;
-    text-shadow:0 0 12px #9b35ff;
+
+    text-shadow:
+        0 0 12px #9b35ff;
 }
 
 .active{
     display:inline-block;
+
     margin-top:8px;
+
     padding:6px 18px;
+
     border-radius:20px;
+
     font-size:12px;
     font-weight:bold;
+
     color:#70ff8a;
+
     border:1px solid #39ff68;
-    box-shadow:0 0 12px rgba(57,255,104,.5);
+
+    box-shadow:
+        0 0 12px rgba(57,255,104,.5);
 }
+
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
     width:92%;
     max-width:600px;
+
     margin:auto;
 }
 
 .section-title{
     margin:25px 0 8px;
+
     color:#777;
+
     font-size:12px;
+
     letter-spacing:2px;
 }
 
+
+/* =========================
+   INFO BUTTON
+========================= */
+
 .info-button{
+
     width:100%;
+
     min-height:68px;
+
     margin:13px 0;
+
     padding:16px 18px;
+
     border-radius:16px;
+
     background:#0b0b10;
+
     border:1px solid;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
     gap:15px;
 
     font-size:15px;
+
     font-weight:bold;
 }
 
 .info-button span{
+
     text-align:right;
+
     word-break:break-all;
+
 }
 
+
+/* =========================
+   PURPLE
+========================= */
+
 .purple{
+
     border-color:#a43cff;
-    box-shadow:0 0 12px rgba(164,60,255,.5);
+
+    box-shadow:
+        0 0 12px rgba(164,60,255,.5);
 }
 
 .purple span{
+
     color:#c98cff;
 }
 
+
+/* =========================
+   GOLD
+========================= */
+
 .gold{
+
     border-color:#ffd23f;
-    box-shadow:0 0 12px rgba(255,210,63,.45);
+
+    box-shadow:
+        0 0 12px rgba(255,210,63,.45);
 }
 
 .gold span{
+
     color:#ffd84d;
 }
 
+
+/* =========================
+   RED
+========================= */
+
 .red{
+
     border-color:#ff3d4f;
-    box-shadow:0 0 12px rgba(255,61,79,.45);
+
+    box-shadow:
+        0 0 12px rgba(255,61,79,.45);
 }
 
 .red span{
+
     color:#ff6573;
 }
 
+
+/* =========================
+   ERROR
+========================= */
+
+.error{
+
+    text-align:center;
+
+    margin:15px;
+
+    color:#ff6573;
+
+    font-size:12px;
+}
+
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
 .bottom-nav{
+
     position:fixed;
+
     bottom:10px;
+
     left:50%;
+
     transform:translateX(-50%);
 
     width:calc(100% - 22px);
+
     max-width:598px;
+
     height:67px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-around;
 
     padding:6px;
 
     border-radius:22px;
 
-    background:linear-gradient(
-        145deg,
-        #18121f,
-        #0c0b10
-    );
+    background:
+        linear-gradient(
+            145deg,
+            #18121f,
+            #0c0b10
+        );
 
     border:1px solid #3a2d47;
 
@@ -157,11 +271,15 @@ body{
 }
 
 .nav-btn{
+
     width:52px;
+
     height:52px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     border-radius:17px;
@@ -172,21 +290,26 @@ body{
 }
 
 .active-nav{
+
     background:#2d173d;
+
     border:1px solid #75468f;
-    box-shadow:0 0 16px #913cff35;
+
+    box-shadow:
+        0 0 16px #913cff35;
 }
 
-.error{
-    text-align:center;
-    margin:15px;
-    color:#ff6573;
-    font-size:12px;
-}
 </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     PROFILE HEADER
+========================= -->
 
 <div class="header">
 
@@ -205,6 +328,10 @@ body{
 </div>
 
 
+<!-- =========================
+     ACCOUNT INFORMATION
+========================= -->
+
 <div class="container">
 
     <div class="section-title">
@@ -212,7 +339,10 @@ body{
     </div>
 
 
+    <!-- USER ID -->
+
     <div class="info-button purple">
+
         <div>
             👤 USER ID
         </div>
@@ -220,8 +350,11 @@ body{
         <span id="userId">
             Loading...
         </span>
+
     </div>
 
+
+    <!-- RANK -->
 
     <div class="info-button gold">
 
@@ -236,6 +369,8 @@ body{
     </div>
 
 
+    <!-- ORDERS -->
+
     <div class="info-button red">
 
         <div>
@@ -248,6 +383,8 @@ body{
 
     </div>
 
+
+    <!-- DEPOSIT -->
 
     <div class="info-button gold">
 
@@ -262,6 +399,8 @@ body{
     </div>
 
 
+    <!-- TOTAL USERS -->
+
     <div class="info-button purple">
 
         <div>
@@ -274,6 +413,8 @@ body{
 
     </div>
 
+
+    <!-- INFO -->
 
     <div class="info-button purple">
 
@@ -290,28 +431,57 @@ body{
 </div>
 
 
-<div id="error" class="error"></div>
+<div id="error"
+     class="error">
+</div>
 
+
+<!-- =========================
+     BOTTOM NAV
+========================= -->
 
 <div class="bottom-nav">
 
-    <a class="nav-btn" id="homeBtn" href="index.html">
+    <a
+        class="nav-btn"
+        id="homeBtn"
+        href="index.html"
+    >
         🏠
     </a>
 
-    <a class="nav-btn" id="ordersBtn" href="orders.html">
+
+    <a
+        class="nav-btn"
+        id="ordersBtn"
+        href="orders.html"
+    >
         🧾
     </a>
 
-    <a class="nav-btn" id="shopBtn" href="shop.html">
+
+    <a
+        class="nav-btn"
+        id="shopBtn"
+        href="shop.html"
+    >
         🛒
     </a>
 
-    <a class="nav-btn" id="depositBtn" href="deposit.html">
+
+    <a
+        class="nav-btn"
+        id="depositBtn"
+        href="deposit.html"
+    >
         💳
     </a>
 
-    <a class="nav-btn active-nav" href="account.html">
+
+    <a
+        class="nav-btn active-nav"
+        href="account.html"
+    >
         👤
     </a>
 
@@ -324,9 +494,10 @@ body{
    TELEGRAM MINI APP
 ========================================== */
 
-let userId = "";
+let telegramId = "";
 
 let tg = null;
+
 
 try{
 
@@ -335,10 +506,18 @@ try{
         window.Telegram.WebApp
     ){
 
-        tg = window.Telegram.WebApp;
+        tg =
+            window.Telegram.WebApp;
 
         tg.ready();
+
         tg.expand();
+
+
+        /*
+         * Telegram Mini App থেকে
+         * আসল Telegram User ID
+         */
 
         if(
             tg.initDataUnsafe &&
@@ -346,9 +525,10 @@ try{
             tg.initDataUnsafe.user.id
         ){
 
-            userId = String(
-                tg.initDataUnsafe.user.id
-            );
+            telegramId =
+                String(
+                    tg.initDataUnsafe.user.id
+                );
 
         }
 
@@ -356,104 +536,167 @@ try{
 
 }catch(error){
 
-    userId = "";
+    telegramId = "";
 
 }
 
 
 /* ==========================================
-   URL FALLBACK
+   CREATE CRAZY USER ID
 ========================================== */
 
-if(!userId){
+function createCrazyId(id){
 
-    try{
+    let number = 0;
 
-        const urlParams =
-            new URLSearchParams(
-                window.location.search
-            );
 
-        const urlUserId =
-            urlParams.get("user_id");
+    /*
+     * Telegram ID থেকে
+     * একই user-এর জন্য
+     * একই code তৈরি হবে
+     */
 
-        if(urlUserId){
+    for(
+        let i = 0;
+        i < id.length;
+        i++
+    ){
 
-            userId =
-                String(urlUserId);
+        number =
+            (
+                number * 31
+            ) +
+            id.charCodeAt(i);
 
-        }
-
-    }catch(error){
+        number =
+            number % 1000000007;
 
     }
 
+
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+
+    let code = "";
+
+
+    for(
+        let i = 0;
+        i < 6;
+        i++
+    ){
+
+        number =
+            (
+                number * 37
+                + 17
+            ) %
+            1000000007;
+
+
+        code +=
+            chars[
+                number % chars.length
+            ];
+
+    }
+
+
+    return "CRAZY_" + code;
+
 }
 
 
 /* ==========================================
-   SHOW USER ID
+   SHOW CRAZY USER ID
 ========================================== */
 
-const userIdElement =
-    document.getElementById("userId");
+if(telegramId){
 
-const errorElement =
-    document.getElementById("error");
+    const crazyUserId =
+        createCrazyId(
+            telegramId
+        );
 
 
-if(userId){
+    document.getElementById(
+        "userId"
+    ).textContent =
+        crazyUserId;
 
-    userIdElement.textContent =
-        userId;
 
-    errorElement.textContent = "";
+    document.getElementById(
+        "error"
+    ).textContent = "";
+
 
 }else{
 
-    userIdElement.textContent =
+    document.getElementById(
+        "userId"
+    ).textContent =
         "ID NOT FOUND";
 
-    errorElement.textContent =
+
+    document.getElementById(
+        "error"
+    ).textContent =
         "Telegram Mini App-এর ভিতর থেকে Account খুলুন.";
 
 }
 
 
 /* ==========================================
-   KEEP USER ID WHEN CHANGING PAGE
+   KEEP USER ID WHILE NAVIGATING
 ========================================== */
 
 function pageUrl(page){
 
-    if(userId){
+    if(telegramId){
 
-        return page +
+        return (
+            page +
             "?user_id=" +
-            encodeURIComponent(userId);
+            encodeURIComponent(
+                telegramId
+            )
+        );
 
     }
+
 
     return page;
 
 }
 
 
-document.getElementById("homeBtn").href =
+document.getElementById(
+    "homeBtn"
+).href =
     pageUrl("index.html");
 
-document.getElementById("ordersBtn").href =
+
+document.getElementById(
+    "ordersBtn"
+).href =
     pageUrl("orders.html");
 
-document.getElementById("shopBtn").href =
+
+document.getElementById(
+    "shopBtn"
+).href =
     pageUrl("shop.html");
 
-document.getElementById("depositBtn").href =
+
+document.getElementById(
+    "depositBtn"
+).href =
     pageUrl("deposit.html");
 
 
 /* ==========================================
-   DEMO ACCOUNT DATA
+   ACCOUNT DATA
 ========================================== */
 
 let totalDeposit = 0;
@@ -477,32 +720,53 @@ document.getElementById(
    RANK SYSTEM
 ========================================== */
 
-let rank = "🥉 BRONZE";
+let rank =
+    "🥉 BRONZE";
 
 
-if(totalDeposit >= 10000000000){
+if(
+    totalDeposit >=
+    10000000000
+){
 
-    rank = "👑 MASTER";
-
-}
-else if(totalDeposit >= 10000){
-
-    rank = "🔴 HEROIC";
-
-}
-else if(totalDeposit >= 1000){
-
-    rank = "💎 DIAMOND";
+    rank =
+        "👑 MASTER";
 
 }
-else if(totalDeposit >= 500){
+else if(
+    totalDeposit >=
+    10000
+){
 
-    rank = "🥈 SILVER";
+    rank =
+        "🔴 HEROIC";
 
 }
-else if(totalDeposit >= 100){
+else if(
+    totalDeposit >=
+    1000
+){
 
-    rank = "🥉 BRONZE";
+    rank =
+        "💎 DIAMOND";
+
+}
+else if(
+    totalDeposit >=
+    500
+){
+
+    rank =
+        "🥈 SILVER";
+
+}
+else if(
+    totalDeposit >=
+    100
+){
+
+    rank =
+        "🥉 BRONZE";
 
 }
 
@@ -515,4 +779,5 @@ document.getElementById(
 </script>
 
 </body>
-            </html>
+
+    </html>
