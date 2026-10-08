@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Crazy Like Shop - Account</title>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
@@ -28,26 +22,20 @@ body{
 
 .header{
     text-align:center;
-    padding:28px 15px 20px;
+    padding:30px 15px 20px;
 }
 
 .profile-logo{
     width:82px;
     height:82px;
     margin:auto;
-
     border-radius:50%;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     font-size:42px;
-
     background:#0b0910;
-
     border:2px solid #b45cff;
-
     box-shadow:
         0 0 20px #8b2cff,
         0 0 40px #8b2cff44;
@@ -55,33 +43,22 @@ body{
 
 .title{
     margin-top:12px;
-
     font-size:25px;
     font-weight:bold;
-
     color:#d59cff;
-
     text-shadow:0 0 12px #9b35ff;
 }
 
 .active{
     display:inline-block;
-
     margin-top:8px;
-
     padding:6px 18px;
-
     border-radius:20px;
-
     font-size:12px;
     font-weight:bold;
-
     color:#70ff8a;
-
     border:1px solid #39ff68;
-
-    box-shadow:
-        0 0 12px rgba(57,255,104,.5);
+    box-shadow:0 0 12px rgba(57,255,104,.5);
 }
 
 .container{
@@ -92,37 +69,23 @@ body{
 
 .section-title{
     margin:25px 0 8px;
-
     color:#777;
-
     font-size:12px;
-
     letter-spacing:2px;
 }
 
 .info-button{
     width:100%;
-
     min-height:68px;
-
     margin:13px 0;
-
     padding:16px 18px;
-
     border-radius:16px;
-
     background:#0b0b10;
-
     border:1px solid;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
-
     font-size:15px;
     font-weight:bold;
 }
@@ -134,9 +97,7 @@ body{
 
 .purple{
     border-color:#a43cff;
-
-    box-shadow:
-        0 0 12px rgba(164,60,255,.5);
+    box-shadow:0 0 12px rgba(164,60,255,.5);
 }
 
 .purple span{
@@ -145,9 +106,7 @@ body{
 
 .gold{
     border-color:#ffd23f;
-
-    box-shadow:
-        0 0 12px rgba(255,210,63,.45);
+    box-shadow:0 0 12px rgba(255,210,63,.45);
 }
 
 .gold span{
@@ -156,100 +115,54 @@ body{
 
 .red{
     border-color:#ff3d4f;
-
-    box-shadow:
-        0 0 12px rgba(255,61,79,.45);
+    box-shadow:0 0 12px rgba(255,61,79,.45);
 }
 
 .red span{
     color:#ff6573;
 }
 
-.error{
-    text-align:center;
-
-    margin:15px;
-
-    color:#ff6573;
-
-    font-size:12px;
-}
-
 .bottom-nav{
     position:fixed;
-
     bottom:10px;
-
     left:50%;
-
     transform:translateX(-50%);
-
     width:calc(100% - 22px);
-
     max-width:598px;
-
     height:67px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-around;
-
     padding:6px;
-
     border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #18121f,
-            #0c0b10
-        );
-
+    background:linear-gradient(145deg,#18121f,#0c0b10);
     border:1px solid #3a2d47;
-
     box-shadow:
         0 10px 35px #000,
         0 0 25px #7d32b518;
-
     z-index:999;
 }
 
 .nav-btn{
     width:52px;
     height:52px;
-
     display:flex;
-
     align-items:center;
     justify-content:center;
-
     border-radius:17px;
-
     text-decoration:none;
-
     font-size:24px;
 }
 
 .active-nav{
     background:#2d173d;
-
     border:1px solid #75468f;
-
-    box-shadow:
-        0 0 16px #913cff35;
+    box-shadow:0 0 16px #913cff35;
 }
-
 </style>
-
 </head>
 
-
 <body>
-
-
-<!-- PROFILE -->
 
 <div class="header">
 
@@ -268,16 +181,12 @@ body{
 </div>
 
 
-<!-- ACCOUNT -->
-
 <div class="container">
 
     <div class="section-title">
         ACCOUNT INFORMATION
     </div>
 
-
-    <!-- RANDOM USER ID -->
 
     <div class="info-button purple">
 
@@ -292,22 +201,18 @@ body{
     </div>
 
 
-    <!-- RANK -->
-
     <div class="info-button gold">
 
         <div>
             🏆 CURRENT RANK
         </div>
 
-        <span id="rank">
+        <span>
             🥉 BRONZE
         </span>
 
     </div>
 
-
-    <!-- ORDERS -->
 
     <div class="info-button red">
 
@@ -315,14 +220,12 @@ body{
             📦 TOTAL ORDERS
         </div>
 
-        <span id="totalOrders">
+        <span>
             0
         </span>
 
     </div>
 
-
-    <!-- DEPOSIT -->
 
     <div class="info-button gold">
 
@@ -330,14 +233,12 @@ body{
             💰 TOTAL DEPOSIT
         </div>
 
-        <span id="totalDeposit">
+        <span>
             ৳0
         </span>
 
     </div>
 
-
-    <!-- USERS -->
 
     <div class="info-button purple">
 
@@ -351,8 +252,6 @@ body{
 
     </div>
 
-
-    <!-- INFO -->
 
     <div class="info-button purple">
 
@@ -369,42 +268,25 @@ body{
 </div>
 
 
-<div id="error"
-class="error">
-</div>
-
-
-<!-- BOTTOM NAV -->
-
 <div class="bottom-nav">
 
-    <a
-    class="nav-btn"
-    href="index.html">
+    <a class="nav-btn" href="index.html">
         🏠
     </a>
 
-    <a
-    class="nav-btn"
-    href="orders.html">
+    <a class="nav-btn" href="orders.html">
         🧾
     </a>
 
-    <a
-    class="nav-btn"
-    href="shop.html">
+    <a class="nav-btn" href="shop.html">
         🛒
     </a>
 
-    <a
-    class="nav-btn"
-    href="deposit.html">
+    <a class="nav-btn" href="deposit.html">
         💳
     </a>
 
-    <a
-    class="nav-btn active-nav"
-    href="account.html">
+    <a class="nav-btn active-nav" href="account.html">
         👤
     </a>
 
@@ -413,9 +295,9 @@ class="error">
 
 <script>
 
-/* ==========================================
+/* =========================================
    TELEGRAM MINI APP
-========================================== */
+========================================= */
 
 try{
 
@@ -425,26 +307,21 @@ try{
     ){
 
         Telegram.WebApp.ready();
-
         Telegram.WebApp.expand();
 
     }
 
-}catch(error){
-
-}
+}catch(error){}
 
 
-/* ==========================================
-   RANDOM CRAZY USER ID
-========================================== */
+/* =========================================
+   CRAZY USER ID
+========================================= */
 
 let crazyUserId = "";
 
 
-/* ==========================================
-   GET OLD USER ID
-========================================== */
+/* Get old ID */
 
 try{
 
@@ -460,9 +337,9 @@ try{
 }
 
 
-/* ==========================================
-   CREATE NEW RANDOM USER
-========================================== */
+/* =========================================
+   CREATE NEW USER ID
+========================================= */
 
 if(!crazyUserId){
 
@@ -470,7 +347,6 @@ if(!crazyUserId){
         "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
     let code = "";
-
 
     for(
         let i = 0;
@@ -494,7 +370,7 @@ if(!crazyUserId){
         "CRAZY_" + code;
 
 
-    /* SAVE USER ID */
+    /* Save ID */
 
     try{
 
@@ -503,16 +379,14 @@ if(!crazyUserId){
             crazyUserId
         );
 
-    }catch(error){
-
-    }
+    }catch(error){}
 
 }
 
 
-/* ==========================================
+/* =========================================
    SHOW USER ID
-========================================== */
+========================================= */
 
 document.getElementById(
     "userId"
@@ -520,89 +394,11 @@ document.getElementById(
     crazyUserId;
 
 
-/* ==========================================
-   ACCOUNT DATA
-========================================== */
-
-let totalDeposit = 0;
-
-let totalOrders = 0;
-
-
-document.getElementById(
-    "totalDeposit"
-).textContent =
-    "৳" + totalDeposit;
-
-
-document.getElementById(
-    "totalOrders"
-).textContent =
-    totalOrders;
-
-
-/* ==========================================
-   RANK SYSTEM
-========================================== */
-
-let rank =
-    "🥉 BRONZE";
-
-
-if(
-    totalDeposit >=
-    10000000000
-){
-
-    rank =
-        "👑 MASTER";
-
-}
-else if(
-    totalDeposit >=
-    10000
-){
-
-    rank =
-        "🔴 HEROIC";
-
-}
-else if(
-    totalDeposit >=
-    1000
-){
-
-    rank =
-        "💎 DIAMOND";
-
-}
-else if(
-    totalDeposit >=
-    500
-){
-
-    rank =
-        "🥈 SILVER";
-
-}
-else if(
-    totalDeposit >=
-    100
-){
-
-    rank =
-        "🥉 BRONZE";
-
-}
-
-
-document.getElementById(
-    "rank"
-).textContent =
-    rank;
+/* =========================================
+   DONE
+========================================= */
 
 </script>
 
 </body>
-
-      </html>
+        </html>
