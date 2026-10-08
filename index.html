@@ -4,492 +4,519 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CRAZY LIKE SHOP</title>
+<title>Crazy Like Shop</title>
 
 <style>
-
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+    font-family:Arial, sans-serif;
 }
 
 body{
-    min-height:100vh;
+    background:#07070b;
     color:#fff;
+    min-height:100vh;
+    padding-bottom:85px;
+}
+
+.app{
+    max-width:600px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.header{
+    padding:22px 18px 18px;
     background:
-        radial-gradient(circle at 20% 10%,rgba(126,45,255,.25),transparent 30%),
-        radial-gradient(circle at 90% 20%,rgba(255,190,50,.12),transparent 28%),
-        linear-gradient(145deg,#050507,#0b0715,#050507);
-}
-
-/* TOP */
-
-.top{
-    padding:25px 20px 20px;
-    text-align:center;
-}
-
-.crown{
-    font-size:38px;
-    filter:drop-shadow(0 0 15px rgba(255,193,7,.8));
+        radial-gradient(circle at 20% 0%,#57209b55,transparent 35%),
+        linear-gradient(145deg,#111019,#07070b);
+    border-bottom:1px solid #27232f;
 }
 
 .logo{
-    margin-top:5px;
-    font-size:27px;
+    font-size:25px;
     font-weight:900;
-    letter-spacing:1px;
-    background:linear-gradient(90deg,#fff,#c78cff,#ffd86b);
+    background:linear-gradient(90deg,#ffffff,#bd73ff,#ffd65c);
     -webkit-background-clip:text;
     color:transparent;
 }
 
-.vip{
-    display:inline-block;
-    margin-top:9px;
-    padding:5px 14px;
-    border-radius:30px;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:2px;
-    color:#ffd86b;
-    border:1px solid rgba(255,216,107,.45);
-    background:rgba(255,216,107,.08);
-    box-shadow:0 0 18px rgba(255,193,7,.12);
+.subtitle{
+    margin-top:6px;
+    color:#85818e;
+    font-size:12px;
 }
 
-/* HERO */
-
-.hero{
-    margin:5px 16px 20px;
-    padding:24px 20px;
-    border-radius:24px;
-    border:1px solid rgba(190,120,255,.25);
-    background:
-        linear-gradient(135deg,
-        rgba(102,35,180,.28),
-        rgba(20,15,30,.72));
-    box-shadow:
-        0 0 35px rgba(113,42,255,.12),
-        inset 0 1px rgba(255,255,255,.06);
-}
-
-.hero-title{
-    font-size:21px;
-    font-weight:800;
-}
-
-.hero-text{
-    margin-top:8px;
-    color:#aaa4b8;
-    font-size:13px;
-    line-height:1.5;
-}
-
-.status{
-    margin-top:17px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:#b8ffcb;
-    font-size:11px;
-}
-
-.dot{
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:#32e875;
-    box-shadow:0 0 12px #32e875;
-}
-
-/* MENU */
-
-.container{
-    padding:0 16px 25px;
-}
-
-.section-title{
-    margin:10px 3px 12px;
-    font-size:14px;
-    color:#c9c3d4;
-    font-weight:bold;
-    letter-spacing:.5px;
-}
-
-.menu{
-    display:grid;
-    gap:13px;
-}
-
-.card{
-    position:relative;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:17px;
-    border-radius:20px;
-    border:1px solid rgba(255,255,255,.08);
-    background:rgba(20,17,27,.78);
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.25),
-        inset 0 1px rgba(255,255,255,.04);
-    transition:.2s;
-}
-
-.card:active{
-    transform:scale(.97);
-}
-
-.card::after{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:100px;
-    right:-50px;
-    top:-50px;
-    background:rgba(150,70,255,.12);
-    border-radius:50%;
-    filter:blur(15px);
-}
-
-.icon{
-    position:relative;
-    z-index:2;
-    width:55px;
-    height:55px;
-    min-width:55px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.balance{
+    margin-top:16px;
+    padding:15px;
     border-radius:17px;
-    font-size:25px;
-    background:linear-gradient(145deg,#2b1747,#15101d);
-    border:1px solid rgba(190,120,255,.25);
-    box-shadow:
-        0 0 20px rgba(143,65,255,.15),
-        inset 0 1px rgba(255,255,255,.06);
-}
-
-.info{
-    position:relative;
-    z-index:2;
-    flex:1;
-}
-
-.title{
-    font-size:16px;
-    font-weight:800;
-}
-
-.desc{
-    margin-top:5px;
-    color:#898292;
-    font-size:11px;
-}
-
-.arrow{
-    position:relative;
-    z-index:2;
-    color:#8c819a;
-    font-size:25px;
-}
-
-/* PREMIUM */
-
-.premium-title{
-    margin-top:25px;
-    margin-bottom:12px;
+    background:linear-gradient(135deg,#211536,#120f18);
+    border:1px solid #3a2850;
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
-.premium-title span:first-child{
+.balance small{
+    color:#90899c;
+}
+
+.balance strong{
+    display:block;
+    margin-top:4px;
+    color:#ffd45b;
+    font-size:19px;
+}
+
+/* CONTENT */
+
+.content{
+    padding:18px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.hero{
+    padding:21px;
+    border-radius:22px;
+    background:
+        radial-gradient(circle at 90% 0%,#7a31c855,transparent 35%),
+        linear-gradient(145deg,#191322,#0e0c13);
+    border:1px solid #30263b;
+}
+
+.hero h2{
+    font-size:21px;
+}
+
+.hero p{
+    margin-top:7px;
+    color:#9993a3;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.online{
+    margin-top:15px;
+    color:#61e993;
+    font-size:11px;
+}
+
+.dot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    margin-right:5px;
+    border-radius:50%;
+    background:#48e987;
+    box-shadow:0 0 10px #48e987;
+}
+
+/* SECTION */
+
+.section{
+    margin-top:22px;
+}
+
+.section-title{
+    margin-bottom:12px;
     font-size:15px;
     font-weight:800;
 }
 
-.hot{
-    color:#ffd45e;
+/* LIVE ORDERS */
+
+.live{
+    padding:15px;
+    border-radius:18px;
+    background:#111016;
+    border:1px solid #292631;
+}
+
+.live-row{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    padding:12px 0;
+    border-bottom:1px solid #211f27;
+}
+
+.live-row:last-child{
+    border-bottom:0;
+}
+
+.avatar{
+    width:39px;
+    height:39px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#6628a8,#21132d);
+}
+
+.live-info{
+    flex:1;
+}
+
+.live-name{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.live-service{
+    margin-top:4px;
+    color:#7e7987;
+    font-size:10px;
+}
+
+.success{
+    color:#59e991;
     font-size:10px;
     font-weight:bold;
 }
 
-/* PACKAGE */
+/* SHOP CARDS */
 
-.package{
-    position:relative;
-    overflow:hidden;
-    padding:19px;
-    margin-bottom:13px;
-    border-radius:21px;
-    border:1px solid rgba(255,205,80,.18);
-    background:
-        linear-gradient(145deg,
-        rgba(35,25,18,.95),
-        rgba(18,15,23,.95));
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.3),
-        0 0 25px rgba(255,183,0,.05);
+.shop-card{
+    padding:17px;
+    margin-bottom:12px;
+    border-radius:19px;
+    background:linear-gradient(145deg,#15121b,#0e0d12);
+    border:1px solid #2b2633;
 }
 
-.package::before{
-    content:"VIP";
-    position:absolute;
-    right:-22px;
-    top:13px;
-    transform:rotate(35deg);
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:2px;
-    color:#ffd45e;
-    opacity:.7;
-}
-
-.package-head{
+.shop-head{
     display:flex;
     align-items:center;
     gap:12px;
 }
 
-.package-icon{
-    width:45px;
-    height:45px;
-    border-radius:14px;
+.shop-icon{
+    width:48px;
+    height:48px;
+    border-radius:15px;
     display:flex;
-    justify-content:center;
     align-items:center;
-    background:linear-gradient(145deg,#3a2410,#17110b);
-    border:1px solid rgba(255,210,80,.22);
-    font-size:21px;
+    justify-content:center;
+    background:#21182b;
+    font-size:23px;
 }
 
-.package-name{
-    font-weight:800;
+.shop-info{
+    flex:1;
+}
+
+.shop-name{
     font-size:15px;
+    font-weight:bold;
 }
 
-.package-small{
+.shop-desc{
     margin-top:4px;
-    color:#8e8795;
+    color:#817b8b;
     font-size:10px;
 }
 
 .price{
-    margin-top:15px;
-    font-size:14px;
-    color:#ffd45e;
-    font-weight:bold;
+    margin-top:14px;
+    color:#ffd35b;
+    font-size:17px;
+    font-weight:900;
 }
 
 .buy{
     width:100%;
-    margin-top:14px;
+    margin-top:12px;
     padding:13px;
-    border:none;
-    border-radius:13px;
-    color:#160d00;
+    border:0;
+    border-radius:12px;
+    background:linear-gradient(90deg,#ffd15a,#fff0a1,#e6a82b);
+    color:#171006;
     font-size:13px;
     font-weight:900;
-    background:linear-gradient(90deg,#ffd15a,#fff0a1,#e9a927);
-    box-shadow:0 0 22px rgba(255,198,58,.18);
 }
 
-/* FOOTER */
+/* FORMS */
 
-.footer{
+.box{
+    padding:18px;
+    border-radius:19px;
+    background:#111016;
+    border:1px solid #292631;
+}
+
+.input{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:1px solid #302b38;
+    border-radius:12px;
+    outline:none;
+    background:#09090d;
+    color:#fff;
+}
+
+.action{
+    width:100%;
+    padding:13px;
+    margin-top:12px;
+    border:0;
+    border-radius:12px;
+    background:linear-gradient(90deg,#762bd1,#a951ff);
+    color:#fff;
+    font-weight:bold;
+}
+
+/* ORDERS */
+
+.empty{
     text-align:center;
-    padding:15px 20px 28px;
-    color:#57515f;
+    padding:35px 15px;
+    border-radius:19px;
+    background:#111016;
+    border:1px solid #292631;
+}
+
+.empty-icon{
+    font-size:35px;
+}
+
+.empty p{
+    margin-top:8px;
+    color:#85808d;
+    font-size:12px;
+}
+
+/* BOTTOM NAV */
+
+.nav{
+    position:fixed;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:600px;
+    height:72px;
+    padding:8px 8px 9px;
+    background:rgba(10,9,14,.96);
+    border-top:1px solid #28232e;
+    display:flex;
+    z-index:99;
+}
+
+.nav button{
+    flex:1;
+    border:0;
+    background:none;
+    color:#77727f;
     font-size:10px;
+    font-weight:bold;
 }
 
-.footer strong{
-    color:#8e8498;
+.nav-icon{
+    display:block;
+    font-size:20px;
+    margin-bottom:4px;
 }
 
-/* DESKTOP */
-
-@media(min-width:700px){
-
-    body{
-        max-width:600px;
-        margin:auto;
-    }
-
+.nav button.active{
+    color:#d179ff;
 }
 
+.nav button.active .nav-icon{
+    filter:drop-shadow(0 0 8px #a83cff);
+}
+
+/* NOTICE */
+
+.notice{
+    margin-top:12px;
+    padding:13px;
+    border-radius:14px;
+    background:#17131d;
+    border:1px solid #2e2638;
+    color:#aaa3b1;
+    font-size:10px;
+    line-height:1.5;
+}
 </style>
 </head>
 
 <body>
 
+<div class="app">
+
 <!-- HEADER -->
 
-<div class="top">
-
-    <div class="crown">👑</div>
+<div class="header">
 
     <div class="logo">
-        CRAZY LIKE SHOP
+        👑 CRAZY LIKE SHOP
     </div>
 
-    <div class="vip">
-        ✦ VIP PREMIUM SHOP ✦
+    <div class="subtitle">
+        Premium Like Service • Fast Delivery
     </div>
 
-</div>
+    <div class="balance">
+        <div>
+            <small>YOUR BALANCE</small>
+            <strong>৳ 0.00</strong>
+        </div>
 
-
-<!-- HERO -->
-
-<div class="hero">
-
-    <div class="hero-title">
-        Welcome, Premium Member 👋
-    </div>
-
-    <div class="hero-text">
-        Buy premium services instantly with
-        fast delivery and secure ordering.
-    </div>
-
-    <div class="status">
-        <div class="dot"></div>
-        Shop is online
+        <div>💰</div>
     </div>
 
 </div>
 
 
-<div class="container">
+<div class="content">
+
+
+<!-- HOME -->
+
+<div id="home" class="page active">
+
+    <div class="hero">
+
+        <h2>
+            Welcome to Crazy Shop 🔥
+        </h2>
+
+        <p>
+            Order premium services with fast delivery
+            and secure payment.
+        </p>
+
+        <div class="online">
+            <span class="dot"></span>
+            LIVE • SHOP ONLINE
+        </div>
+
+    </div>
+
+
+    <!-- LIVE ORDERS -->
+
+    <div class="section">
+
+        <div class="section-title">
+            🔴 LIVE ORDERS
+        </div>
+
+        <div class="live">
+
+            <div class="live-row">
+
+                <div class="avatar">👤</div>
+
+                <div class="live-info">
+                    <div class="live-name">
+                        Crazy User
+                    </div>
+
+                    <div class="live-service">
+                        Premium Like Order
+                    </div>
+                </div>
+
+                <div class="success">
+                    ✓ SUCCESS
+                </div>
+
+            </div>
+
+
+            <div class="live-row">
+
+                <div class="avatar">👤</div>
+
+                <div class="live-info">
+                    <div class="live-name">
+                        VIP Member
+                    </div>
+
+                    <div class="live-service">
+                        Like Package
+                    </div>
+                </div>
+
+                <div class="success">
+                    ✓ SUCCESS
+                </div>
+
+            </div>
+
+
+            <div class="live-row">
+
+                <div class="avatar">👤</div>
+
+                <div class="live-info">
+                    <div class="live-name">
+                        Premium User
+                    </div>
+
+                    <div class="live-service">
+                        Crazy Like Service
+                    </div>
+                </div>
+
+                <div class="success">
+                    ✓ SUCCESS
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="notice">
+        ⚡ Orders are processed automatically after
+        successful payment and verification.
+    </div>
+
+</div>
+
+
+<!-- SHOP -->
+
+<div id="shop" class="page">
 
     <div class="section-title">
-        SHOP MENU
+        🔥 CRAZY LIKE SHOP
     </div>
 
-    <div class="menu">
 
-        <!-- SHOP -->
+    <div class="shop-card">
 
-        <div class="card" onclick="openShop()">
+        <div class="shop-head">
 
-            <div class="icon">
+            <div class="shop-icon">
                 🔥
             </div>
 
-            <div class="info">
+            <div class="shop-info">
 
-                <div class="title">
-                    CRAZY LIKE SHOP
+                <div class="shop-name">
+                    Premium Like Package
                 </div>
 
-                <div class="desc">
-                    Premium likes & services
-                </div>
-
-            </div>
-
-            <div class="arrow">
-                ›
-            </div>
-
-        </div>
-
-
-        <!-- DEPOSIT -->
-
-        <div class="card" onclick="deposit()">
-
-            <div class="icon">
-                💰
-            </div>
-
-            <div class="info">
-
-                <div class="title">
-                    DEPOSIT
-                </div>
-
-                <div class="desc">
-                    Add balance to your account
-                </div>
-
-            </div>
-
-            <div class="arrow">
-                ›
-            </div>
-
-        </div>
-
-
-        <!-- ORDERS -->
-
-        <div class="card" onclick="orders()">
-
-            <div class="icon">
-                📦
-            </div>
-
-            <div class="info">
-
-                <div class="title">
-                    MY ORDERS
-                </div>
-
-                <div class="desc">
-                    Track your orders
-                </div>
-
-            </div>
-
-            <div class="arrow">
-                ›
-            </div>
- 
-        </div>
-
-    </div>
-
-
-    <!-- PREMIUM -->
-
-    <div class="premium-title">
-
-        <span>
-            👑 PREMIUM PACKAGES
-        </span>
-
-        <span class="hot">
-            ✦ VIP
-        </span>
-
-    </div>
-
-
-    <!-- PACKAGE -->
-
-    <div class="package">
-
-        <div class="package-head">
-
-            <div class="package-icon">
-                🔥
-            </div>
-
-            <div>
-
-                <div class="package-name">
-                    Crazy Premium Like
-                </div>
-
-                <div class="package-small">
-                    High quality • Fast delivery
+                <div class="shop-desc">
+                    Fast delivery • High quality
                 </div>
 
             </div>
@@ -500,31 +527,29 @@ body{
             PREMIUM PACKAGE
         </div>
 
-        <button class="buy" onclick="comingSoon()">
-            BUY NOW  ›
+        <button class="buy" onclick="buyPackage()">
+            BUY NOW →
         </button>
 
     </div>
 
 
-    <!-- PACKAGE -->
+    <div class="shop-card">
 
-    <div class="package">
+        <div class="shop-head">
 
-        <div class="package-head">
-
-            <div class="package-icon">
+            <div class="shop-icon">
                 ⚡
             </div>
 
-            <div>
+            <div class="shop-info">
 
-                <div class="package-name">
-                    Crazy VIP Service
+                <div class="shop-name">
+                    VIP Like Service
                 </div>
 
-                <div class="package-small">
-                    Secure • Reliable • Premium
+                <div class="shop-desc">
+                    Secure • Reliable • Fast
                 </div>
 
             </div>
@@ -535,8 +560,8 @@ body{
             VIP PACKAGE
         </div>
 
-        <button class="buy" onclick="comingSoon()">
-            BUY NOW  ›
+        <button class="buy" onclick="buyPackage()">
+            BUY NOW →
         </button>
 
     </div>
@@ -544,29 +569,161 @@ body{
 </div>
 
 
-<div class="footer">
-    <strong>CRAZY LIKE SHOP</strong><br>
-    Premium Service • Secure Ordering
+<!-- DEPOSIT -->
+
+<div id="deposit" class="page">
+
+    <div class="section-title">
+        💰 DEPOSIT
+    </div>
+
+    <div class="box">
+
+        <div style="font-size:14px;font-weight:bold;">
+            Add Balance
+        </div>
+
+        <div style="margin-top:6px;color:#85808d;font-size:11px;">
+            Add money to your Crazy Shop balance.
+        </div>
+
+        <input
+            class="input"
+            id="amount"
+            type="number"
+            placeholder="Enter amount"
+        >
+
+        <button class="action" onclick="depositNow()">
+            CONTINUE DEPOSIT
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ORDERS -->
+
+<div id="orders" class="page">
+
+    <div class="section-title">
+        📦 MY ORDERS
+    </div>
+
+    <div class="empty">
+
+        <div class="empty-icon">
+            📦
+        </div>
+
+        <div style="margin-top:8px;font-weight:bold;">
+            No Orders Yet
+        </div>
+
+        <p>
+            Your successful orders will appear here.
+        </p>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="nav">
+
+    <button
+        id="navHome"
+        class="active"
+        onclick="showPage('home',this)"
+    >
+        <span class="nav-icon">🏠</span>
+        HOME
+    </button>
+
+
+    <button
+        id="navShop"
+        onclick="showPage('shop',this)"
+    >
+        <span class="nav-icon">🔥</span>
+        SHOP
+    </button>
+
+
+    <button
+        id="navDeposit"
+        onclick="showPage('deposit',this)"
+    >
+        <span class="nav-icon">💰</span>
+        DEPOSIT
+    </button>
+
+
+    <button
+        id="navOrders"
+        onclick="showPage('orders',this)"
+    >
+        <span class="nav-icon">📦</span>
+        ORDERS
+    </button>
+
+</div>
+
 </div>
 
 
 <script>
 
-let tg = window.Telegram?.WebApp;
+/* Telegram Mini App */
 
-if(tg){
-    tg.ready();
-    tg.expand();
+if(window.Telegram && window.Telegram.WebApp){
+
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+
 }
 
 
-/* SHOP */
+/* PAGE SYSTEM */
 
-function openShop(){
+function showPage(page,button){
+
+    const pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(item){
+        item.classList.remove("active");
+    });
+
+    document.getElementById(page).classList.add("active");
+
+    const buttons = document.querySelectorAll(".nav button");
+
+    buttons.forEach(function(item){
+        item.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* BUY */
+
+function buyPackage(){
 
     alert(
         "🔥 CRAZY LIKE SHOP\n\n" +
-        "Premium packages will be available here."
+        "Package purchase system will be connected next."
     );
 
 }
@@ -574,35 +731,22 @@ function openShop(){
 
 /* DEPOSIT */
 
-function deposit(){
+function depositNow(){
+
+    const amount =
+        document.getElementById("amount").value;
+
+    if(!amount || Number(amount) <= 0){
+
+        alert("❌ Please enter a valid amount.");
+
+        return;
+    }
 
     alert(
         "💰 DEPOSIT\n\n" +
-        "Deposit system will be connected soon."
-    );
-
-}
-
-
-/* ORDERS */
-
-function orders(){
-
-    alert(
-        "📦 MY ORDERS\n\n" +
-        "Your orders will appear here."
-    );
-
-}
-
-
-/* BUY */
-
-function comingSoon(){
-
-    alert(
-        "👑 VIP PACKAGE\n\n" +
-        "Premium package system is coming soon."
+        "Amount: ৳" + amount +
+        "\n\nDeposit system will be connected next."
     );
 
 }
@@ -610,4 +754,4 @@ function comingSoon(){
 </script>
 
 </body>
-    </html>
+</html>
