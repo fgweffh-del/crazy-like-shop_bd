@@ -1,1 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
+<title>Deposit</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#050507;
+    color:#fff;
+    min-height:100vh;
+}
+
+.page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:20px 14px;
+}
+
+.card{
+    width:100%;
+    max-width:620px;
+    margin:auto;
+    padding:25px 18px;
+
+    border-radius:26px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #9b3cff30,
+            transparent 45%
+        ),
+        linear-gradient(
+            145deg,
+            #1d1326,
+            #09080c
+        );
+
+    border:1px solid #4d3260;
+
+    box-shadow:
+        0 0 45px #8b36ff18;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+}
+
+.bkash-logo{
+    width:72px;
+    height:72px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:#e2136e;
+
+    color:#fff;
+
+    font-size:27px;
+    font-weight:900;
+
+    box-shadow:
+        0 0 25px #e2136e55;
+}
+
+.title{
+    margin-top:13px;
+
+    font-size:25px;
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #c66cff,
+            #ffd45b
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.subtitle{
+    margin-top:6px;
+
+    color:#8b8392;
+    font-size:9px;
+}
+
+/* NUMBER */
+
+.number-box{
+    margin-top:22px;
+    padding:19px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:#0b090d;
+    border:1px solid #3d2b46;
+}
+
+.number-label{
+    color:#817887;
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.number{
+    margin-top:8px;
+
+    color:#ffd45b;
+
+    font-size:24px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.copy{
+    margin-top:11px;
+
+    padding:8px 16px;
+
+    border:1px solid #664171;
+    border-radius:10px;
+
+    background:#24132f;
+
+    color:#d09aff;
+
+    font-size:8px;
+    font-weight:bold;
+}
+
+/* INSTRUCTION */
+
+.instruction{
+    margin-top:15px;
+    padding:17px;
+
+    border-radius:17px;
+
+    background:#110e14;
+    border:1px solid #302635;
+}
+
+.instruction-title{
+    font-size:12px;
+    font-weight:900;
+}
+
+.instruction-text{
+    margin-top:9px;
+
+    color:#89818e;
+
+    font-size:9px;
+    line-height:1.8;
+}
+
+/* VERIFY */
+
+.verify-title{
+    margin-top:19px;
+
+    font-size:11px;
+    font-weight:900;
+}
+
+input{
+    width:100%;
+    height:51px;
+
+    margin-top:8px;
+    padding:0 14px;
+
+    border-radius:14px;
+
+    background:#08070a;
+    border:1px solid #3c2c45;
+
+    color:#fff;
+    outline:none;
+
+    font-size:12px;
+}
+
+input:focus{
+    border-color:#9b3cff;
+}
+
+.verify{
+    width:100%;
+    height:51px;
+
+    margin-top:11px;
+
+    border:0;
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7130a5,
+            #a13cff
+        );
+
+    color:#fff;
+
+    font-size:11px;
+    font-weight:900;
+}
+
+.status{
+    display:none;
+
+    margin-top:12px;
+    padding:13px;
+
+    text-align:center;
+
+    border-radius:13px;
+
+    background:#101611;
+    border:1px solid #2b593d;
+
+    color:#59e995;
+
+    font-size:9px;
+}
+
+/* CONTACT */
+
+.contact{
+    margin-top:16px;
+    padding:15px;
+
+    text-align:center;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151018,
+            #0d0b10
+        );
+
+    border:1px solid #35273d;
+}
+
+.contact-title{
+    font-size:10px;
+    font-weight:900;
+}
+
+.contact-text{
+    margin-top:6px;
+
+    color:#827a89;
+
+    font-size:8px;
+    line-height:1.6;
+}
+
+.whatsapp{
+    display:inline-block;
+
+    margin-top:9px;
+    padding:8px 15px;
+
+    border-radius:10px;
+
+    background:#173b27;
+    border:1px solid #2d734b;
+
+    color:#64e59a;
+
+    font-size:9px;
+    font-weight:bold;
+
+    text-decoration:none;
+}
+
+/* BACK */
+
+.back{
+    width:100%;
+    height:44px;
+
+    margin-top:10px;
+
+    border:1px solid #302638;
+    border-radius:13px;
+
+    background:#121016;
+
+    color:#aaa;
+
+    font-size:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="card">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div class="bkash-logo">
+                bK
+            </div>
+
+            <div class="title">
+                bKash DEPOSIT
+            </div>
+
+            <div class="subtitle">
+                Fast • Secure • Automatic Balance
+            </div>
+
+        </div>
+
+
+        <!-- NUMBER -->
+
+        <div class="number-box">
+
+            <div class="number-label">
+                SEND MONEY TO THIS NUMBER
+            </div>
+
+            <div class="number">
+                01957941357
+            </div>
+
+            <button class="copy" onclick="copyNumber()">
+                📋 COPY NUMBER
+            </button>
+
+        </div>
+
+
+        <!-- INSTRUCTION -->
+
+        <div class="instruction">
+
+            <div class="instruction-title">
+                📌 DEPOSIT INSTRUCTIONS
+            </div>
+
+            <div class="instruction-text">
+
+                1️⃣ Open your bKash app.<br>
+
+                2️⃣ Select <b>Send Money</b>.<br>
+
+                3️⃣ Send your desired amount to the number above.<br>
+
+                4️⃣ After successful payment, copy your
+                <b>Transaction ID</b>.<br>
+
+                5️⃣ Enter the Transaction ID below and press
+                <b>VERIFY PAYMENT</b>.<br>
+
+                6️⃣ After successful verification, your balance
+                will be added automatically.
+
+            </div>
+
+        </div>
+
+
+        <!-- VERIFY -->
+
+        <div class="verify-title">
+            🧾 TRANSACTION ID
+        </div>
+
+        <input
+            id="txid"
+            type="text"
+            placeholder="Enter your Transaction ID"
+            autocomplete="off"
+        >
+
+        <button class="verify" onclick="verifyTransaction()">
+            ✓ VERIFY PAYMENT
+        </button>
+
+        <div class="status" id="status">
+            ⏳ Verifying payment...
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div class="contact">
+
+            <div class="contact-title">
+                ⚠️ TRANSACTION PROBLEM?
+            </div>
+
+            <div class="contact-text">
+                Transaction verify না হলে বা কোনো সমস্যা হলে
+                আমাদের WhatsApp-এ যোগাযোগ করুন।
+            </div>
+
+            <a
+                class="whatsapp"
+                href="https://wa.me/8801846882853"
+                target="_blank"
+            >
+                💬 WhatsApp: 01846882853
+            </a>
+
+        </div>
+
+
+        <button class="back" onclick="goHome()">
+            ← BACK TO HOME
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+if(window.Telegram && window.Telegram.WebApp){
+
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+
+}
+
+
+function copyNumber(){
+
+    const number = "01957941357";
+
+    if(navigator.clipboard){
+
+        navigator.clipboard.writeText(number);
+
+    }
+
+    alert("✅ bKash number copied");
+
+}
+
+
+function verifyTransaction(){
+
+    const txid =
+        document.getElementById("txid").value.trim();
+
+    if(txid === ""){
+
+        alert("❌ Please enter Transaction ID");
+        return;
+
+    }
+
+    const status =
+        document.getElementById("status");
+
+    status.style.display = "block";
+
+    status.innerHTML =
+        "⏳ Verifying payment...";
+
+    /*
+      এখানে Telegram bot-এর /dp system
+      connect করতে হবে।
+
+      HTML নিজে Firebase থেকে transaction
+      verify করে balance add করবে না।
+    */
+
+}
+
+
+function goHome(){
+
+    window.location.href = "index.html";
+
+}
+
+</script>
+
+</body>
+              </html>
