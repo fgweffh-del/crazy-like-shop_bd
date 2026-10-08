@@ -15,7 +15,7 @@
 
 body{
     background:#050507;
-    color:white;
+    color:#fff;
     font-family:Arial,sans-serif;
     min-height:100vh;
     padding-bottom:90px;
@@ -35,11 +35,9 @@ body{
     align-items:center;
     justify-content:center;
     font-size:42px;
-    background:linear-gradient(145deg,#1a1025,#09090c);
-    border:2px solid #b56cff;
-    box-shadow:
-        0 0 15px #9b35ff,
-        0 0 35px rgba(155,53,255,.45);
+    background:#0b0910;
+    border:2px solid #b45cff;
+    box-shadow:0 0 20px #8b2cff;
 }
 
 .title{
@@ -57,7 +55,7 @@ body{
     border-radius:20px;
     font-size:12px;
     font-weight:bold;
-    color:#72ff8b;
+    color:#70ff8a;
     border:1px solid #39ff68;
     box-shadow:0 0 12px rgba(57,255,104,.5);
 }
@@ -82,19 +80,16 @@ body{
     gap:15px;
     font-size:15px;
     font-weight:bold;
-    box-shadow:0 0 15px rgba(0,0,0,.6);
 }
 
 .info-button span{
     text-align:right;
-    word-break:break-word;
+    word-break:break-all;
 }
 
 .purple{
     border-color:#a43cff;
-    box-shadow:
-        0 0 10px rgba(164,60,255,.5),
-        inset 0 0 15px rgba(164,60,255,.08);
+    box-shadow:0 0 12px rgba(164,60,255,.5);
 }
 
 .purple span{
@@ -103,9 +98,7 @@ body{
 
 .gold{
     border-color:#ffd23f;
-    box-shadow:
-        0 0 10px rgba(255,210,63,.45),
-        inset 0 0 15px rgba(255,210,63,.08);
+    box-shadow:0 0 12px rgba(255,210,63,.45);
 }
 
 .gold span{
@@ -114,9 +107,7 @@ body{
 
 .red{
     border-color:#ff3d4f;
-    box-shadow:
-        0 0 10px rgba(255,61,79,.45),
-        inset 0 0 15px rgba(255,61,79,.08);
+    box-shadow:0 0 12px rgba(255,61,79,.45);
 }
 
 .red span{
@@ -141,7 +132,6 @@ body{
     display:flex;
     justify-content:space-around;
     align-items:center;
-    z-index:999;
 }
 
 .nav-btn{
@@ -150,21 +140,21 @@ body{
     width:20%;
     height:58px;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     border-radius:14px;
 }
 
-.nav-btn.active-nav{
-    background:rgba(164,60,255,.13);
-    box-shadow:0 0 15px rgba(164,60,255,.35);
+.active-nav{
+    background:rgba(164,60,255,.15);
+    box-shadow:0 0 15px rgba(164,60,255,.4);
 }
 
 .error{
     text-align:center;
     color:#ff6573;
-    margin-top:15px;
     font-size:13px;
+    margin:15px;
 }
 </style>
 </head>
@@ -173,17 +163,11 @@ body{
 
 <div class="header">
 
-    <div class="profile-logo">
-        👤
-    </div>
+    <div class="profile-logo">👤</div>
 
-    <div class="title">
-        PROFILE
-    </div>
+    <div class="title">PROFILE</div>
 
-    <div class="active">
-        ● ACTIVE
-    </div>
+    <div class="active">● ACTIVE</div>
 
 </div>
 
@@ -200,34 +184,29 @@ body{
         <span id="userId">Loading...</span>
     </div>
 
-
-    <!-- CURRENT RANK -->
+    <!-- RANK -->
     <div class="info-button gold">
         <div>🏆 CURRENT RANK</div>
         <span id="rank">🥉 BRONZE</span>
     </div>
 
-
-    <!-- TOTAL ORDERS -->
+    <!-- ORDERS -->
     <div class="info-button red">
         <div>📦 TOTAL ORDERS</div>
         <span id="totalOrders">0</span>
     </div>
 
-
-    <!-- TOTAL DEPOSIT -->
+    <!-- DEPOSIT -->
     <div class="info-button gold">
         <div>💰 TOTAL DEPOSIT</div>
         <span id="totalDeposit">৳0</span>
     </div>
 
-
-    <!-- TOTAL USERS -->
+    <!-- USERS -->
     <div class="info-button purple">
         <div>👥 TOTAL USERS</div>
         <span>100,397</span>
     </div>
-
 
     <!-- INFO -->
     <div class="info-button purple">
@@ -237,100 +216,80 @@ body{
 
 </div>
 
-
 <div id="error" class="error"></div>
 
 
 <!-- BOTTOM NAV -->
+
 <div class="bottom-nav">
 
-    <a class="nav-btn" href="index.html">
-        🏠
-    </a>
+    <a class="nav-btn" href="index.html">🏠</a>
 
-    <a class="nav-btn" href="orders.html">
-        🧾
-    </a>
+    <a class="nav-btn" href="orders.html">🧾</a>
 
-    <a class="nav-btn" href="shop.html">
-        🛒
-    </a>
+    <a class="nav-btn" href="shop.html">🛒</a>
 
-    <a class="nav-btn" href="deposit.html">
-        💳
-    </a>
+    <a class="nav-btn" href="deposit.html">💳</a>
 
-    <a class="nav-btn active-nav" href="account.html">
-        👤
-    </a>
+    <a class="nav-btn active-nav" href="account.html">👤</a>
 
 </div>
 
 
 <script>
 
-let tg = null;
+/* TELEGRAM MINI APP */
 
 if(window.Telegram && window.Telegram.WebApp){
 
-    tg = window.Telegram.WebApp;
+    const tg = window.Telegram.WebApp;
 
     tg.ready();
     tg.expand();
 
-    try{
+    const telegramUser =
+        tg.initDataUnsafe &&
+        tg.initDataUnsafe.user;
 
-        let user = tg.initDataUnsafe.user;
-
-        if(user && user.id){
-
-            document.getElementById("userId").textContent =
-                user.id;
-
-        }else{
-
-            document.getElementById("userId").textContent =
-                "Not Available";
-
-            document.getElementById("error").textContent =
-                "Telegram User ID পাওয়া যায়নি। Telegram Mini App থেকে খুলুন.";
-
-        }
-
-    }catch(e){
+    if(telegramUser && telegramUser.id){
 
         document.getElementById("userId").textContent =
-            "Not Available";
+            String(telegramUser.id);
+
+    }else{
+
+        document.getElementById("userId").textContent =
+            "ID NOT FOUND";
+
+        document.getElementById("error").textContent =
+            "Telegram Mini App থেকে Account খুলুন.";
 
     }
 
 }else{
 
     document.getElementById("userId").textContent =
-        "Telegram Only";
+        "TELEGRAM ONLY";
+
+    document.getElementById("error").textContent =
+        "এই page Telegram Mini App-এর ভিতর থেকে খুলতে হবে.";
 
 }
 
 
-/* DEMO DATA */
+/* DEMO */
 
 let totalDeposit = 0;
 let totalOrders = 0;
 
-
-/* TOTAL ORDERS */
+document.getElementById("totalDeposit").textContent =
+    "৳" + totalDeposit;
 
 document.getElementById("totalOrders").textContent =
     totalOrders;
 
 
-/* TOTAL DEPOSIT */
-
-document.getElementById("totalDeposit").textContent =
-    "৳" + totalDeposit;
-
-
-/* RANK SYSTEM */
+/* RANK */
 
 let rank = "🥉 BRONZE";
 
@@ -349,10 +308,6 @@ if(totalDeposit >= 10000000000){
 }else if(totalDeposit >= 500){
 
     rank = "🥈 SILVER";
-
-}else{
-
-    rank = "🥉 BRONZE";
 
 }
 
