@@ -46,7 +46,6 @@ body{
 
 .logo{
     margin-top:5px;
-
     font-size:25px;
     font-weight:900;
     letter-spacing:.5px;
@@ -65,7 +64,6 @@ body{
 
 .subtitle{
     margin-top:7px;
-
     color:#8e8797;
     font-size:10px;
 }
@@ -103,18 +101,14 @@ body{
 
 .balance-label{
     color:#827b8c;
-
     font-size:8px;
     letter-spacing:1px;
 }
 
 .balance-value{
     display:block;
-
     margin-top:4px;
-
     color:#ffd65b;
-
     font-size:20px;
     font-weight:900;
 }
@@ -166,18 +160,14 @@ body{
 
 .welcome-text{
     margin-top:8px;
-
     color:#96909f;
-
     font-size:10px;
     line-height:1.7;
 }
 
 .online{
     margin-top:13px;
-
     color:#59ea98;
-
     font-size:8px;
     font-weight:bold;
 }
@@ -293,9 +283,7 @@ body{
 
 .live-service{
     margin-top:3px;
-
     color:#716b78;
-
     font-size:8px;
 }
 
@@ -406,7 +394,6 @@ body{
         <div class="subtitle">
             Premium Like Service • Fast Delivery
         </div>
-
 
         <!-- BALANCE -->
 
@@ -603,45 +590,123 @@ body{
 
 <script>
 
-if(window.Telegram && window.Telegram.WebApp){
+/* ============================= */
+/* TELEGRAM USER ID */
+/* ============================= */
 
-    Telegram.WebApp.ready();
-    Telegram.WebApp.expand();
+let telegramUserId = "";
 
+if(
+    window.Telegram &&
+    window.Telegram.WebApp
+){
+
+    const tg = window.Telegram.WebApp;
+
+    tg.ready();
+    tg.expand();
+
+    try{
+
+        if(
+            tg.initDataUnsafe &&
+            tg.initDataUnsafe.user &&
+            tg.initDataUnsafe.user.id
+        ){
+
+            telegramUserId =
+                String(tg.initDataUnsafe.user.id);
+
+        }
+
+    }catch(error){
+
+        telegramUserId = "";
+
+    }
 }
 
 
+/* ============================= */
+/* NAVIGATION */
+/* ============================= */
+
 function goHome(){
 
-    window.location.href="index.html";
+    window.location.href =
+        "index.html";
 
 }
 
 
 function goOrders(){
 
-    window.location.href="orders.html";
+    if(telegramUserId){
+
+        window.location.href =
+            "orders.html?user_id=" +
+            encodeURIComponent(telegramUserId);
+
+    }else{
+
+        window.location.href =
+            "orders.html";
+
+    }
 
 }
 
 
 function goShop(){
 
-    window.location.href="shop.html";
+    if(telegramUserId){
+
+        window.location.href =
+            "shop.html?user_id=" +
+            encodeURIComponent(telegramUserId);
+
+    }else{
+
+        window.location.href =
+            "shop.html";
+
+    }
 
 }
 
 
 function goDeposit(){
 
-    window.location.href="deposit.html";
+    if(telegramUserId){
+
+        window.location.href =
+            "deposit.html?user_id=" +
+            encodeURIComponent(telegramUserId);
+
+    }else{
+
+        window.location.href =
+            "deposit.html";
+
+    }
 
 }
 
 
 function goAccount(){
 
-    window.location.href="account.html";
+    if(telegramUserId){
+
+        window.location.href =
+            "account.html?user_id=" +
+            encodeURIComponent(telegramUserId);
+
+    }else{
+
+        window.location.href =
+            "account.html";
+
+    }
 
 }
 
