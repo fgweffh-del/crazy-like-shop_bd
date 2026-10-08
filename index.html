@@ -60,38 +60,81 @@ body{
     font-size:10px;
 }
 
+/* LOGIN */
+
 .login-box{
     margin:18px auto 0;
     max-width:420px;
 }
 
-.google-btn{
+.phone-input{
     width:100%;
     min-height:52px;
+    padding:0 16px;
+    border-radius:17px;
+    border:1px solid #70478d;
+    background:#100c15;
+    color:#fff;
+    outline:none;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.phone-input::placeholder{
+    color:#77717f;
+}
+
+.phone-input:focus{
+    border-color:#b766ff;
+    box-shadow:0 0 18px #9b3cff22;
+}
+
+.phone-btn,
+.verify-btn{
+    width:100%;
+    min-height:52px;
+    margin-top:10px;
     border:1px solid #70478d;
     border-radius:17px;
-    background:linear-gradient(135deg,#251531,#100c15);
+    background:linear-gradient(135deg,#422457,#160d20);
     color:#fff;
     font-size:14px;
     font-weight:800;
     cursor:pointer;
 }
 
-.google-btn:active{
+.phone-btn:active,
+.verify-btn:active{
     transform:scale(.97);
 }
 
-.google-icon{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:27px;
-    height:27px;
-    margin-right:7px;
-    border-radius:50%;
-    background:#fff;
-    color:#4285f4;
+.otp-box{
+    display:none;
+}
+
+.otp-input{
+    width:100%;
+    min-height:52px;
+    margin-top:10px;
+    padding:0 16px;
+    border-radius:17px;
+    border:1px solid #70478d;
+    background:#100c15;
+    color:#fff;
+    outline:none;
+    text-align:center;
+    font-size:20px;
     font-weight:900;
+    letter-spacing:7px;
+}
+
+.change-number{
+    margin-top:10px;
+    border:0;
+    background:transparent;
+    color:#c66cff;
+    font-size:10px;
+    cursor:pointer;
 }
 
 .logged-user{
@@ -116,13 +159,10 @@ body{
     font-weight:900;
 }
 
-.logged-email{
+.logged-phone{
     margin-top:4px;
     color:#77717f;
     font-size:9px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
 }
 
 .balance{
@@ -351,12 +391,57 @@ body{
 Premium Like Service • Fast Delivery
 </div>
 
-<div class="login-box">
+<!-- PHONE LOGIN -->
 
-<button id="googleLoginBtn" class="google-btn" onclick="googleLogin()">
-<span class="google-icon">G</span>
-Continue with Google
+<div id="loginBox" class="login-box">
+
+<input
+    id="phoneNumber"
+    class="phone-input"
+    type="tel"
+    placeholder="+8801XXXXXXXXX"
+    autocomplete="tel"
+>
+
+<button
+    id="sendOtpBtn"
+    class="phone-btn"
+    onclick="sendOTP()"
+>
+📱 Send OTP
 </button>
+
+<div id="otpBox" class="otp-box">
+
+<input
+    id="otpCode"
+    class="otp-input"
+    type="text"
+    inputmode="numeric"
+    maxlength="6"
+    placeholder="••••••"
+    autocomplete="one-time-code"
+>
+
+<button
+    class="verify-btn"
+    onclick="verifyOTP()"
+>
+🔐 Verify OTP
+</button>
+
+<button
+    class="change-number"
+    onclick="changeNumber()"
+>
+← Change phone number
+</button>
+
+</div>
+
+</div>
+
+<!-- LOGGED USER -->
 
 <div id="loggedUser" class="logged-user">
 
@@ -368,13 +453,13 @@ LOGGED IN
 CRAZY_XXXXXX
 </div>
 
-<div id="userEmail" class="logged-email">
+<div id="userPhone" class="logged-phone">
 -
 </div>
 
 </div>
 
-</div>
+<!-- BALANCE -->
 
 <div class="balance">
 
@@ -540,6 +625,10 @@ SHOP ONLINE
 
 </div>
 
+<!-- RECAPTCHA CONTAINER -->
+
+<div id="recaptcha-container"></div>
+
 <script>
 
 const firebaseConfig = {
@@ -558,6 +647,8 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
 
+let confirmationResult = null;
+
 if(window.Telegram && window.Telegram.WebApp){
     Telegram.WebApp.ready();
     Telegram.WebApp.expand();
@@ -566,131 +657,348 @@ if(window.Telegram && window.Telegram.WebApp){
 function createCrazyId(){
 
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
     let code = "";
 
     for(let i = 0; i < 6; i++){
+
         code += chars.charAt(
             Math.floor(Math.random() * chars.length)
         );
+
     }
 
     return "CRAZY_" + code;
 }
 
-async function googleLogin(){
 
-    const button = document.getElementById("googleLoginBtn");
+/* ============================= */
+/* CREATE USER */
+/* ============================= */
+
+async function createUserAccount(user){
+
+    const userRef = db.ref("users/" + user.uid);
+
+    const snapshot = await userRef.once("value");
+
+    if(snapshot.exists()){
+
+        return snapshot.val();
+
+    }
+
+    const data = {
+
+        uid: user.uid,
+
+        crazy_id: createCrazyId(),
+
+        phone: user.phoneNumber || "",
+
+        balance: 0,
+
+        total_deposit: 0,
+
+        total_orders: 0,
+
+        created_at: Date.now()
+
+    };
+
+    await userRef.set(data);
+
+    return data;
+}
+
+
+/* ============================= */
+/* SEND OTP */
+/* ============================= */
+
+async function sendOTP(){
+
+    const phone = document
+        .getElementById("phoneNumber")
+        .value
+        .trim();
+
+    const button =
+        document.getElementById("sendOtpBtn");
+
+    if(!phone){
+
+        alert("❌ Please enter your phone number.");
+
+        return;
+
+    }
+
+    if(!/^\+[1-9]\d{7,14}$/.test(phone)){
+
+        alert(
+            "❌ Invalid phone number.\n\n" +
+            "Example:\n+8801712345678"
+        );
+
+        return;
+
+    }
 
     button.disabled = true;
-    button.innerHTML = "⏳ Connecting...";
+    button.innerText = "⏳ Sending OTP...";
 
     try{
 
-        const provider = new firebase.auth.GoogleAuthProvider();
+        if(!window.recaptchaVerifier){
 
-        provider.setCustomParameters({
-            prompt: "select_account"
-        });
+            window.recaptchaVerifier =
+                new firebase.auth.RecaptchaVerifier(
+                    "recaptcha-container",
+                    {
+                        size:"normal",
+                        callback:function(){
 
-        const result = await auth.signInWithPopup(provider);
+                        }
+                    }
+                );
 
-        const user = result.user;
-
-        const userRef = db.ref("users/" + user.uid);
-
-        const snapshot = await userRef.once("value");
-
-        if(!snapshot.exists()){
-
-            await userRef.set({
-                uid: user.uid,
-                crazy_id: createCrazyId(),
-                name: user.displayName || "",
-                email: user.email || "",
-                photo: user.photoURL || "",
-                balance: 0,
-                total_deposit: 0,
-                total_orders: 0,
-                created_at: Date.now()
-            });
+            await window.recaptchaVerifier.render();
 
         }
 
+        confirmationResult =
+            await auth.signInWithPhoneNumber(
+                phone,
+                window.recaptchaVerifier
+            );
+
+        document.getElementById("otpBox")
+            .style.display = "block";
+
+        document.getElementById("sendOtpBtn")
+            .style.display = "none";
+
+        document.getElementById("phoneNumber")
+            .disabled = true;
+
+        alert("✅ OTP sent successfully.");
+
     }catch(error){
 
-        alert("Google Login Error:\n\n" + error.message);
+        console.log(error);
+
+        alert(
+            "❌ OTP Error:\n\n" +
+            error.message
+        );
+
+        if(window.recaptchaVerifier){
+
+            try{
+
+                window.recaptchaVerifier.clear();
+
+            }catch(e){}
+
+            window.recaptchaVerifier = null;
+
+        }
 
     }
 
     button.disabled = false;
-    button.innerHTML =
-        '<span class="google-icon">G</span> Continue with Google';
+    button.innerText = "📱 Send OTP";
 }
+
+
+/* ============================= */
+/* VERIFY OTP */
+/* ============================= */
+
+async function verifyOTP(){
+
+    const otp =
+        document
+        .getElementById("otpCode")
+        .value
+        .trim();
+
+    if(!otp){
+
+        alert("❌ Please enter OTP.");
+
+        return;
+
+    }
+
+    if(!/^\d{6}$/.test(otp)){
+
+        alert("❌ OTP must be 6 digits.");
+
+        return;
+
+    }
+
+    const button =
+        document.querySelector(".verify-btn");
+
+    button.disabled = true;
+    button.innerText = "⏳ Verifying...";
+
+    try{
+
+        if(!confirmationResult){
+
+            throw new Error(
+                "OTP session expired. Please request a new OTP."
+            );
+
+        }
+
+        const result =
+            await confirmationResult.confirm(otp);
+
+        const user = result.user;
+
+        await createUserAccount(user);
+
+        alert("✅ Login successful!");
+
+    }catch(error){
+
+        console.log(error);
+
+        alert(
+            "❌ OTP Verification Error:\n\n" +
+            error.message
+        );
+
+    }
+
+    button.disabled = false;
+    button.innerText = "🔐 Verify OTP";
+}
+
+
+/* ============================= */
+/* CHANGE NUMBER */
+/* ============================= */
+
+function changeNumber(){
+
+    document.getElementById("otpBox")
+        .style.display = "none";
+
+    document.getElementById("sendOtpBtn")
+        .style.display = "block";
+
+    document.getElementById("phoneNumber")
+        .disabled = false;
+
+    document.getElementById("otpCode")
+        .value = "";
+
+    confirmationResult = null;
+
+}
+
+
+/* ============================= */
+/* AUTH STATE */
+/* ============================= */
 
 auth.onAuthStateChanged(async function(user){
 
-    const loginButton = document.getElementById("googleLoginBtn");
-    const loggedUser = document.getElementById("loggedUser");
-    const crazyId = document.getElementById("crazyId");
-    const userEmail = document.getElementById("userEmail");
-    const balance = document.getElementById("balanceValue");
+    const loginBox =
+        document.getElementById("loginBox");
+
+    const loggedUser =
+        document.getElementById("loggedUser");
+
+    const crazyId =
+        document.getElementById("crazyId");
+
+    const userPhone =
+        document.getElementById("userPhone");
+
+    const balance =
+        document.getElementById("balanceValue");
 
     if(!user){
 
-        loginButton.style.display = "block";
+        loginBox.style.display = "block";
+
         loggedUser.style.display = "none";
+
         balance.innerText = "৳ 0.00";
 
         return;
+
     }
 
-    loginButton.style.display = "none";
-    loggedUser.style.display = "block";
+    try{
 
-    const ref = db.ref("users/" + user.uid);
+        const data =
+            await createUserAccount(user);
 
-    let snapshot = await ref.once("value");
-    let data = snapshot.val();
+        loginBox.style.display = "none";
 
-    if(!data){
+        loggedUser.style.display = "block";
 
-        data = {
-            uid: user.uid,
-            crazy_id: createCrazyId(),
-            name: user.displayName || "",
-            email: user.email || "",
-            photo: user.photoURL || "",
-            balance: 0,
-            total_deposit: 0,
-            total_orders: 0,
-            created_at: Date.now()
-        };
+        crazyId.innerText =
+            data.crazy_id || "CRAZY_XXXXXX";
 
-        await ref.set(data);
+        userPhone.innerText =
+            user.phoneNumber || "";
+
+        const amount =
+            Number(data.balance || 0);
+
+        balance.innerText =
+            "৳ " + amount.toFixed(2);
+
+    }catch(error){
+
+        console.log(
+            "Account Error:",
+            error
+        );
+
     }
 
-    crazyId.innerText = data.crazy_id;
-    userEmail.innerText = user.email || "";
-
-    const amount = Number(data.balance || 0);
-
-    balance.innerText = "৳ " + amount.toFixed(2);
 });
+
+
+/* ============================= */
+/* LOGIN CHECK */
+/* ============================= */
 
 function checkLogin(){
 
     if(!auth.currentUser){
 
-        alert("🔵 Please login with Google first.");
+        alert(
+            "📱 Please login with your phone number first."
+        );
 
         return false;
+
     }
 
     return true;
 }
 
+
+/* ============================= */
+/* NAVIGATION */
+/* ============================= */
+
 function goHome(){
-    window.location.href = "index.html";
+
+    window.location.href =
+        "index.html";
+
 }
 
 function goOrders(){
@@ -699,7 +1007,10 @@ function goOrders(){
 
     window.location.href =
         "orders.html?uid=" +
-        encodeURIComponent(auth.currentUser.uid);
+        encodeURIComponent(
+            auth.currentUser.uid
+        );
+
 }
 
 function goShop(){
@@ -708,7 +1019,10 @@ function goShop(){
 
     window.location.href =
         "shop.html?uid=" +
-        encodeURIComponent(auth.currentUser.uid);
+        encodeURIComponent(
+            auth.currentUser.uid
+        );
+
 }
 
 function goDeposit(){
@@ -717,7 +1031,10 @@ function goDeposit(){
 
     window.location.href =
         "deposit.html?uid=" +
-        encodeURIComponent(auth.currentUser.uid);
+        encodeURIComponent(
+            auth.currentUser.uid
+        );
+
 }
 
 function goAccount(){
@@ -726,7 +1043,10 @@ function goAccount(){
 
     window.location.href =
         "account.html?uid=" +
-        encodeURIComponent(auth.currentUser.uid);
+        encodeURIComponent(
+            auth.currentUser.uid
+        );
+
 }
 
 </script>
