@@ -2,708 +2,363 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Crazy Like Profile</title>
+<title>Crazy Like Shop - Account</title>
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
+    background:#050507;
+    color:white;
+    font-family:Arial,sans-serif;
     min-height:100vh;
-    color:#fff;
-
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            #8b2cff35,
-            transparent 35%
-        ),
-        #050507;
-
-    padding-bottom:95px;
+    padding-bottom:90px;
 }
 
-.container{
-    width:100%;
-    max-width:620px;
-    margin:auto;
-
-    padding:25px 15px 30px;
-}
-
-
-/* =========================
-   PROFILE
-========================= */
-
-.profile{
+.header{
     text-align:center;
-    padding-bottom:22px;
+    padding:28px 15px 20px;
 }
 
 .profile-logo{
     width:82px;
     height:82px;
-
     margin:auto;
-
+    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-
-    border-radius:50%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #7b2db0,
-            #24102f
-        );
-
-    border:2px solid #a65bd2;
-
+    font-size:42px;
+    background:linear-gradient(145deg,#1a1025,#09090c);
+    border:2px solid #b56cff;
     box-shadow:
-        0 0 15px #9b32ff,
-        0 0 35px #9b32ff55;
-
-    font-size:40px;
+        0 0 15px #9b35ff,
+        0 0 35px rgba(155,53,255,.45);
 }
 
-.profile-title{
-    margin-top:10px;
-
-    font-size:24px;
-    font-weight:900;
-    letter-spacing:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #c879ff,
-            #ffd45b
-        );
-
-    -webkit-background-clip:text;
-    color:transparent;
+.title{
+    margin-top:12px;
+    font-size:25px;
+    font-weight:bold;
+    color:#d59cff;
+    text-shadow:0 0 12px #9b35ff;
 }
 
 .active{
-    margin-top:7px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:6px;
-
-    color:#57ef96;
-
-    font-size:9px;
+    display:inline-block;
+    margin-top:8px;
+    padding:6px 18px;
+    border-radius:20px;
+    font-size:12px;
     font-weight:bold;
+    color:#72ff8b;
+    border:1px solid #39ff68;
+    box-shadow:0 0 12px rgba(57,255,104,.5);
 }
 
-.active-dot{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#57ef96;
-
-    box-shadow:
-        0 0 10px #57ef96;
+.container{
+    width:92%;
+    max-width:600px;
+    margin:auto;
 }
-
-
-/* =========================
-   BUTTON AREA
-========================= */
-
-.buttons{
-    display:flex;
-    flex-direction:column;
-    gap:13px;
-}
-
-
-/* COMMON BUTTON */
 
 .info-button{
-
     width:100%;
-    min-height:62px;
-
+    min-height:68px;
+    margin:13px 0;
+    padding:16px 18px;
+    border-radius:16px;
+    background:#0b0b10;
+    border:1px solid;
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding:0 18px;
-
-    border-radius:17px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #151018,
-            #09080c
-        );
-
-    color:#fff;
-
-    font-size:11px;
+    gap:15px;
+    font-size:15px;
     font-weight:bold;
-
-    border:1px solid;
-
-    transition:.2s;
+    box-shadow:0 0 15px rgba(0,0,0,.6);
 }
 
-.info-button:active{
-    transform:scale(.97);
-}
-
-
-/* LEFT */
-
-.button-left{
-    display:flex;
-    align-items:center;
-    gap:9px;
-
-    min-width:0;
-}
-
-.button-icon{
-    font-size:20px;
-}
-
-.button-label{
-    color:#b5aabc;
-}
-
-
-/* RIGHT */
-
-.button-right{
+.info-button span{
     text-align:right;
-
-    font-size:12px;
-    font-weight:900;
-
-    white-space:nowrap;
+    word-break:break-word;
 }
-
-
-/* =========================
-   PURPLE
-========================= */
 
 .purple{
-
-    border-color:#8e38bd;
-
+    border-color:#a43cff;
     box-shadow:
-        0 0 10px #9b32ff55,
-        inset 0 0 15px #9b32ff0d;
+        0 0 10px rgba(164,60,255,.5),
+        inset 0 0 15px rgba(164,60,255,.08);
 }
 
-.purple .button-right{
-    color:#d18aff;
+.purple span{
+    color:#c98cff;
 }
-
-
-/* =========================
-   GOLD
-========================= */
 
 .gold{
-
-    border-color:#c69227;
-
+    border-color:#ffd23f;
     box-shadow:
-        0 0 10px #ffd21f55,
-        inset 0 0 15px #ffd21f0d;
+        0 0 10px rgba(255,210,63,.45),
+        inset 0 0 15px rgba(255,210,63,.08);
 }
 
-.gold .button-right{
-    color:#ffd45b;
+.gold span{
+    color:#ffd84d;
 }
-
-
-/* =========================
-   RED
-========================= */
 
 .red{
-
-    border-color:#a52c35;
-
+    border-color:#ff3d4f;
     box-shadow:
-        0 0 10px #ff263855,
-        inset 0 0 15px #ff26380d;
+        0 0 10px rgba(255,61,79,.45),
+        inset 0 0 15px rgba(255,61,79,.08);
 }
 
-.red .button-right{
-    color:#ff6670;
+.red span{
+    color:#ff6573;
 }
 
-
-/* =========================
-   INFO BUTTON
-========================= */
-
-.info-button.info{
-
-    display:block;
-
-    padding:16px 18px;
-
-    border-color:#8e38bd;
-
-    box-shadow:
-        0 0 13px #9b32ff55,
-        inset 0 0 18px #9b32ff0d;
-}
-
-.info-top{
-
-    display:flex;
-    align-items:center;
-
-    gap:9px;
-
-    color:#d18aff;
-
+.section-title{
+    margin:25px 0 8px;
+    color:#777;
     font-size:12px;
-    font-weight:900;
+    letter-spacing:2px;
 }
-
-.info-text{
-
-    margin-top:10px;
-
-    color:#96909e;
-
-    font-size:10px;
-
-    line-height:1.6;
-}
-
-
-/* =========================
-   BOTTOM NAV
-========================= */
 
 .bottom-nav{
-
     position:fixed;
-
-    left:50%;
-    bottom:10px;
-
-    transform:translateX(-50%);
-
-    width:calc(100% - 20px);
-    max-width:600px;
-
-    height:68px;
-
+    bottom:0;
+    left:0;
+    right:0;
+    height:72px;
+    background:#08080c;
+    border-top:1px solid #29202f;
     display:flex;
-    align-items:center;
     justify-content:space-around;
-
-    padding:6px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #19111f,
-            #09080d
-        );
-
-    border:1px solid #3c2948;
-
-    border-radius:22px;
-
-    box-shadow:
-        0 10px 35px #000,
-        0 0 20px #8b32d522;
-
+    align-items:center;
     z-index:999;
 }
 
 .nav-btn{
-
-    width:52px;
-    height:52px;
-
+    text-decoration:none;
+    font-size:26px;
+    width:20%;
+    height:58px;
     display:flex;
-    align-items:center;
     justify-content:center;
-
-    border:0;
-
-    border-radius:17px;
-
-    background:transparent;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-    transition:.2s;
+    align-items:center;
+    border-radius:14px;
 }
 
-.nav-btn:active{
-    transform:scale(.86);
+.nav-btn.active-nav{
+    background:rgba(164,60,255,.13);
+    box-shadow:0 0 15px rgba(164,60,255,.35);
 }
 
-.nav-btn.active{
-
-    background:
-        linear-gradient(
-            145deg,
-            #48245c,
-            #21112d
-        );
-
-    border:1px solid #8549a6;
-
-    box-shadow:
-        0 0 15px #9b32ff55;
+.error{
+    text-align:center;
+    color:#ff6573;
+    margin-top:15px;
+    font-size:13px;
 }
-
 </style>
 </head>
 
-
 <body>
 
+<div class="header">
 
-<div class="container">
-
-
-    <!-- PROFILE -->
-
-    <div class="profile">
-
-        <div class="profile-logo">
-            👤
-        </div>
-
-        <div class="profile-title">
-            PROFILE
-        </div>
-
-        <div class="active">
-
-            <span class="active-dot"></span>
-
-            ACTIVE
-
-        </div>
-
+    <div class="profile-logo">
+        👤
     </div>
 
-
-    <!-- BUTTONS -->
-
-    <div class="buttons">
-
-
-        <!-- USER ID -->
-
-        <div class="info-button purple">
-
-            <div class="button-left">
-
-                <span class="button-icon">
-                    👤
-                </span>
-
-                <span class="button-label">
-                    USER ID
-                </span>
-
-            </div>
-
-            <div
-                class="button-right"
-                id="userId">
-
-                000000
-
-            </div>
-
-        </div>
-
-
-        <!-- CURRENT RANK -->
-
-        <div class="info-button gold">
-
-            <div class="button-left">
-
-                <span class="button-icon">
-                    🥉
-                </span>
-
-                <span class="button-label">
-                    CURRENT RANK
-                </span>
-
-            </div>
-
-            <div
-                class="button-right"
-                id="rank">
-
-                BRONZE
-
-            </div>
-
-        </div>
-
-
-        <!-- TOTAL ORDERS -->
-
-        <div class="info-button red">
-
-            <div class="button-left">
-
-                <span class="button-icon">
-                    📦
-                </span>
-
-                <span class="button-label">
-                    TOTAL ORDERS
-                </span>
-
-            </div>
-
-            <div
-                class="button-right"
-                id="totalOrders">
-
-                0
-
-            </div>
-
-        </div>
-
-
-        <!-- TOTAL DEPOSIT -->
-
-        <div class="info-button gold">
-
-            <div class="button-left">
-
-                <span class="button-icon">
-                    💰
-                </span>
-
-                <span class="button-label">
-                    TOTAL DEPOSIT
-                </span>
-
-            </div>
-
-            <div
-                class="button-right"
-                id="totalDeposit">
-
-                ৳0
-
-            </div>
-
-        </div>
-
-
-        <!-- TOTAL USERS -->
-
-        <div class="info-button purple">
-
-            <div class="button-left">
-
-                <span class="button-icon">
-                    👥
-                </span>
-
-                <span class="button-label">
-                    TOTAL USERS
-                </span>
-
-            </div>
-
-            <div class="button-right">
-
-                100,397
-
-            </div>
-
-        </div>
-
-
-        <!-- INFO -->
-
-        <div class="info-button info">
-
-            <div class="info-top">
-
-                ℹ️ INFO
-
-            </div>
-
-            <div
-                class="info-text"
-                id="adminInfo">
-
-                Admin Panel থেকে Info এখানে দেখানো হবে।
-
-            </div>
-
-        </div>
-
-
+    <div class="title">
+        PROFILE
+    </div>
+
+    <div class="active">
+        ● ACTIVE
     </div>
 
 </div>
 
 
-<!-- BOTTOM NAV -->
+<div class="container">
 
+    <div class="section-title">
+        ACCOUNT INFORMATION
+    </div>
+
+    <!-- USER ID -->
+    <div class="info-button purple">
+        <div>👤 USER ID</div>
+        <span id="userId">Loading...</span>
+    </div>
+
+
+    <!-- CURRENT RANK -->
+    <div class="info-button gold">
+        <div>🏆 CURRENT RANK</div>
+        <span id="rank">🥉 BRONZE</span>
+    </div>
+
+
+    <!-- TOTAL ORDERS -->
+    <div class="info-button red">
+        <div>📦 TOTAL ORDERS</div>
+        <span id="totalOrders">0</span>
+    </div>
+
+
+    <!-- TOTAL DEPOSIT -->
+    <div class="info-button gold">
+        <div>💰 TOTAL DEPOSIT</div>
+        <span id="totalDeposit">৳0</span>
+    </div>
+
+
+    <!-- TOTAL USERS -->
+    <div class="info-button purple">
+        <div>👥 TOTAL USERS</div>
+        <span>100,397</span>
+    </div>
+
+
+    <!-- INFO -->
+    <div class="info-button purple">
+        <div>ℹ️ INFO</div>
+        <span>Crazy Like Shop</span>
+    </div>
+
+</div>
+
+
+<div id="error" class="error"></div>
+
+
+<!-- BOTTOM NAV -->
 <div class="bottom-nav">
 
-    <button
-        class="nav-btn"
-        onclick="location.href='index.html'">
-
+    <a class="nav-btn" href="index.html">
         🏠
+    </a>
 
-    </button>
-
-
-    <button
-        class="nav-btn"
-        onclick="location.href='orders.html'">
-
+    <a class="nav-btn" href="orders.html">
         🧾
+    </a>
 
-    </button>
-
-
-    <button
-        class="nav-btn"
-        onclick="location.href='shop.html'">
-
+    <a class="nav-btn" href="shop.html">
         🛒
+    </a>
 
-    </button>
-
-
-    <button
-        class="nav-btn"
-        onclick="location.href='deposit.html'">
-
+    <a class="nav-btn" href="deposit.html">
         💳
+    </a>
 
-    </button>
-
-
-    <button
-        class="nav-btn active"
-        onclick="location.href='account.html'">
-
+    <a class="nav-btn active-nav" href="account.html">
         👤
-
-    </button>
+    </a>
 
 </div>
 
 
 <script>
 
-/* Telegram */
+let tg = null;
 
-if(
-    window.Telegram &&
-    window.Telegram.WebApp
-){
+if(window.Telegram && window.Telegram.WebApp){
 
-    Telegram.WebApp.ready();
+    tg = window.Telegram.WebApp;
 
-    Telegram.WebApp.expand();
+    tg.ready();
+    tg.expand();
+
+    try{
+
+        let user = tg.initDataUnsafe.user;
+
+        if(user && user.id){
+
+            document.getElementById("userId").textContent =
+                user.id;
+
+        }else{
+
+            document.getElementById("userId").textContent =
+                "Not Available";
+
+            document.getElementById("error").textContent =
+                "Telegram User ID পাওয়া যায়নি। Telegram Mini App থেকে খুলুন.";
+
+        }
+
+    }catch(e){
+
+        document.getElementById("userId").textContent =
+            "Not Available";
+
+    }
+
+}else{
+
+    document.getElementById("userId").textContent =
+        "Telegram Only";
 
 }
 
 
-/* Demo data */
+/* DEMO DATA */
 
 let totalDeposit = 0;
-
 let totalOrders = 0;
 
 
-/* Rank */
+/* TOTAL ORDERS */
 
-function updateRank(){
-
-    let rank = "BRONZE";
-
-    if(totalDeposit >= 10000000000){
-
-        rank = "👑 MASTER";
-
-    }
-
-    else if(totalDeposit >= 10000){
-
-        rank = "🔴 HEROIC";
-
-    }
-
-    else if(totalDeposit >= 1000){
-
-        rank = "💎 DIAMOND";
-
-    }
-
-    else if(totalDeposit >= 500){
-
-        rank = "🥈 SILVER";
-
-    }
-
-    else{
-
-        rank = "🥉 BRONZE";
-
-    }
+document.getElementById("totalOrders").textContent =
+    totalOrders;
 
 
-    document.getElementById("rank").innerText = rank;
+/* TOTAL DEPOSIT */
 
-    document.getElementById("totalDeposit").innerText =
-        "৳" + totalDeposit.toLocaleString();
+document.getElementById("totalDeposit").textContent =
+    "৳" + totalDeposit;
 
-    document.getElementById("totalOrders").innerText =
-        totalOrders.toLocaleString();
+
+/* RANK SYSTEM */
+
+let rank = "🥉 BRONZE";
+
+if(totalDeposit >= 10000000000){
+
+    rank = "👑 MASTER";
+
+}else if(totalDeposit >= 10000){
+
+    rank = "🔴 HEROIC";
+
+}else if(totalDeposit >= 1000){
+
+    rank = "💎 DIAMOND";
+
+}else if(totalDeposit >= 500){
+
+    rank = "🥈 SILVER";
+
+}else{
+
+    rank = "🥉 BRONZE";
 
 }
 
-
-updateRank();
+document.getElementById("rank").textContent = rank;
 
 </script>
 
-
 </body>
-  </html>
+    </html>
