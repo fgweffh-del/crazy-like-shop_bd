@@ -1,1 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crazy Like Admin</title>
 
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#050509;
+    color:white;
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+}
+
+.container{
+    width:100%;
+    max-width:650px;
+    margin:auto;
+    padding:20px 15px 100px;
+}
+
+.header{
+    text-align:center;
+    padding:20px 10px;
+}
+
+.logo{
+    font-size:55px;
+}
+
+.title{
+    font-size:25px;
+    font-weight:bold;
+    color:#d8a7ff;
+    text-shadow:0 0 15px #8a2be2;
+}
+
+.subtitle{
+    color:#999;
+    margin-top:6px;
+    font-size:13px;
+}
+
+.admin-info{
+    margin-top:20px;
+    padding:18px;
+    border:1px solid #7020a8;
+    border-radius:18px;
+    background:linear-gradient(135deg,#100719,#08080d);
+    box-shadow:0 0 20px #5d1685;
+}
+
+.admin-name{
+    font-size:19px;
+    font-weight:bold;
+}
+
+.admin-id{
+    margin-top:7px;
+    color:#aaa;
+    font-size:13px;
+}
+
+.status{
+    margin-top:12px;
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:20px;
+    background:#123b20;
+    color:#55ff8a;
+    font-size:12px;
+}
+
+.section-title{
+    margin:25px 0 12px;
+    color:#d8a7ff;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.admin-btn{
+    width:100%;
+    min-height:58px;
+    border-radius:16px;
+    border:1px solid #64208c;
+    background:linear-gradient(135deg,#12081b,#08080c);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    text-align:left;
+    padding:15px 18px;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:0 0 10px rgba(145,40,220,.25);
+}
+
+.admin-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 18px rgba(170,60,255,.65);
+}
+
+.admin-btn span{
+    display:block;
+}
+
+.permission{
+    color:#888;
+    font-size:11px;
+    margin-top:4px;
+    font-weight:normal;
+}
+
+.red{
+    border-color:#8d2020;
+    box-shadow:0 0 10px rgba(255,40,40,.2);
+}
+
+.gold{
+    border-color:#9a7115;
+    box-shadow:0 0 10px rgba(255,200,40,.2);
+}
+
+.blue{
+    border-color:#204f9a;
+    box-shadow:0 0 10px rgba(40,130,255,.2);
+}
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#08080d;
+    border-top:1px solid #292033;
+    display:flex;
+    justify-content:center;
+    padding:12px;
+}
+
+.back{
+    border:1px solid #64208c;
+    background:#110817;
+    color:white;
+    border-radius:12px;
+    padding:10px 25px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">👑</div>
+        <div class="title">CRAZY LIKE ADMIN</div>
+        <div class="subtitle">Secure Administration Panel</div>
+    </div>
+
+    <div class="admin-info">
+        <div class="admin-name" id="adminName">
+            ADMIN
+        </div>
+
+        <div class="admin-id" id="adminId">
+            Telegram ID: Loading...
+        </div>
+
+        <div class="status">
+            ● ACTIVE
+        </div>
+    </div>
+
+
+    <div class="section-title">
+        👑 ADMIN FEATURES
+    </div>
+
+    <div class="menu">
+
+        <button class="admin-btn" data-permission="users">
+            👥 Users
+            <span class="permission">User management</span>
+        </button>
+
+        <button class="admin-btn" data-permission="search_user">
+            🔎 User Search
+            <span class="permission">Search user by Telegram ID</span>
+        </button>
+
+        <button class="admin-btn" data-permission="add_balance">
+            ➕ Add Balance
+            <span class="permission">Add user balance</span>
+        </button>
+
+        <button class="admin-btn red" data-permission="cut_balance">
+            ➖ Cut Balance
+            <span class="permission">Remove user balance</span>
+        </button>
+
+        <button class="admin-btn red" data-permission="ban">
+            🚫 Ban / Unban
+            <span class="permission">Manage user access</span>
+        </button>
+
+        <button class="admin-btn gold" data-permission="deposit">
+            💳 Deposit
+            <span class="permission">Deposit management</span>
+        </button>
+
+        <button class="admin-btn" data-permission="products">
+            📦 Products
+            <span class="permission">Add / Edit / Delete products</span>
+        </button>
+
+        <button class="admin-btn" data-permission="orders">
+            🛒 Orders
+            <span class="permission">View and manage orders</span>
+        </button>
+
+        <button class="admin-btn blue" data-permission="chat_user">
+            💬 Chat User
+            <span class="permission">Contact users</span>
+        </button>
+
+        <button class="admin-btn" data-permission="broadcast">
+            📢 Broadcast
+            <span class="permission">Send broadcast messages</span>
+        </button>
+
+        <button class="admin-btn gold" data-permission="protect_pass">
+            🔐 Protect Pass
+            <span class="permission">Manage protection passes</span>
+        </button>
+
+        <button class="admin-btn" data-permission="reseller">
+            👑 Reseller
+            <span class="permission">Reseller management</span>
+        </button>
+
+        <button class="admin-btn" data-permission="statistics">
+            📊 Statistics
+            <span class="permission">Bot statistics</span>
+        </button>
+
+        <button class="admin-btn" data-permission="settings">
+            ⚙️ Settings
+            <span class="permission">Bot settings</span>
+        </button>
+
+        <button class="admin-btn" data-permission="info">
+            ℹ️ Info
+            <span class="permission">Manage information</span>
+        </button>
+
+        <button class="admin-btn red" data-permission="bot_control">
+            🔴 Bot Control
+            <span class="permission">Bot OFF / OPEN</span>
+        </button>
+
+        <button class="admin-btn gold" data-permission="admin_management">
+            👑 Admin Management
+            <span class="permission">Add / Remove admin & permissions</span>
+        </button>
+
+    </div>
+
+</div>
+
+<div class="bottom">
+    <button class="back" id="backBtn">
+        ← Back
+    </button>
+</div>
+
+
+<script>
+
+if(window.Telegram && Telegram.WebApp){
+    Telegram.WebApp.ready();
+    Telegram.WebApp.expand();
+}
+
+
+/*
+    DEMO PERMISSIONS
+
+    Real permissions must come from
+    your secure backend.
+
+    Main Admin:
+    6346808004
+
+    Later backend will return something like:
+
+    {
+        "admin": true,
+        "permissions": [
+            "users",
+            "add_balance",
+            "orders"
+        ]
+    }
+*/
+
+
+const MAIN_ADMIN_ID = "6346808004";
+
+
+function getTelegramUser(){
+
+    if(
+        window.Telegram &&
+        Telegram.WebApp &&
+        Telegram.WebApp.initDataUnsafe &&
+        Telegram.WebApp.initDataUnsafe.user
+    ){
+        return Telegram.WebApp.initDataUnsafe.user;
+    }
+
+    return null;
+}
+
+
+const tgUser = getTelegramUser();
+
+
+if(tgUser){
+
+    document.getElementById("adminName").innerText =
+        tgUser.first_name || "ADMIN";
+
+    document.getElementById("adminId").innerText =
+        "Telegram ID: " + tgUser.id;
+
+}else{
+
+    document.getElementById("adminName").innerText =
+        "ADMIN";
+
+    document.getElementById("adminId").innerText =
+        "Telegram ID: Not detected";
+}
+
+
+/*
+    TEMPORARY DEMO
+
+    Main Admin gets every permission.
+
+    Other admins currently get nothing
+    until backend permission system is connected.
+*/
+
+let permissions = [];
+
+if(tgUser && String(tgUser.id) === MAIN_ADMIN_ID){
+
+    permissions = [
+        "users",
+        "search_user",
+        "add_balance",
+        "cut_balance",
+        "ban",
+        "deposit",
+        "products",
+        "orders",
+        "chat_user",
+        "broadcast",
+        "protect_pass",
+        "reseller",
+        "statistics",
+        "settings",
+        "info",
+        "bot_control",
+        "admin_management"
+    ];
+
+}
+
+
+/*
+    Hide buttons without permission
+*/
+
+document.querySelectorAll(".admin-btn").forEach(function(button){
+
+    const permission = button.dataset.permission;
+
+    if(!permissions.includes(permission)){
+        button.style.display = "none";
+    }
+
+});
+
+
+/*
+    Button click
+
+    Later each button will open its
+    own Admin Mini App page.
+*/
+
+document.querySelectorAll(".admin-btn").forEach(function(button){
+
+    button.addEventListener("click", function(){
+
+        const permission = this.dataset.permission;
+
+        if(!permissions.includes(permission)){
+            alert("❌ You don't have permission.");
+            return;
+        }
+
+        alert(
+            "✅ Access granted\n\n" +
+            "Feature: " + permission
+        );
+
+    });
+
+});
+
+
+document.getElementById("backBtn").addEventListener("click",function(){
+
+    if(
+        window.Telegram &&
+        Telegram.WebApp
+    ){
+        Telegram.WebApp.close();
+    }else{
+        history.back();
+    }
+
+});
+
+</script>
+
+</body>
+  </html>
