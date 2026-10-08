@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crazy Like Shop</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#050507;
+    color:#fff;
+    min-height:100vh;
+    padding-bottom:92px;
+}
+
+.container{
+    width:100%;
+    max-width:620px;
+    margin:auto;
+}
+
+/* TOP */
+
+.top{
+    padding:24px 18px 20px;
+    text-align:center;
+
+    background:
+        radial-gradient(circle at 50% -20%,#9b3cff45,transparent 45%),
+        linear-gradient(180deg,#100b17,#07060a);
+
+    border-bottom:1px solid #30243b;
+}
+
+.crown{
+    font-size:34px;
+    filter:drop-shadow(0 0 12px #ffd45b);
+}
+
+.logo{
+    margin-top:5px;
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:.5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #c66cff,
+            #ffd45b
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.subtitle{
+    margin-top:7px;
+    color:#8e8797;
+    font-size:10px;
+}
+
+/* BALANCE */
+
+.balance{
+    margin:18px auto 0;
+    max-width:420px;
+
+    padding:15px 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-radius:19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #241532,
+            #100d15
+        );
+
+    border:1px solid #503467;
+
+    box-shadow:
+        0 0 25px #8d36ff14;
+}
+
+.balance-left{
+    text-align:left;
+}
+
+.balance-label{
+    color:#827b8c;
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.balance-value{
+    display:block;
+    margin-top:4px;
+
+    color:#ffd65b;
+    font-size:20px;
+    font-weight:900;
+}
+
+.balance-icon{
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:#291637;
+    border:1px solid #70478d;
+
+    font-size:22px;
+}
+
+/* CONTENT */
+
+.content{
+    padding:18px;
+}
+
+/* WELCOME */
+
+.welcome{
+    padding:22px;
+
+    border-radius:23px;
+
+    background:
+        radial-gradient(circle at 100% 0%,#913cff45,transparent 42%),
+        radial-gradient(circle at 0% 100%,#ffd34b10,transparent 35%),
+        linear-gradient(145deg,#1d1427,#0c0a10);
+
+    border:1px solid #493255;
+
+    box-shadow:
+        0 0 30px #8b36ff12;
+}
+
+.welcome-title{
+    font-size:20px;
+    font-weight:900;
+}
+
+.welcome-text{
+    margin-top:8px;
+    color:#96909f;
+    font-size:10px;
+    line-height:1.7;
+}
+
+.online{
+    margin-top:13px;
+    color:#59ea98;
+    font-size:8px;
+    font-weight:bold;
+}
+
+.dot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    margin-right:5px;
+    border-radius:50%;
+    background:#55e993;
+    box-shadow:0 0 10px #55e993;
+}
+
+/* LIVE */
+
+.live-section{
+    margin-top:22px;
+}
+
+.live-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:11px;
+}
+
+.live-title{
+    font-size:15px;
+    font-weight:900;
+}
+
+.live-count{
+    padding:5px 9px;
+    border-radius:12px;
+
+    color:#d9a2ff;
+    background:#9a3cff12;
+    border:1px solid #9a3cff35;
+
+    font-size:8px;
+    font-weight:bold;
+}
+
+.live-box{
+    width:100%;
+
+    padding:5px 14px;
+
+    border-radius:20px;
+
+    background:#0e0d12;
+    border:1px solid #29242f;
+
+    box-shadow:
+        inset 0 0 25px #00000030;
+}
+
+.live-row{
+    min-height:61px;
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    border-bottom:1px solid #25212b;
+}
+
+.live-row:last-child{
+    border-bottom:0;
+}
+
+.avatar{
+    width:38px;
+    height:38px;
+    min-width:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #652b9c,
+            #21142d
+        );
+
+    border:1px solid #71458d;
+
+    font-size:17px;
+}
+
+.live-info{
+    flex:1;
+    min-width:0;
+}
+
+.live-name{
+    font-size:10px;
+    font-weight:bold;
+}
+
+.live-service{
+    margin-top:3px;
+
+    color:#716b78;
+
+    font-size:8px;
+}
+
+.success{
+    color:#59e995;
+    font-size:7px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+
+    left:50%;
+    bottom:10px;
+
+    transform:translateX(-50%);
+
+    width:calc(100% - 22px);
+    max-width:598px;
+
+    height:67px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+
+    padding:6px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #18121f,
+            #0c0b10
+        );
+
+    border:1px solid #3a2d47;
+
+    box-shadow:
+        0 10px 35px #000000cc,
+        0 0 25px #7d32b518;
+
+    z-index:999;
+}
+
+.nav-button{
+    width:52px;
+    height:52px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:0;
+    border-radius:17px;
+
+    background:transparent;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.18s;
+}
+
+.nav-button:active{
+    transform:scale(.86);
+}
+
+.nav-button.active{
+    background:
+        linear-gradient(
+            145deg,
+            #422457,
+            #21132c
+        );
+
+    border:1px solid #75468f;
+
+    box-shadow:
+        0 0 16px #913cff25;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- TOP -->
+
+    <div class="top">
+
+        <div class="crown">
+            👑
+        </div>
+
+        <div class="logo">
+            CRAZY LIKE SHOP
+        </div>
+
+        <div class="subtitle">
+            Premium Like Service • Fast Delivery
+        </div>
+
+        <div class="balance">
+
+            <div class="balance-left">
+
+                <div class="balance-label">
+                    YOUR BALANCE
+                </div>
+
+                <strong class="balance-value">
+                    ৳ 0.00
+                </strong>
+
+            </div>
+
+            <div class="balance-icon">
+                💰
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="content">
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <div class="welcome-title">
+                Welcome to Crazy Shop 🔥
+            </div>
+
+            <div class="welcome-text">
+                Premium service, fast delivery and secure
+                ordering — everything in one place.
+            </div>
+
+            <div class="online">
+                <span class="dot"></span>
+                SHOP ONLINE
+            </div>
+
+        </div>
+
+
+        <!-- LIVE ORDERS -->
+
+        <div class="live-section">
+
+            <div class="live-header">
+
+                <div class="live-title">
+                    🔴 LIVE ORDERS
+                </div>
+
+                <div class="live-count">
+                    10 ORDERS
+                </div>
+
+            </div>
+
+
+            <div class="live-box">
+
+                <div class="live-row">
+
+                    <div class="avatar">👤</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            Crazy User
+                        </div>
+
+                        <div class="live-service">
+                            Premium Like
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">👑</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            VIP Member
+                        </div>
+
+                        <div class="live-service">
+                            Like Service
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">🔥</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            Premium User
+                        </div>
+
+                        <div class="live-service">
+                            Crazy Like
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">⭐</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            Crazy VIP
+                        </div>
+
+                        <div class="live-service">
+                            Premium Like
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">💎</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            VIP User
+                        </div>
+
+                        <div class="live-service">
+                            Like Package
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">🚀</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            Crazy Member
+                        </div>
+
+                        <div class="live-service">
+                            Fast Like
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">💜</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            Premium Member
+                        </div>
+
+                        <div class="live-service">
+                            VIP Like
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">⚡</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            Crazy Customer
+                        </div>
+
+                        <div class="live-service">
+                            Fast Delivery
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">🏆</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            VIP Customer
+                        </div>
+
+                        <div class="live-service">
+                            Premium Service
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+
+                <div class="live-row">
+
+                    <div class="avatar">💫</div>
+
+                    <div class="live-info">
+                        <div class="live-name">
+                            Crazy Premium
+                        </div>
+
+                        <div class="live-service">
+                            Crazy Like
+                        </div>
+                    </div>
+
+                    <div class="success">
+                        ✓ SUCCESS
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BOTTOM NAVIGATION -->
+
+<div class="bottom-nav">
+
+    <button
+        class="nav-button active"
+        onclick="goHome()"
+    >
+        🏠
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="goOrders()"
+    >
+        🧾
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="goShop()"
+    >
+        🛒
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="goDeposit()"
+    >
+        💳
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="goAccount()"
+    >
+        👤
+    </button>
+
+</div>
+
+
+<script>
+
+if(
+    window.Telegram &&
+    window.Telegram.WebApp
+){
+
+    Telegram.WebApp.ready();
+
+    Telegram.WebApp.expand();
+
+}
+
+
+function goHome(){
+
+    window.location.href="index.html";
+
+}
+
+
+function goOrders(){
+
+    window.location.href="orders.html";
+
+}
+
+
+function goShop(){
+
+    window.location.href="shop.html";
+
+}
+
+
+function goDeposit(){
+
+    window.location.href="deposit.html";
+
+}
+
+
+function goAccount(){
+
+    alert("My Account coming soon");
+
+}
+
+</script>
+
+</body>
+  </html>
