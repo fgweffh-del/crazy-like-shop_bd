@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Crazy Like Shop - Account</title>
 
 <style>
@@ -66,6 +65,13 @@ body{
     margin:auto;
 }
 
+.section-title{
+    margin:25px 0 8px;
+    color:#777;
+    font-size:12px;
+    letter-spacing:2px;
+}
+
 .info-button{
     width:100%;
     min-height:68px;
@@ -74,10 +80,13 @@ body{
     border-radius:16px;
     background:#0b0b10;
     border:1px solid;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:15px;
+
     font-size:15px;
     font-weight:bold;
 }
@@ -114,60 +123,86 @@ body{
     color:#ff6573;
 }
 
-.section-title{
-    margin:25px 0 8px;
-    color:#777;
-    font-size:12px;
-    letter-spacing:2px;
-}
-
 .bottom-nav{
     position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:72px;
-    background:#08080c;
-    border-top:1px solid #29202f;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:calc(100% - 22px);
+    max-width:598px;
+    height:67px;
+
     display:flex;
-    justify-content:space-around;
     align-items:center;
+    justify-content:space-around;
+
+    padding:6px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #18121f,
+            #0c0b10
+        );
+
+    border:1px solid #3a2d47;
+
+    box-shadow:
+        0 10px 35px #000,
+        0 0 25px #7d32b518;
+
+    z-index:999;
 }
 
 .nav-btn{
-    text-decoration:none;
-    font-size:26px;
-    width:20%;
-    height:58px;
+    width:52px;
+    height:52px;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:14px;
+
+    border-radius:17px;
+
+    text-decoration:none;
+
+    font-size:24px;
 }
 
 .active-nav{
-    background:rgba(164,60,255,.15);
-    box-shadow:0 0 15px rgba(164,60,255,.4);
+    background:#2d173d;
+    border:1px solid #75468f;
+    box-shadow:0 0 16px #913cff35;
 }
 
 .error{
     text-align:center;
-    color:#ff6573;
-    font-size:13px;
     margin:15px;
+    color:#ff6573;
+    font-size:12px;
 }
 </style>
 </head>
 
 <body>
 
+
 <div class="header">
 
-    <div class="profile-logo">👤</div>
+    <div class="profile-logo">
+        👤
+    </div>
 
-    <div class="title">PROFILE</div>
+    <div class="title">
+        PROFILE
+    </div>
 
-    <div class="active">● ACTIVE</div>
+    <div class="active">
+        ● ACTIVE
+    </div>
 
 </div>
 
@@ -178,43 +213,98 @@ body{
         ACCOUNT INFORMATION
     </div>
 
+
     <!-- USER ID -->
+
     <div class="info-button purple">
-        <div>👤 USER ID</div>
-        <span id="userId">Loading...</span>
+
+        <div>
+            👤 USER ID
+        </div>
+
+        <span id="userId">
+            Loading...
+        </span>
+
     </div>
+
 
     <!-- RANK -->
+
     <div class="info-button gold">
-        <div>🏆 CURRENT RANK</div>
-        <span id="rank">🥉 BRONZE</span>
+
+        <div>
+            🏆 CURRENT RANK
+        </div>
+
+        <span id="rank">
+            🥉 BRONZE
+        </span>
+
     </div>
+
 
     <!-- ORDERS -->
+
     <div class="info-button red">
-        <div>📦 TOTAL ORDERS</div>
-        <span id="totalOrders">0</span>
+
+        <div>
+            📦 TOTAL ORDERS
+        </div>
+
+        <span id="totalOrders">
+            0
+        </span>
+
     </div>
+
 
     <!-- DEPOSIT -->
+
     <div class="info-button gold">
-        <div>💰 TOTAL DEPOSIT</div>
-        <span id="totalDeposit">৳0</span>
+
+        <div>
+            💰 TOTAL DEPOSIT
+        </div>
+
+        <span id="totalDeposit">
+            ৳0
+        </span>
+
     </div>
+
 
     <!-- USERS -->
+
     <div class="info-button purple">
-        <div>👥 TOTAL USERS</div>
-        <span>100,397</span>
+
+        <div>
+            👥 TOTAL USERS
+        </div>
+
+        <span>
+            100,397
+        </span>
+
     </div>
 
+
     <!-- INFO -->
+
     <div class="info-button purple">
-        <div>ℹ️ INFO</div>
-        <span>Crazy Like Shop</span>
+
+        <div>
+            ℹ️ INFO
+        </div>
+
+        <span>
+            Crazy Like Shop
+        </span>
+
     </div>
 
 </div>
+
 
 <div id="error" class="error"></div>
 
@@ -223,97 +313,175 @@ body{
 
 <div class="bottom-nav">
 
-    <a class="nav-btn" href="index.html">🏠</a>
+    <a class="nav-btn" href="index.html">
+        🏠
+    </a>
 
-    <a class="nav-btn" href="orders.html">🧾</a>
+    <a class="nav-btn" href="orders.html">
+        🧾
+    </a>
 
-    <a class="nav-btn" href="shop.html">🛒</a>
+    <a class="nav-btn" href="shop.html">
+        🛒
+    </a>
 
-    <a class="nav-btn" href="deposit.html">💳</a>
+    <a class="nav-btn" href="deposit.html">
+        💳
+    </a>
 
-    <a class="nav-btn active-nav" href="account.html">👤</a>
+    <a class="nav-btn active-nav" href="account.html">
+        👤
+    </a>
 
 </div>
 
 
 <script>
 
-/* TELEGRAM MINI APP */
+/* ================================= */
+/* GET TELEGRAM USER ID */
+/* ================================= */
 
-if(window.Telegram && window.Telegram.WebApp){
+let userId = "";
 
-    const tg = window.Telegram.WebApp;
 
-    tg.ready();
-    tg.expand();
+/* 1. Telegram WebApp থেকে */
 
-    const telegramUser =
-        tg.initDataUnsafe &&
-        tg.initDataUnsafe.user;
+try{
 
-    if(telegramUser && telegramUser.id){
+    if(
+        window.Telegram &&
+        window.Telegram.WebApp
+    ){
 
-        document.getElementById("userId").textContent =
-            String(telegramUser.id);
+        const tg = window.Telegram.WebApp;
 
-    }else{
+        tg.ready();
+        tg.expand();
 
-        document.getElementById("userId").textContent =
-            "ID NOT FOUND";
+        if(
+            tg.initDataUnsafe &&
+            tg.initDataUnsafe.user &&
+            tg.initDataUnsafe.user.id
+        ){
 
-        document.getElementById("error").textContent =
-            "Telegram Mini App থেকে Account খুলুন.";
+            userId =
+                String(
+                    tg.initDataUnsafe.user.id
+                );
+
+        }
 
     }
 
-}else{
-
-    document.getElementById("userId").textContent =
-        "TELEGRAM ONLY";
-
-    document.getElementById("error").textContent =
-        "এই page Telegram Mini App-এর ভিতর থেকে খুলতে হবে.";
+}catch(error){
 
 }
 
 
-/* DEMO */
+/* 2. URL থেকে user_id */
+
+try{
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const urlUserId =
+        params.get("user_id");
+
+    if(urlUserId){
+
+        userId =
+            String(urlUserId);
+
+    }
+
+}catch(error){
+
+}
+
+
+/* ================================= */
+/* SHOW USER ID */
+/* ================================= */
+
+if(userId){
+
+    document.getElementById(
+        "userId"
+    ).textContent = userId;
+
+}else{
+
+    document.getElementById(
+        "userId"
+    ).textContent = "ID NOT FOUND";
+
+    document.getElementById(
+        "error"
+    ).textContent =
+        "Account page-টি Home থেকে Account button দিয়ে খুলুন.";
+
+}
+
+
+/* ================================= */
+/* DEMO ACCOUNT DATA */
+/* ================================= */
 
 let totalDeposit = 0;
+
 let totalOrders = 0;
 
-document.getElementById("totalDeposit").textContent =
+
+document.getElementById(
+    "totalDeposit"
+).textContent =
     "৳" + totalDeposit;
 
-document.getElementById("totalOrders").textContent =
+
+document.getElementById(
+    "totalOrders"
+).textContent =
     totalOrders;
 
 
-/* RANK */
+/* ================================= */
+/* RANK SYSTEM */
+/* ================================= */
 
 let rank = "🥉 BRONZE";
+
 
 if(totalDeposit >= 10000000000){
 
     rank = "👑 MASTER";
 
-}else if(totalDeposit >= 10000){
+}
+else if(totalDeposit >= 10000){
 
     rank = "🔴 HEROIC";
 
-}else if(totalDeposit >= 1000){
+}
+else if(totalDeposit >= 1000){
 
     rank = "💎 DIAMOND";
 
-}else if(totalDeposit >= 500){
+}
+else if(totalDeposit >= 500){
 
     rank = "🥈 SILVER";
 
 }
 
-document.getElementById("rank").textContent = rank;
+
+document.getElementById(
+    "rank"
+).textContent = rank;
 
 </script>
 
 </body>
-    </html>
+            </html>
