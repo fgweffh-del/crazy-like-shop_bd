@@ -1,274 +1,421 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>CRAZY MODZ GAME</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CRAZY_FUCK Jump Game</title>
+
 <style>
-:root{color-scheme:dark;--cyan:#53f5ff;--purple:#9c63ff}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#080b18;color:#fff;font-family:system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none}
-#game{position:fixed;inset:0}
-canvas{display:block;width:100%;height:100%}
-.hud{position:fixed;inset:0;pointer-events:none;padding:16px}
-.brand{font-weight:900;letter-spacing:1px;font-size:clamp(16px,4vw,23px);text-shadow:0 0 18px #53f5ff77}
-.brand span{color:var(--cyan)}
-.stats{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.pill{background:#111a31dd;border:1px solid #53f5ff55;border-radius:12px;padding:7px 11px;font-size:12px;font-weight:700}
-#mission{position:absolute;top:16px;right:16px;background:#111a31dd;border:1px solid #ffffff22;padding:9px 12px;border-radius:12px;font-size:12px;text-align:right;max-width:44%}
-#message{position:absolute;top:28%;left:50%;transform:translate(-50%,-50%);text-align:center;width:min(90%,440px);text-shadow:0 3px 18px #000;transition:opacity .2s}
-#message h1{font-size:clamp(28px,8vw,50px);line-height:1;margin:0 0 10px;font-weight:1000}
-#message p{margin:0;color:#d8e4ff}
-#menu{pointer-events:auto;position:absolute;left:50%;top:51%;transform:translate(-50%,-50%);width:min(88%,340px);background:#0d1427ee;border:1px solid #53f5ff66;border-radius:20px;padding:22px;text-align:center;box-shadow:0 0 55px #5b5bff22}
-#menu h2{margin:0 0 8px;font-size:25px}
-#menu p{font-size:13px;line-height:1.5;color:#c8d4ee}
-button{border:0;cursor:pointer;color:#07101b;background:linear-gradient(120deg,var(--cyan),#a9fff6);font-weight:900;border-radius:13px;padding:13px 18px;font-size:15px;min-height:46px}
-#start{width:100%;margin-top:8px}
-.controls{position:fixed;bottom:18px;left:0;right:0;display:flex;justify-content:space-between;align-items:flex-end;padding:0 18px;pointer-events:none}
-.pad{display:grid;grid-template-columns:repeat(3,54px);grid-template-rows:repeat(2,50px);gap:6px;pointer-events:auto}
-.ctrl{background:#111a31d9;color:#fff;border:1px solid #53f5ff77;border-radius:14px;font-size:19px;padding:0;min-height:46px;touch-action:none;user-select:none}
-.pad .empty{visibility:hidden}
-#jump{pointer-events:auto;width:76px;height:76px;border-radius:50%;background:linear-gradient(145deg,#a56aff,#5d53ff);color:#fff;border:2px solid #ffffff88;font-size:13px;box-shadow:0 0 28px #8e5bff66}
-#hint{position:absolute;bottom:113px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:11px;color:#d8e4ffbb;background:#10172c99;border-radius:20px;padding:7px 12px}
-@media(min-width:700px){.controls{max-width:780px;margin:auto;left:50%;transform:translateX(-50%);width:100%}}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  overflow: hidden;
+  background: #10152d;
+  font-family: Arial, sans-serif;
+  touch-action: none;
+}
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100dvh;
+}
+#top {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  pointer-events: none;
+  text-shadow: 2px 2px #111;
+}
+#controls {
+  position: fixed;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+.group {
+  display: flex;
+  gap: 12px;
+}
+button {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #ffffff80;
+  border-radius: 18px;
+  background: #253b72dd;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  touch-action: none;
+  user-select: none;
+}
+#jump {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: #ff5722ee;
+}
+#startScreen {
+  position: fixed;
+  inset: 0;
+  background: #090e20df;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  gap: 18px;
+}
+#startScreen h1 {
+  color: #ff5722;
+  font-size: 34px;
+  text-shadow: 2px 3px #000;
+}
+#startScreen p {
+  text-align: center;
+  line-height: 1.6;
+  padding: 0 22px;
+}
+#play {
+  width: 180px;
+  height: 58px;
+  background: #16b85b;
+  border-radius: 14px;
+  font-size: 20px;
+}
 </style>
 </head>
+
 <body>
-<div id="game"></div>
-<div class="hud">
-  <div class="brand">🔥 CRAZY <span>MODZ</span> GAME</div>
-  <div class="stats">
-    <div class="pill">LEVEL <b id="level">1</b>/3</div>
-    <div class="pill">CHECKPOINT <b id="checkpoint">0</b></div>
-    <div class="pill">GEMS <b id="gems">0</b></div>
-  </div>
-  <div id="mission">MISSION<br><b id="missionText">Reach the finish</b></div>
-  <div id="message"><h1>READY TO<br>RUN?</h1><p>Jump across the floating platforms.</p></div>
-  <div id="menu">
-    <h2>CRAZY PARKOUR</h2>
-    <p>Run, jump and reach the glowing finish gate.<br>Collect gems and avoid falling!</p>
-    <button id="start">▶ START GAME</button>
-    <p style="font-size:11px;margin-bottom:0">Mobile controls below · Landscape mode recommended</p>
-  </div>
+<canvas id="game"></canvas>
+
+<div id="top">
+  <span>🔥 CRAZY_FUCK</span>
+  <span>🏆 SCORE: <b id="score">0</b></span>
 </div>
-<div class="controls">
-  <div class="pad">
-    <button class="ctrl empty"> </button><button class="ctrl" data-key="forward">▲</button><button class="ctrl empty"> </button>
-    <button class="ctrl" data-key="left">◀</button><button class="ctrl" data-key="back">▼</button><button class="ctrl" data-key="right">▶</button>
+
+<div id="controls">
+  <div class="group">
+    <button id="left">◀</button>
+    <button id="right">▶</button>
   </div>
-  <button id="jump">JUMP<br>⤴</button>
+  <button id="jump">⬆</button>
 </div>
-<div id="hint">▲ Move forward · ◀ ▶ Steer · JUMP to leap</div>
-<script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
 
-const root=document.getElementById('game');
-const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x080b18);
-scene.fog=new THREE.Fog(0x080b18,24,95);
-const camera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,180);
-camera.position.set(0,5,10);
-const renderer=new THREE.WebGLRenderer({antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));
-renderer.setSize(innerWidth,innerHeight);
-renderer.shadowMap.enabled=true;
-renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-root.appendChild(renderer.domElement);
+<div id="startScreen">
+  <h1>CRAZY_FUCK</h1>
+  <p>
+    🔥 JUMP • RUN • CLIMB<br>
+    গাড়ির ওপর দিয়ে লাফ দাও<br>
+    বক্সে ওঠো এবং স্কোর বাড়াও!
+  </p>
+  <button id="play">▶ PLAY GAME</button>
+</div>
 
-scene.add(new THREE.HemisphereLight(0x9fc7ff,0x191126,2.1));
-const sun=new THREE.DirectionalLight(0xffffff,3);
-sun.position.set(-7,13,8);sun.castShadow=true;scene.add(sun);
-sun.shadow.mapSize.set(1024,1024);
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+const scoreText = document.getElementById("score");
 
-const mat=(color,emissive=0x000000,metalness=.15,roughness=.55)=>new THREE.MeshStandardMaterial({color,emissive,emissiveIntensity:1,metalness,roughness});
-const platformMat=mat(0x192b4d,0x071b35,.25,.45);
-const edgeMat=mat(0x43eaff,0x147caa,.35,.35);
-const playerMat=mat(0x9b5cff,0x4a14a3,.3,.3);
-const whiteMat=mat(0xf4fbff,0x334b75);
-const gemMat=new THREE.MeshStandardMaterial({color:0x56fff2,emissive:0x00c8ff,emissiveIntensity:2,metalness:.3,roughness:.2});
-const boxGeo=new THREE.BoxGeometry(1,1,1);
-function box(x,y,z,sx,sy,sz,material,shadow=true){
- const m=new THREE.Mesh(boxGeo,material);m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.castShadow=shadow;m.receiveShadow=true;scene.add(m);return m;
-}
-function platform(x,y,z,w,d){
- box(x,y-.25,z,w,.5,d,platformMat);
- box(x,y+.015,z,w,.055,d,edgeMat,false);
- // neon front edge
- box(x,y-.05,z+d/2,w,.08,.08,edgeMat,false);
- return {x,y,z,w,d};
-}
-const platforms=[];
-platforms.push(platform(0,0,2,9,10));
-platforms.push(platform(0,.3,-6,4.2,4));
-platforms.push(platform(2,.65,-12,3.6,3.5));
-platforms.push(platform(-1,.95,-18,3.6,3.5));
-platforms.push(platform(-3,1.15,-24,4,3.5));
-platforms.push(platform(0,1.3,-30,4,4));
-platforms.push(platform(3,1.55,-37,4,4));
-platforms.push(platform(0,1.8,-44,5,4));
-platforms.push(platform(-2,2.05,-51,4,4));
-platforms.push(platform(1,2.25,-58,5,5));
-platforms.push(platform(0,2.25,-66,8,7));
+let W, H, ground, camera = 0;
+let running = false;
+let score = 0;
+let keys = { left:false, right:false };
+let platforms = [];
+let obstacles = [];
+let player;
 
-const grid=new THREE.GridHelper(100,50,0x1b6c9c,0x162344);
-grid.position.set(0,-5, -25);scene.add(grid);
+function resize() {
+  W = canvas.width = innerWidth * devicePixelRatio;
+  H = canvas.height = innerHeight * devicePixelRatio;
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+  W = innerWidth;
+  H = innerHeight;
+  ground = H - 115;
+  if (!running) drawMenu();
+}
+addEventListener("resize", resize);
 
-const player=new THREE.Group();scene.add(player);
-const body=new THREE.Mesh(new THREE.BoxGeometry(.8,1.05,.48),playerMat);body.position.y=.85;body.castShadow=true;player.add(body);
-const head=new THREE.Mesh(new THREE.SphereGeometry(.34,20,16),whiteMat);head.position.y=1.58;head.castShadow=true;player.add(head);
-const visor=new THREE.Mesh(new THREE.BoxGeometry(.48,.13,.05),mat(0x08152d,0x22eaff,0,.2));visor.position.set(0,1.6,-.3);player.add(visor);
-const pack=new THREE.Mesh(new THREE.BoxGeometry(.45,.5,.2),mat(0x31eaff,0x147caa));pack.position.set(0,.95,.32);player.add(pack);
+function resetGame() {
+  camera = 0;
+  score = 0;
+  scoreText.textContent = 0;
+  player = {
+    x: W * 0.25,
+    y: ground - 60,
+    w: 32,
+    h: 58,
+    vx: 0,
+    vy: 0,
+    onGround: true
+  };
 
-function ring(x,y,z,color=0x5bffef){
- const r=new THREE.Mesh(new THREE.TorusGeometry(.8,.08,10,36),new THREE.MeshStandardMaterial({color,emissive:color,emissiveIntensity:1.7}));
- r.position.set(x,y+1.4,z);scene.add(r);return r;
-}
-const gate=ring(0,2.25,-67,0x9e65ff);
-const gate2=ring(0,2.25,-67,0x53f5ff);gate2.scale.set(.72,.72,.72);
-box(-1.15,3.2,-67,.16,2.3,.18,edgeMat,false);
-box(1.15,3.2,-67,.16,2.3,.18,edgeMat,false);
-box(0,4.35,-67,2.45,.16,.18,edgeMat,false);
+  platforms = [
+    {x:0, y:ground, w:W+200, h:30},
+    {x:W*0.52, y:ground-105, w:105, h:18},
+    {x:W*0.80, y:ground-175, w:110, h:18},
+    {x:W*1.15, y:ground-115, w:115, h:18},
+    {x:W*1.48, y:ground-220, w:120, h:18}
+  ];
 
-const gems=[];
-for(const p of platforms.slice(1,-1)){
- const g=new THREE.Mesh(new THREE.OctahedronGeometry(.42),gemMat);
- g.position.set(p.x,p.y+1.1,p.z);g.castShadow=true;scene.add(g);gems.push({mesh:g,taken:false});
-}
-const flags=[];
-for(let i=2;i<platforms.length-1;i+=3){
- const p=platforms[i];
- const pole=box(p.x+p.w*.35,p.y+1.1,p.z,.07,2.2,.07,whiteMat,false);
- const flag=box(p.x+p.w*.35+.38,p.y+1.7,p.z,.7,.38,.06,edgeMat,false);
- flags.push({p,pole,flag});
-}
-const keys={forward:false,back:false,left:false,right:false};
-let started=false,finished=false,vy=0,onGround=false,lastCheckpoint=0,gemsCount=0,level=1;
-let lastTime=performance.now(),elapsed=0;
-const startPos=new THREE.Vector3(0,0,1.5);
-player.position.copy(startPos);
+  obstacles = [
+    {x:W*0.40, y:ground-42, w:95, h:42, type:"car"},
+    {x:W*0.92, y:ground-68, w:45, h:68, type:"box"},
+    {x:W*1.34, y:ground-48, w:100, h:48, type:"car"}
+  ];
 
-function setMessage(title,desc){
- const el=document.getElementById('message');
- el.innerHTML='<h1>'+title+'</h1><p>'+desc+'</p>';
-}
-function updateStats(){
- document.getElementById('checkpoint').textContent=lastCheckpoint;
- document.getElementById('gems').textContent=gemsCount;
- document.getElementById('level').textContent=level;
- document.getElementById('missionText').textContent=finished?'Mission complete!':'Reach the finish';
-}
-function resetPlayer(){
- if(lastCheckpoint>0){
-  const p=platforms[Math.min(lastCheckpoint,platforms.length-1)];
-  player.position.set(p.x,p.y+.05,p.z+.2);
- }else player.position.copy(startPos);
- vy=0;onGround=false;
-}
-function jump(){
- if(started&&!finished&&onGround){vy=8.2;onGround=false;}
-}
-document.getElementById('start').addEventListener('click',()=>{
- started=true;finished=false;document.getElementById('menu').style.display='none';
- document.getElementById('message').style.opacity='0';
- lastTime=performance.now();
-});
-document.getElementById('jump').addEventListener('pointerdown',e=>{e.preventDefault();jump();});
-document.querySelectorAll('[data-key]').forEach(btn=>{
- const k=btn.dataset.key;
- const down=e=>{e.preventDefault();keys[k]=true;btn.style.background='#31456c';};
- const up=e=>{e.preventDefault();keys[k]=false;btn.style.background='';};
- btn.addEventListener('pointerdown',down);
- btn.addEventListener('pointerup',up);
- btn.addEventListener('pointercancel',up);
- btn.addEventListener('lostpointercapture',up);
-});
-addEventListener('keydown',e=>{
- if(['ArrowUp','w','W'].includes(e.key))keys.forward=true;
- if(['ArrowDown','s','S'].includes(e.key))keys.back=true;
- if(['ArrowLeft','a','A'].includes(e.key))keys.left=true;
- if(['ArrowRight','d','D'].includes(e.key))keys.right=true;
- if(e.code==='Space'){e.preventDefault();jump();}
-});
-addEventListener('keyup',e=>{
- if(['ArrowUp','w','W'].includes(e.key))keys.forward=false;
- if(['ArrowDown','s','S'].includes(e.key))keys.back=false;
- if(['ArrowLeft','a','A'].includes(e.key))keys.left=false;
- if(['ArrowRight','d','D'].includes(e.key))keys.right=false;
-});
-addEventListener('blur',()=>Object.keys(keys).forEach(k=>keys[k]=false));
-
-function step(dt){
- if(!started||finished)return;
- const speed=6.1;
- if(keys.left)player.position.x-=speed*dt;
- if(keys.right)player.position.x+=speed*dt;
- if(keys.forward)player.position.z-=speed*dt;
- if(keys.back)player.position.z+=speed*dt;
- player.position.x=Math.max(-5.5,Math.min(5.5,player.position.x));
- vy-=19*dt;
- player.position.y+=vy*dt;
- onGround=false;
- // land only while descending and within platform bounds
- if(vy<=0){
-  for(const p of platforms){
-   const withinX=Math.abs(player.position.x-p.x)<p.w/2-.18;
-   const withinZ=Math.abs(player.position.z-p.z)<p.d/2-.18;
-   const feet=player.position.y;
-   if(withinX&&withinZ&&feet<=p.y+.1&&feet>=p.y-.55){
-    player.position.y=p.y;vy=0;onGround=true;
-    const idx=platforms.indexOf(p);
-    if(idx>lastCheckpoint&&idx<platforms.length-1){lastCheckpoint=idx;updateStats();}
-    break;
-   }
+  // Generate more platforms
+  for (let i=5; i<80; i++) {
+    let prev = platforms[i-1];
+    platforms.push({
+      x: prev.x + 135 + Math.random()*65,
+      y: Math.max(ground-300, prev.y - 35 - Math.random()*55),
+      w: 85 + Math.random()*45,
+      h: 18
+    });
   }
- }
- if(onGround){
-  body.position.y=.85+Math.sin(elapsed*9)*.025;
-  body.rotation.z+=(0-body.rotation.z)*Math.min(1,dt*8);
- }else body.rotation.z+=(keys.left?.2:keys.right?-.2:0-body.rotation.z)*Math.min(1,dt*3);
- if(player.position.y < -7){
-  resetPlayer();setMessage('TRY AGAIN','You fell! Back to your latest checkpoint.');document.getElementById('message').style.opacity='1';
-  setTimeout(()=>{if(started&&!finished)document.getElementById('message').style.opacity='0';},1200);
- }
- gems.forEach(g=>{
-  if(g.taken)return;
-  g.mesh.rotation.y+=dt*1.7;g.mesh.rotation.x+=dt;
-  if(player.position.distanceTo(g.mesh.position)<1.15){
-   g.taken=true;scene.remove(g.mesh);gemsCount++;updateStats();
-  }
- });
- flags.forEach(({p,flag})=>{
-  if(Math.abs(player.position.z-p.z)<1.2&&Math.abs(player.position.x-p.x)<p.w/2){
-   flag.material=edgeMat;
-  }
- });
- gate.rotation.z=Math.sin(elapsed*2)*.08;
- if(player.position.z < -63 && Math.abs(player.position.x)<3.2 && player.position.y>1){
-  finished=true;
-  setMessage('🏆 YOU WIN!','Gems collected: '+gemsCount+' · Parkour completed!');
-  document.getElementById('message').style.opacity='1';
-  document.getElementById('menu').style.display='block';
-  document.getElementById('menu').innerHTML='<h2>🏆 LEVEL COMPLETE</h2><p>You reached the finish gate!<br>Gems collected: <b>'+gemsCount+'</b></p><button id="again" style="width:100%">↻ PLAY AGAIN</button><p style="font-size:11px">Bot Power is not connected in this HTML demo.</p>';
-  document.getElementById('again').addEventListener('click',()=>location.reload());
-  document.getElementById('hint').textContent='Mission complete!';
-  updateStats();
- }
+  running = true;
+  document.getElementById("startScreen").style.display = "none";
+  requestAnimationFrame(loop);
 }
-function animate(now){
- requestAnimationFrame(animate);
- const dt=Math.min((now-lastTime)/1000,.033);lastTime=now;elapsed+=dt;
- if(started&&!finished)step(dt);
- const target=new THREE.Vector3(player.position.x,player.position.y+1.1,player.position.z);
- const desired=new THREE.Vector3(player.position.x*.65,player.position.y+4.4,player.position.z+8.2);
- camera.position.lerp(desired,Math.min(1,dt*3.2));camera.lookAt(target);
- gems.forEach(g=>{if(!g.taken)g.mesh.position.y=platforms.find(p=>Math.abs(p.z-g.mesh.position.z)<.1)?.y+1.1+Math.sin(elapsed*2+g.mesh.position.z)*.12||g.mesh.position.y;});
- renderer.render(scene,camera);
+
+function drawMenu() {
+  ctx.fillStyle = "#10152d";
+  ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = "#23365d";
+  for(let i=0;i<12;i++) {
+    ctx.fillRect(i*90, H-115-(i%3)*25, 70, 20);
+  }
 }
-requestAnimationFrame(animate);
-addEventListener('resize',()=>{
- camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
- renderer.setSize(innerWidth,innerHeight);
+
+function drawBackground() {
+  let g = ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,"#121b43");
+  g.addColorStop(1,"#5c6bc0");
+  ctx.fillStyle = g;
+  ctx.fillRect(0,0,W,H);
+
+  // Stars
+  ctx.fillStyle = "#ffffff88";
+  for(let i=0;i<45;i++) {
+    let x = ((i*137 - camera*0.15) % (W+20) + W+20)%(W+20);
+    let y = (i*71)%Math.max(1,H*0.65);
+    ctx.fillRect(x,y,2,2);
+  }
+}
+
+function drawPlatform(p) {
+  let x = p.x-camera;
+  if(x+p.w < -20 || x > W+20) return;
+  ctx.fillStyle = "#27d68a";
+  ctx.fillRect(x,p.y,p.w,p.h);
+  ctx.fillStyle = "#147b54";
+  ctx.fillRect(x,p.y+p.h-5,p.w,5);
+}
+
+function drawCar(o) {
+  let x = o.x-camera;
+  if(x+o.w < -20 || x > W+20) return;
+  ctx.fillStyle = "#ff3d59";
+  ctx.fillRect(x,o.y+12,o.w,o.h-12);
+  ctx.fillStyle = "#ffc857";
+  ctx.fillRect(x+15,o.y,o.w-30,18);
+  ctx.fillStyle = "#a9e5ff";
+  ctx.fillRect(x+20,o.y+3,20,12);
+  ctx.fillRect(x+o.w-40,o.y+3,20,12);
+  ctx.fillStyle = "#171a29";
+  ctx.beginPath();
+  ctx.arc(x+20,o.y+o.h,10,0,Math.PI*2);
+  ctx.arc(x+o.w-20,o.y+o.h,10,0,Math.PI*2);
+  ctx.fill();
+}
+
+function drawBox(o) {
+  let x = o.x-camera;
+  if(x+o.w < -20 || x > W+20) return;
+  ctx.fillStyle = "#a56b35";
+  ctx.fillRect(x,o.y,o.w,o.h);
+  ctx.strokeStyle = "#ffda9b";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(x+4,o.y+4,o.w-8,o.h-8);
+  ctx.beginPath();
+  ctx.moveTo(x+4,o.y+4);
+  ctx.lineTo(x+o.w-4,o.y+o.h-4);
+  ctx.moveTo(x+o.w-4,o.y+4);
+  ctx.lineTo(x+4,o.y+o.h-4);
+  ctx.stroke();
+}
+
+function drawPlayer() {
+  let x = player.x-camera;
+  let y = player.y;
+
+  // Shadow
+  ctx.fillStyle = "#0005";
+  ctx.fillRect(x-5,y+player.h,42,5);
+
+  // Head
+  ctx.fillStyle = "#e7ad82";
+  ctx.beginPath();
+  ctx.arc(x+16,y+10,10,0,Math.PI*2);
+  ctx.fill();
+
+  // Hair
+  ctx.fillStyle = "#211a19";
+  ctx.fillRect(x+6,y,21,7);
+
+  // Jacket
+  ctx.fillStyle = "#15191f";
+  ctx.fillRect(x+4,y+21,25,22);
+
+  // Shirt detail
+  ctx.fillStyle = "#ff5722";
+  ctx.fillRect(x+14,y+22,5,18);
+
+  // Arms
+  ctx.strokeStyle = "#e7ad82";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.moveTo(x+6,y+25);
+  ctx.lineTo(x-1,y+38);
+  ctx.moveTo(x+27,y+25);
+  ctx.lineTo(x+34,y+36);
+  ctx.stroke();
+
+  // Pants
+  ctx.fillStyle = "#253e78";
+  ctx.fillRect(x+5,y+42,10,12);
+  ctx.fillRect(x+18,y+42,10,12);
+
+  // Shoes
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(x+2,y+52,13,6);
+  ctx.fillRect(x+17,y+52,14,6);
+
+  // Name label
+  ctx.font = "bold 12px Arial";
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#fff";
+  ctx.fillText("CRAZY_FUCK",x+16,y-9);
+}
+
+function jump() {
+  if (!running) return;
+  if (player.onGround) {
+    player.vy = -13;
+    player.onGround = false;
+  }
+}
+
+function loop() {
+  if (!running) return;
+
+  drawBackground();
+
+  player.vx = 0;
+  if(keys.left) player.vx = -4;
+  if(keys.right) player.vx = 4;
+
+  player.x += player.vx;
+  player.vy += 0.55;
+  let oldY = player.y;
+  player.y += player.vy;
+  player.onGround = false;
+
+  // Platform collision
+  for(const p of platforms) {
+    if(player.x+player.w > p.x &&
+       player.x < p.x+p.w &&
+       oldY+player.h <= p.y &&
+       player.y+player.h >= p.y &&
+       player.vy >= 0) {
+      player.y = p.y-player.h;
+      player.vy = 0;
+      player.onGround = true;
+    }
+    drawPlatform(p);
+  }
+
+  // Obstacles
+  for(const o of obstacles) {
+    if(o.type === "car") drawCar(o);
+    else drawBox(o);
+  }
+
+  // Camera follows player
+  if(player.x-camera > W*0.48) {
+    camera = player.x-W*0.48;
+  }
+
+  drawPlayer();
+
+  score = Math.max(score,Math.floor(camera/10));
+  scoreText.textContent = score;
+
+  // Fall / restart
+  if(player.y > H+100) {
+    running = false;
+    document.getElementById("startScreen").style.display = "flex";
+    document.querySelector("#startScreen h1").textContent = "GAME OVER!";
+    document.querySelector("#startScreen p").innerHTML =
+      "🔥 CRAZY_FUCK<br>YOUR SCORE: "+score+"<br>আবার চেষ্টা করো!";
+    document.getElementById("play").textContent = "↻ PLAY AGAIN";
+    return;
+  }
+
+  requestAnimationFrame(loop);
+}
+
+function bindButton(id, key) {
+  const el = document.getElementById(id);
+  el.addEventListener("pointerdown", e => {
+    e.preventDefault();
+    keys[key] = true;
+    el.setPointerCapture(e.pointerId);
+  });
+  function stop(e) {
+    keys[key] = false;
+  }
+  el.addEventListener("pointerup", stop);
+  el.addEventListener("pointercancel", stop);
+  el.addEventListener("lostpointercapture", stop);
+}
+
+bindButton("left","left");
+bindButton("right","right");
+
+document.getElementById("jump").addEventListener("pointerdown",e=>{
+  e.preventDefault();
+  jump();
 });
+
+addEventListener("keydown",e=>{
+  if(e.key==="ArrowLeft" || e.key==="a") keys.left=true;
+  if(e.key==="ArrowRight" || e.key==="d") keys.right=true;
+  if(e.key==="ArrowUp" || e.key===" " ) jump();
+});
+
+addEventListener("keyup",e=>{
+  if(e.key==="ArrowLeft" || e.key==="a") keys.left=false;
+  if(e.key==="ArrowRight" || e.key==="d") keys.right=false;
+});
+
+document.getElementById("play").addEventListener("click",resetGame);
+
+resize();
+drawMenu();
 </script>
 </body>
 </html>
