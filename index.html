@@ -1,381 +1,392 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>CRAZY ARIB 3D</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>CRAZY CITY 3D</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;overflow:hidden;background:#8bb9d2;font-family:Arial;color:white;touch-action:none}
-canvas{display:block}
-#hud{position:fixed;top:10px;left:10px;right:10px;pointer-events:none}
-.panel{background:#101d2cdd;border:1px solid #ffffff55;border-radius:12px;padding:10px;font-weight:bold}
-#stats{position:absolute;right:0;top:0;font-size:12px;line-height:1.8}
-#brand{display:inline-block;color:#ffd447}
-#mission{position:absolute;top:66px;left:50%;transform:translateX(-50%);width:90%;text-align:center;font-size:12px}
-#controls{position:fixed;inset:0;pointer-events:none}
-#stick{position:absolute;bottom:22px;left:20px;width:125px;height:125px;border:2px solid #ffffff99;background:#101d2c88;border-radius:50%;pointer-events:auto}
-#knob{position:absolute;left:36px;top:36px;width:50px;height:50px;border-radius:50%;background:#ffffffbb}
-button{border:1px solid #ffffff99;color:white;font-weight:bold;background:#172b43e8;touch-action:none}
-.action{position:absolute;border-radius:50%;pointer-events:auto}
-#jump{right:20px;bottom:25px;width:76px;height:76px;background:#e87522;font-size:14px}
-#run{right:105px;bottom:83px;width:64px;height:64px;background:#159b70;font-size:13px}
-#use{right:110px;bottom:17px;width:54px;height:54px;background:#425fce;font-size:12px}
-#switch{position:absolute;right:10px;top:86px;padding:9px;border-radius:9px;pointer-events:auto;font-size:11px}
-#screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#07111ddd;z-index:5;padding:20px}
-#card{width:100%;max-width:400px;text-align:center;padding:24px;border-radius:20px;background:#18283b;border:1px solid #ffffff44}
-h1{color:#ffd447}
-select,#start{width:100%;padding:13px;margin-top:10px;border-radius:10px;font-weight:bold}
-select{background:#101d2c;color:white}
-#start{background:#ffd447;border:0;color:#101820}
-#message{position:fixed;top:40%;left:5%;width:90%;text-align:center;font-size:28px;font-weight:bold;color:#ffdc53;text-shadow:0 3px 6px black;display:none;z-index:3}
-#toast{position:fixed;bottom:165px;left:10%;width:80%;text-align:center;background:#101d2cdd;padding:10px;border-radius:10px;display:none;pointer-events:none}
+body{margin:0;overflow:hidden;background:#9fc5df;font-family:Arial}
+#hud{position:fixed;top:10px;left:10px;color:white;background:#101820dd;padding:12px;border-radius:12px;z-index:5;line-height:1.7}
+#msg{color:#ffe66d;font-weight:bold}
+#controls{position:fixed;bottom:15px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:end;z-index:5}
+.pad{display:grid;grid-template-columns:48px 48px 48px;gap:4px}
+button{background:#17232ddd;color:white;border:1px solid #ffffff88;border-radius:12px;min-width:45px;min-height:45px;font-weight:bold;touch-action:none}
+#actions{display:grid;grid-template-columns:repeat(2,58px);gap:6px}
+#start{position:fixed;inset:0;background:#101820f5;color:white;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#start button{padding:10px 18px;background:#087f5b;margin:3px}
+#end{display:none;position:fixed;inset:0;z-index:9;background:#101820ee;color:white;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+#end button{padding:12px 22px}
 </style>
 </head>
 <body>
+
 <div id="hud">
-  <div id="brand" class="panel">🔥 CRAZY ARIB 3D</div>
-  <div id="stats" class="panel">
-    CHARACTER: <span id="name">CRAZY ARIB</span><br>
-    POWER: <span id="power">0/5</span><br>
-    STATUS: <span id="status">READY</span>
-  </div>
-  <div id="mission" class="panel">Collect 5 Power and return to your blue-roof home!</div>
+<b>🔥 CRAZY CITY 3D</b><br>
+Character: <span id="who">CRAZY ARIB</span><br>
+Power: <span id="power">0</span>/1<br>
+Police: <span id="wanted">SAFE</span><br>
+<span id="msg">Power building খুঁজে বের করো</span>
 </div>
 
 <div id="controls">
-  <div id="stick"><div id="knob"></div></div>
-  <button id="run" class="action">RUN</button>
-  <button id="jump" class="action">JUMP</button>
-  <button id="use" class="action">USE</button>
-  <button id="switch">CHANGE CHARACTER</button>
+ <div class="pad">
+  <span></span><button id="up">▲</button><span></span>
+  <button id="left">◀</button><button id="down">▼</button><button id="right">▶</button>
+ </div>
+ <div id="actions">
+  <button id="run">RUN</button><button id="jump">JUMP</button>
+  <button id="crouch">CROUCH</button><button id="use">USE</button>
+ </div>
 </div>
-<div id="toast"></div>
-<div id="message"></div>
 
-<div id="screen">
-  <div id="card">
-    <h1>CRAZY ARIB 3D</h1>
-    <p>Explore houses, collect Power, avoid police and return home to win!</p>
-    <select id="choose">
-      <option>CRAZY ARIB</option>
-      <option>CRAZY NAZIM</option>
-      <option>CRAZY HABIB</option>
-    </select>
-    <button id="start">▶ START GAME</button>
-    <p style="font-size:11px;color:#aab9ca">3D game prototype. Internet required to load Three.js.</p>
-  </div>
+<div id="start">
+ <h1>🔥 CRAZY CITY 3D</h1>
+ <p>Open City • Power Mission • Police Chase</p>
+ <p>নিজের Character বেছে নাও</p>
+ <button onclick="begin('CRAZY ARIB')">CRAZY ARIB</button>
+ <button onclick="begin('CRAZY NAZIM')">CRAZY NAZIM</button>
+ <button onclick="begin('CRAZY HABIB')">CRAZY HABIB</button>
+ <p>চালাতে ইন্টারনেট লাগবে</p>
+</div>
+
+<div id="end">
+ <h1 id="endTitle">MISSION COMPLETE</h1>
+ <p id="endText"></p>
+ <button onclick="location.reload()">PLAY AGAIN</button>
 </div>
 
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
 const scene=new THREE.Scene();
-scene.background=new THREE.Color(0x8bb9d2);
-scene.fog=new THREE.Fog(0x8bb9d2,70,190);
+scene.background=new THREE.Color(0x9fc5df);
+scene.fog=new THREE.Fog(0x9fc5df,100,270);
 
-const camera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,400);
+const camera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,600);
 const renderer=new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(innerWidth,innerHeight);
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
 renderer.shadowMap.enabled=true;
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 renderer.outputColorSpace=THREE.SRGBColorSpace;
-document.body.prepend(renderer.domElement);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
 
-scene.add(new THREE.HemisphereLight(0xffffff,0x536246,2));
-const sun=new THREE.DirectionalLight(0xffedcf,3);
-sun.position.set(-30,60,30);
+scene.add(new THREE.HemisphereLight(0xdcecff,0x59634c,2));
+const sun=new THREE.DirectionalLight(0xfff0d4,3);
+sun.position.set(70,100,50);
 sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);
 scene.add(sun);
 
-const material=(c,em=0)=>new THREE.MeshStandardMaterial({
- color:c,roughness:.8,emissive:em,emissiveIntensity:1.5
-});
-const grass=material(0x658a50),road=material(0x343a42);
-const wall=material(0xd5c1a0),roof=material(0x84493a);
-const glass=material(0x73bddb),dark=material(0x202833);
-const powerMat=material(0x49fff0,0x00bbaa);
-const gold=material(0xffd044,0x886000);
-const world=new THREE.Group();
-scene.add(world);
+const material=(c,r=.85)=>new THREE.MeshStandardMaterial({color:c,roughness:r});
+const groundMat=material(0x667b4d),roadMat=material(0x30353b);
+const whiteMat=material(0xe8e7d9),glassMat=material(0x5b9ebc,.22);
+const skinMat=material(0xc58d69);
+const buildingMats=[0xb8a18a,0xc7c4bb,0x9ba8ad,0xd1bba0].map(c=>material(c));
 
-function block(parent,x,y,z,sx,sy,sz,m){
- const o=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz),m);
- o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;
- parent.add(o);return o;
-}
-function ball(parent,x,y,z,r,m){
- const o=new THREE.Mesh(new THREE.SphereGeometry(r,14,10),m);
- o.position.set(x,y,z);o.castShadow=true;parent.add(o);return o;
-}
-block(world,0,-.6,0,220,.8,220,grass);
-block(world,0,-.12,0,220,.15,12,road);
-block(world,0,-.12,0,12,.15,220,road);
-const lineMat=material(0xf1dca0);
-for(let i=-100;i<100;i+=9){
- block(world,i,-.025,0,3,.025,.13,lineMat);
- block(world,0,-.02,i,.13,.025,3,lineMat);
+function box(x,y,z,w,h,d,m){
+ const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);
+ o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;scene.add(o);return o;
 }
 
-const houses=[];
-function house(x,z,i,isHome=false){
- const g=new THREE.Group();g.position.set(x,0,z);world.add(g);
- const w=10,d=9,h=5;
- block(g,0,.12,0,w,.24,d,material(0xb4a080));
- block(g,-w/2,h/2,0,.3,h,d,wall);
- block(g,w/2,h/2,0,.3,h,d,wall);
- block(g,0,h/2,-d/2,w,h,.3,wall);
- block(g,-3.3,h/2,d/2,3.4,h,.3,wall);
- block(g,3.3,h/2,d/2,3.4,h,.3,wall);
- block(g,0,h+.15,0,w+.5,.3,d+.5,material(isHome?0x285d91:0x84493a));
- const r=block(g,0,h+.8,0,w+.6,1,d+.6,material(isHome?0x285d91:0x934d3d));
- r.rotation.z=.025;
- block(g,-w/2-.03,2.7,-1.5,.08,1.2,1.5,glass);
- block(g,w/2+.03,2.7,-1.5,.08,1.2,1.5,glass);
- block(g,-2,.6,-1.5,2.5,.8,1.2,material(0x765039));
- block(g,2,.5,-2,1.5,.7,1,material(0x496e79));
- houses.push({x,z,isHome});
-}
-house(18,18,0,true);
-house(29,-18,1);house(-22,24,2);house(-30,-20,3);
-house(48,18,4);house(-49,15,5);house(20,49,6);
-house(-18,-49,7);house(52,-39,8);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(300,300),groundMat);
+ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
 
-function tree(x,z){
- const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.3,.45,2.5,8),material(0x68462d));
- trunk.position.set(x,1.2,z);world.add(trunk);
- ball(world,x,3,z,1.5,material(0x347344));
- ball(world,x-.7,3.2,z+.3,1,material(0x46854b));
+// শহরের রাস্তা
+box(0,.04,0,300,.08,14,roadMat);
+box(0,.04,0,14,.08,300,roadMat);
+for(let i=-140;i<=140;i+=12){
+ box(i,.09,0,5,.025,.14,whiteMat);
+ box(0,.09,i,.14,.025,5,whiteMat);
 }
-for(let i=0;i<45;i++){
- const x=(Math.random()-.5)*180,z=(Math.random()-.5)*180;
- if(Math.abs(x)<12||Math.abs(z)<12)continue;
- if(houses.some(h=>Math.abs(x-h.x)<8&&Math.abs(z-h.z)<8))continue;
- tree(x,z);
-}
-function car(x,z,c){
- const g=new THREE.Group();g.position.set(x,0,z);world.add(g);
- block(g,0,.65,0,4,1.1,2,material(c));
- block(g,0,1.35,-.1,2.2,.7,1.5,glass);
- for(const a of [-1.25,1.25])for(const b of [-.8,.8]){
-  const wh=new THREE.Mesh(new THREE.CylinderGeometry(.38,.38,.25,12),dark);
-  wh.rotation.z=Math.PI/2;wh.position.set(a,.35,b);g.add(wh);
+
+// সাধারণ শহরের বিল্ডিং
+for(let x=-112;x<=112;x+=28){
+ for(let z=-112;z<=112;z+=28){
+  if(Math.abs(x)<18||Math.abs(z)<18)continue;
+  const w=12+Math.random()*5,d=12+Math.random()*5,h=10+Math.random()*25;
+  box(x,.25,z,w,.5,d,material(0xb7b8b1));
+  box(x,h/2+.5,z,w,h,d,buildingMats[Math.floor(Math.random()*buildingMats.length)]);
+  box(x,h+.8,z,w+.3,.6,d+.3,material(0x484d53));
+  for(let yy=3;yy<h-1;yy+=3){
+   for(let xx=-w/2+1;xx<w/2-1;xx+=2.5){
+    box(x+xx,yy,z+d/2+.03,1,1.35,.06,glassMat);
+   }
+  }
  }
 }
-car(10,18,0x337ab7);car(-12,-8,0xb93640);car(24,7,0x626a72);car(-8,36,0xd4b748);
 
-function human(name,police=false){
- const g=new THREE.Group();
- const shirt=material(police?0x183967:name==='CRAZY ARIB'?0x202a35:name==='CRAZY NAZIM'?0x873e32:0x28664e);
- const pants=material(police?0x101c30:0x263c59);
- const skin=material(0xc88e68);
- block(g,0,1.5,0,.75,1,.4,shirt);
- ball(g,0,2.25,0,.31,skin);
- ball(g,0,2.44,-.04,.31,material(0x211b18)).scale.y=.4;
- block(g,-.5,1.5,0,.2,.75,.22,shirt);
- block(g,.5,1.5,0,.2,.75,.22,shirt);
- block(g,-.21,.62,0,.26,.78,.28,pants);
- block(g,.21,.62,0,.26,.78,.28,pants);
- block(g,-.21,.16,.1,.3,.18,.4,dark);
- block(g,.21,.16,.1,.3,.18,.4,dark);
- const c=document.createElement('canvas');c.width=512;c.height=100;
- const cx=c.getContext('2d');cx.fillStyle='#14202c';cx.fillRect(0,0,512,100);
- cx.fillStyle='#ffda4d';cx.font='bold 42px Arial';cx.textAlign='center';
- cx.fillText(police?'POLICE':name,256,65);
- const tex=new THREE.CanvasTexture(c);
- const label=new THREE.Mesh(new THREE.PlaneGeometry(2.8,.55),
- new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}));
- label.position.set(0,2.9,0);g.add(label);
- const sc=document.createElement('canvas');sc.width=256;sc.height=90;
- const s=sc.getContext('2d');s.fillStyle='white';s.font='bold 23px Arial';s.textAlign='center';
- s.fillText(police?'POLICE':'CRAZY GAME',128,53);
- const decal=new THREE.Mesh(new THREE.PlaneGeometry(.68,.3),
- new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(sc),transparent:true,side:THREE.DoubleSide}));
- decal.position.set(0,1.57,.205);g.add(decal);
- g.userData={name,police,phase:Math.random()*6.28};
- return g;
+// রাস্তার গাছ
+function tree(x,z){
+ const trunk=box(x,1.2,z,.6,2.4,.6,material(0x65432b));
+ const leaves=new THREE.Mesh(new THREE.SphereGeometry(1.8,10,9),material(0x416b39));
+ leaves.position.set(x,3.6,z);leaves.castShadow=true;scene.add(leaves);
+}
+for(let i=-120;i<=120;i+=18){tree(i,11);tree(i,-11);}
+
+// চরিত্র: আপাতত placeholder 3D model
+const player=new THREE.Group();scene.add(player);
+const body=new THREE.Mesh(new THREE.CapsuleGeometry(.4,.65,5,10),material(0x1c304b));
+body.position.y=1.2;body.castShadow=true;player.add(body);
+const head=new THREE.Mesh(new THREE.SphereGeometry(.28,20,16),skinMat);
+head.position.y=2;head.castShadow=true;player.add(head);
+const legs=[];
+for(const x of [-.18,.18]){
+ const leg=new THREE.Mesh(new THREE.CapsuleGeometry(.14,.62,4,8),material(0x292b32));
+ leg.position.set(x,.45,0);leg.castShadow=true;player.add(leg);legs.push(leg);
+}
+const arms=[];
+for(const x of [-.48,.48]){
+ const arm=new THREE.Mesh(new THREE.CapsuleGeometry(.12,.55,4,8),skinMat);
+ arm.position.set(x,1.25,0);player.add(arm);arms.push(arm);
+}
+const labelCanvas=document.createElement('canvas');
+labelCanvas.width=512;labelCanvas.height=96;
+const lctx=labelCanvas.getContext('2d');
+const labelTexture=new THREE.CanvasTexture(labelCanvas);
+const nameLabel=new THREE.Sprite(new THREE.SpriteMaterial({map:labelTexture}));
+nameLabel.position.y=2.75;nameLabel.scale.set(3, .56, 1);player.add(nameLabel);
+
+function setLabel(name){
+ lctx.fillStyle='#101820';lctx.fillRect(0,0,512,96);
+ lctx.fillStyle='#ffffff';lctx.font='bold 44px Arial';lctx.textAlign='center';
+ lctx.fillText(name,256,64);labelTexture.needsUpdate=true;
+ document.getElementById('who').textContent=name;
 }
 
-let name='CRAZY ARIB',player=human(name);
-world.add(player);player.position.set(18,0,31);
+// Power mission buildings with visible entrance
+function missionBuilding(x,z,title){
+ box(x,2,z,14,4,12,buildingMats[1]);
+ box(x,4.3,z,14,.4,12,material(0x454a50));
+ // front wall on either side, with entrance gap
+ box(x-5,2,z+6,4,4,.35,buildingMats[1]);
+ box(x+5,2,z+6,4,4,.35,buildingMats[1]);
+ for(const xx of [x-4,x+4]){
+  box(xx,2,z+6.22,1.2,1.2,.05,glassMat);
+ }
+ const c=document.createElement('canvas');c.width=512;c.height=96;
+ const cx=c.getContext('2d');cx.fillStyle='#111923';cx.fillRect(0,0,512,96);
+ cx.fillStyle='#ffdf70';cx.font='bold 40px Arial';cx.textAlign='center';
+ cx.fillText(title,256,62);
+ const sign=new THREE.Mesh(new THREE.PlaneGeometry(8,1.5),
+ new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c)}));
+ sign.position.set(x,5,z+6.25);scene.add(sign);
+}
+missionBuilding(35,-25,'POWER BUILDING 1');
+missionBuilding(-42,38,'POWER BUILDING 2');
+
+// নিজের বাড়ি
+box(18,2,35,10,4,9,material(0xbda58a));
+box(18,4.3,35,11,.5,10,material(0x773f35));
+box(18,1.4,39.6,2.2,2.8,.15,material(0x573e2b));
+box(18,.12,44,5,.1,3,material(0x30c878));
+
+// Power item
+const coreMat=new THREE.MeshStandardMaterial({
+ color:0x29f3ff,emissive:0x007bff,emissiveIntensity:3,metalness:.4,roughness:.2
+});
+const core=new THREE.Mesh(new THREE.IcosahedronGeometry(.9,1),coreMat);
+core.position.set(35,1.5,-25);scene.add(core);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(1.3,.07,8,32),
+new THREE.MeshBasicMaterial({color:0x43eaff}));
+ring.position.copy(core.position);ring.rotation.x=Math.PI/2;scene.add(ring);
+
+// অনেক পথচারী
+const people=[];
+for(let i=0;i<55;i++){
+ const p=new THREE.Group();
+ const shirt=material(new THREE.Color().setHSL(Math.random(),.5,.43));
+ const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.25,.55,4,8),shirt);
+ torso.position.y=1.05;p.add(torso);
+ const h=new THREE.Mesh(new THREE.SphereGeometry(.2,12,10),skinMat);
+ h.position.y=1.8;p.add(h);
+ p.position.set((Math.random()-.5)*230,0,(Math.random()-.5)*230);
+ scene.add(p);people.push({p,dir:Math.random()*6.28});
+}
+
+// তিনজন পুলিশ
 const police=[];
-[[-5,5],[38,-4],[-40,-5],[5,-42],[47,42]].forEach(([x,z])=>{
- const p=human('POLICE',true);p.position.set(x,0,z);
- p.userData.homeX=x;p.userData.homeZ=z;world.add(p);police.push(p);
-});
+function makePolice(name,x,z){
+ const p=new THREE.Group();
+ const uniform=material(0x172c4b);
+ const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.34,.65,4,8),uniform);
+ torso.position.y=1.2;p.add(torso);
+ const h=new THREE.Mesh(new THREE.SphereGeometry(.24,16,12),skinMat);
+ h.position.y=2;p.add(h);
+ const cap=new THREE.Mesh(new THREE.CylinderGeometry(.25,.25,.12,16),material(0x101a2a));
+ cap.position.y=2.23;p.add(cap);
+ const badge=box(0,1.35,.34,.12,.18,.04,material(0xffd45b));
+ p.position.set(x,0,z);scene.add(p);
 
-const powers=[];
-function power(x,z){
- const g=new THREE.Group();g.position.set(x,.8,z);world.add(g);
- const ring=new THREE.Mesh(new THREE.TorusGeometry(.5,.08,8,22),gold);
- ring.rotation.x=Math.PI/2;g.add(ring);
- const core=new THREE.Mesh(new THREE.OctahedronGeometry(.36,1),powerMat);
- core.position.y=.15;g.add(core);
- const beam=new THREE.Mesh(new THREE.CylinderGeometry(.04,.35,1.2,12,1,true),
- new THREE.MeshBasicMaterial({color:0x49fff0,transparent:true,opacity:.2,side:THREE.DoubleSide}));
- beam.position.y=.35;g.add(beam);
- powers.push({g,x,z,got:false,phase:Math.random()*6});
+ const c=document.createElement('canvas');c.width=512;c.height=90;
+ const cx=c.getContext('2d');cx.fillStyle='#101820';cx.fillRect(0,0,512,90);
+ cx.fillStyle='#fff';cx.font='bold 42px Arial';cx.textAlign='center';cx.fillText(name,256,60);
+ const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(c)}));
+ sp.position.y=2.8;sp.scale.set(3,.53,1);p.add(sp);
+ police.push({p,name,origin:new THREE.Vector3(x,0,z)});
 }
-[[16,17],[19,16],[27,-18],[29,-20],[-20,23],[-18,25],[-28,-21],[-26,-19],[48,17],[50,19],[-48,14],[20,47],[-18,-47],[52,-37]].forEach(p=>power(...p));
+makePolice('CRAZY NAZIM',55,15);
+makePolice('CRAZY ARIB',-55,-15);
+makePolice('CRAZY HABIB',10,-65);
 
-// Walls block the player's movement.
-const walls=[];
-houses.forEach(h=>{
- walls.push({x:h.x-5,z:h.z,w:.5,d:9},{x:h.x+5,z:h.z,w:.5,d:9},
- {x:h.x,z:h.z-4.5,w:10,d:.5},
- {x:h.x-3.3,z:h.z+4.5,w:3.4,d:.5},
- {x:h.x+3.3,z:h.z+4.5,w:3.4,d:.5});
-});
-
-const $=id=>document.getElementById(id);
-let state='menu',count=0,run=false,joy={x:0,y:0,active:false};
-let vy=0,py=0,toastTime=0;
-function toast(t){$('toast').textContent=t;$('toast').style.display='block';toastTime=2;}
-function start(){
- name=$('choose').value;
- world.remove(player);player=human(name);world.add(player);
- player.position.set(18,0,31);player.rotation.y=Math.PI;
- powers.forEach(p=>{p.got=false;p.g.visible=true;});
- police.forEach((p,i)=>p.position.set([ -5,38,-40,5,47][i],0,[5,-4,-5,-42,42][i]));
- count=0;py=0;vy=0;state='playing';
- $('power').textContent='0/5';$('name').textContent=name;$('status').textContent='COLLECT';
- $('screen').style.display='none';$('message').style.display='none';
- $('mission').textContent='Collect 5 Power, avoid police, return to the blue-roof home!';
- toast('Mission started! Find the glowing Power.');
-}
-$('start').onclick=start;
-
-$('switch').onclick=()=>{
- if(state!=='playing')return;
- const names=['CRAZY ARIB','CRAZY NAZIM','CRAZY HABIB'];
- name=names[(names.indexOf(name)+1)%3];
- const pos=player.position.clone(),rot=player.rotation.y;
- world.remove(player);player=human(name);world.add(player);
- player.position.copy(pos);player.rotation.y=rot;$('name').textContent=name;
- toast('Character: '+name);
-};
-
-const stick=$('stick'),knob=$('knob');
-function stickMove(e){
- const r=stick.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
- const max=39,len=Math.hypot(dx,dy)||1,k=Math.min(1,max/len);
- joy.x=dx*k/max;joy.y=dy*k/max;
- knob.style.left=(36+dx*k)+'px';knob.style.top=(36+dy*k)+'px';
-}
-stick.onpointerdown=e=>{joy.active=true;stick.setPointerCapture(e.pointerId);stickMove(e)};
-stick.onpointermove=e=>{if(joy.active)stickMove(e)};
-function stickEnd(){joy.active=false;joy.x=joy.y=0;knob.style.left='36px';knob.style.top='36px'}
-stick.onpointerup=stickEnd;stick.onpointercancel=stickEnd;
-
+// Controls
 const keys={};
+for(const id of ['up','down','left','right','run','jump','crouch','use']){
+ const b=document.getElementById(id);
+ b.addEventListener('pointerdown',e=>{e.preventDefault();keys[id]=true;});
+ for(const ev of ['pointerup','pointercancel','pointerleave'])
+  b.addEventListener(ev,()=>keys[id]=false);
+}
 addEventListener('keydown',e=>{
  keys[e.key.toLowerCase()]=true;
- if(e.code==='Space'&&state==='playing'&&py===0)vy=7;
- if(e.key.toLowerCase()==='e')usePower();
+ if(e.code==='Space')keys.jump=true;
 });
-addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
-$('jump').onpointerdown=e=>{e.preventDefault();if(state==='playing'&&py===0)vy=7};
-$('run').onpointerdown=e=>{e.preventDefault();run=true};
-$('run').onpointerup=()=>run=false;
-$('run').onpointercancel=()=>run=false;
-$('run').onlostpointercapture=()=>run=false;
-$('use').onpointerdown=e=>{e.preventDefault();usePower()};
+addEventListener('keyup',e=>{
+ keys[e.key.toLowerCase()]=false;
+ if(e.code==='Space')keys.jump=false;
+});
 
-function usePower(){
- if(state!=='playing')return;
- const p=powers.find(p=>!p.got&&Math.hypot(player.position.x-p.x,player.position.z-p.z)<3.5);
- if(p){p.got=true;p.g.visible=false;count++;$('power').textContent=count+'/5';
- toast('POWER FOUND! '+count+'/5');
- if(count>=5){$('status').textContent='RETURN HOME';$('mission').textContent='You have enough Power! Return to your home.'}
- return}
- if(count>=5&&Math.hypot(player.position.x-18,player.position.z-31)<7){win();return}
- toast('Get closer to a glowing Power item.');
-}
-function win(){
- state='win';$('status').textContent='WIN!';
- $('message').innerHTML='🏆 MISSION WIN!<br><small style="font-size:15px">You returned home with Power!</small><br><button id="again" style="padding:12px 25px;margin-top:16px;border-radius:10px;color:#111">PLAY AGAIN</button>';
- $('message').style.display='block';$('again').onclick=start;
-}
-function jail(){
- state='jail';$('status').textContent='JAILED';
- $('message').innerHTML='🚨 POLICE CAUGHT YOU!<br><small style="font-size:15px">You went to jail.</small><br><button id="retry" style="padding:12px 25px;margin-top:16px;border-radius:10px;color:#111">TRY AGAIN</button>';
- $('message').style.display='block';
- $('retry').onclick=()=>{
-  count=0;$('power').textContent='0/5';powers.forEach(p=>{p.got=false;p.g.visible=true});
-  player.position.set(18,0,31);py=0;vy=0;state='playing';$('message').style.display='none';
-  $('status').textContent='COLLECT';$('mission').textContent='Collect 5 Power and return home!';
-  toast('You escaped jail. Try again!');
- };
-}
-function canMove(x,z){
- if(Math.abs(x)>105||Math.abs(z)>105)return false;
- for(const o of walls){
-  const cx=Math.max(o.x-o.w/2,Math.min(x,o.x+o.w/2));
-  const cz=Math.max(o.z-o.d/2,Math.min(z,o.z+o.d/2));
-  if((x-cx)**2+(z-cz)**2<.8**2)return false;
- }
- return true;
+let started=false,hasPower=false,alarm=false,caught=false,won=false;
+let jumpY=0,velocityY=0,alarmTimer=null;
+const msg=document.getElementById('msg');
+const powerText=document.getElementById('power');
+const wantedText=document.getElementById('wanted');
+
+window.begin=(name)=>{
+ started=true;setLabel(name);
+ player.position.set(18,0,48);
+ document.getElementById('start').style.display='none';
+ msg.textContent='Power building-এ যাও';
+};
+
+function finish(win){
+ if(caught||won)return;
+ if(win)won=true;else caught=true;
+ document.getElementById('end').style.display='flex';
+ document.getElementById('endTitle').textContent=win?'🏆 YOU WIN!':'🚔 JAILED!';
+ document.getElementById('endText').textContent=win?
+ 'Power নিয়ে পুলিশকে ফাঁকি দিয়ে বাড়ি ফিরেছ!':
+ 'পুলিশ তোমাকে ধরে ফেলেছে। Mission Failed!';
 }
 
-const clock=new THREE.Clock();
-function animate(){
+function playAlarm(){
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  const ac=new AC(),osc=ac.createOscillator(),gain=ac.createGain();
+  osc.type='sawtooth';gain.gain.value=.035;
+  osc.connect(gain);gain.connect(ac.destination);osc.start();
+  let high=true;
+  alarmTimer=setInterval(()=>{
+   osc.frequency.setValueAtTime(high?850:600,ac.currentTime);high=!high;
+  },350);
+  setTimeout(()=>{clearInterval(alarmTimer);osc.stop();ac.close();},12000);
+ }catch(e){}
+}
+
+const temp=new THREE.Vector3();
+let previous=performance.now();
+function animate(now){
  requestAnimationFrame(animate);
- const dt=Math.min(clock.getDelta(),.04),t=clock.elapsedTime;
- if(state==='playing'){
-  const f=(keys.w||keys.arrowup?1:0)-(keys.s||keys.arrowdown?1:0)-joy.y;
-  const side=(keys.d||keys.arrowright?1:0)-(keys.a||keys.arrowleft?1:0)+joy.x;
-  const moving=Math.abs(f)+Math.abs(side)>.1;
-  const speed=(run||keys.shift?9.5:5)*dt;
-  const dir=new THREE.Vector3(side,0,f);
-  if(dir.length()>1)dir.normalize();
-  dir.applyAxisAngle(new THREE.Vector3(0,1,0),camera.rotation.y);
-  const nx=player.position.x+dir.x*speed,nz=player.position.z+dir.z*speed;
-  if(canMove(nx,player.position.z))player.position.x=nx;
-  if(canMove(player.position.x,nz))player.position.z=nz;
-  if(moving)player.rotation.y=Math.atan2(dir.x,dir.z);
-  vy-=18*dt;py+=vy*dt;if(py<0){py=0;vy=0}
-  player.position.y=py;
-  player.userData.phase+=dt*(moving?(run?13:8):2);
-  const swing=moving?Math.sin(player.userData.phase)*.45:0;
-  player.children[3].rotation.x=swing;player.children[4].rotation.x=-swing;
-  player.children[5].rotation.x=-swing;player.children[6].rotation.x=swing;
+ const dt=Math.min((now-previous)/1000,.04);previous=now;
+ core.rotation.y+=dt;
+ core.position.y=1.5+Math.sin(now*.003)*.25;
+ ring.rotation.z+=dt*.8;
 
-  police.forEach(p=>{
-   const dx=player.position.x-p.position.x,dz=player.position.z-p.position.z,d=Math.hypot(dx,dz);
-   let vx,vz,sp;
-   if(d<18){vx=dx/(d||1);vz=dz/(d||1);sp=4.1}
-   else{vx=Math.cos(t*.45+p.userData.phase)*.5;vz=Math.sin(t*.45+p.userData.phase)*.5;sp=1.3}
-   const x=p.position.x+vx*sp*dt,z=p.position.z+vz*sp*dt;
-   if(canMove(x,p.position.z))p.position.x=x;
-   if(canMove(p.position.x,z))p.position.z=z;
-   if(d>0.1)p.rotation.y=Math.atan2(vx,vz);
-   if(d<1.55&&py<1.2)jail();
-  });
+ if(started&&!caught&&!won){
+  const forward=(keys.up||keys.w||keys['arrowup']?1:0)-
+                (keys.down||keys.s||keys['arrowdown']?1:0);
+  const side=(keys.right||keys.d||keys['arrowright']?1:0)-
+             (keys.left||keys.a||keys['arrowleft']?1:0);
+  const moving=forward!==0||side!==0;
+  const crouching=!!keys.crouch;
+  const speed=(keys.run?9:4.5)*(crouching?.5:1);
+  if(moving){
+   const direction=new THREE.Vector3(side,0,-forward).normalize();
+   player.position.addScaledVector(direction,speed*dt);
+   player.rotation.y=Math.atan2(direction.x,direction.z)+Math.PI;
+   legs[0].rotation.x=Math.sin(now*.012)*(keys.run?1:.5);
+   legs[1].rotation.x=-legs[0].rotation.x;
+   arms[0].rotation.x=-legs[0].rotation.x*.7;
+   arms[1].rotation.x=-legs[1].rotation.x*.7;
+  }else{
+   legs.forEach(l=>l.rotation.x=0);
+   arms.forEach(a=>a.rotation.x=0);
+  }
 
-  powers.forEach(p=>{
-   if(p.got)return;
-   p.g.rotation.y=t+p.phase;p.g.position.y=.8+Math.sin(t*2+p.phase)*.15;
-   if(Math.hypot(player.position.x-p.x,player.position.z-p.z)<1.4){
-    p.got=true;p.g.visible=false;count++;$('power').textContent=count+'/5';
-    toast('POWER FOUND! '+count+'/5');
-    if(count>=5){$('status').textContent='RETURN HOME';$('mission').textContent='Power ready! Return to your blue-roof home.'}
+  body.scale.y=crouching?.7:1;
+  head.position.y=crouching?1.75:2;
+  if(keys.jump&&jumpY===0){velocityY=7;jumpY=1;}
+  player.position.y+=velocityY*dt;
+  velocityY-=18*dt;
+  if(player.position.y<=0){player.position.y=0;velocityY=0;jumpY=0;}
+
+  // map boundary
+  player.position.x=THREE.MathUtils.clamp(player.position.x,-145,145);
+  player.position.z=THREE.MathUtils.clamp(player.position.z,-145,145);
+
+  // Power সংগ্রহ করলে অ্যালার্ম
+  if(!hasPower&&distance2D(player.position,core.position)<3){
+   hasPower=true;scene.remove(core);scene.remove(ring);
+   powerText.textContent='1';alarm=true;
+   wantedText.textContent='🚨 CHASE';
+   msg.textContent='ALARM! পুলিশ থেকে পালাও!';
+   playAlarm();
+  }
+
+  // Police chase
+  for(const cop of police){
+   const p=cop.p;
+   if(alarm){
+    temp.copy(player.position).sub(p.position);temp.y=0;
+    const dist=temp.length();
+    if(dist>1.6){
+     temp.normalize();p.position.addScaledVector(temp,dt*5.5);
+     p.rotation.y=Math.atan2(temp.x,temp.z);
+    }
+    if(dist<1.65)finish(false);
+   }else{
+    const t=now*.00045;
+    p.position.x=cop.origin.x+Math.sin(t+cop.origin.z)*5;
+    p.position.z=cop.origin.z+Math.cos(t+cop.origin.x)*5;
    }
-  });
-  if(count>=5&&Math.hypot(player.position.x-18,player.position.z-31)<5.5)win();
- }
- if(toastTime>0){toastTime-=dt;if(toastTime<=0)$('toast').style.display='none'}
+  }
 
- const target=new THREE.Vector3(player.position.x,player.position.y+1.9,player.position.z);
- const behind=new THREE.Vector3(0,5.5,-9).applyAxisAngle(new THREE.Vector3(0,1,0),player.rotation.y);
- camera.position.lerp(target.clone().add(behind),1-Math.exp(-dt*4));
- camera.lookAt(target);
+  // Power নিয়ে নিজের বাড়িতে ফিরলে Win
+  if(hasPower&&distance2D(player.position,new THREE.Vector3(18,0,44))<5){
+   finish(true);
+  }
+
+  // pedestrian movement
+  people.forEach(o=>{
+   o.p.position.x+=Math.cos(o.dir)*dt*.8;
+   o.p.position.z+=Math.sin(o.dir)*dt*.8;
+   if(Math.random()<.004)o.dir=Math.random()*6.28;
+  });
+
+  // third person follow camera
+  const behind=new THREE.Vector3(
+   Math.sin(player.rotation.y)*8,5.2,
+   Math.cos(player.rotation.y)*8
+  );
+  const target=player.position.clone().add(behind);
+  camera.position.lerp(target,.09);
+  camera.lookAt(player.position.x,player.position.y+1.2,player.position.z);
+ }else if(!started){
+  camera.position.set(0,45,75);camera.lookAt(0,0,0);
+ }
  renderer.render(scene,camera);
 }
-animate();
+function distance2D(a,b){
+ return Math.hypot(a.x-b.x,a.z-b.z);
+}
+requestAnimationFrame(animate);
+
 addEventListener('resize',()=>{
- camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+ camera.aspect=innerWidth/innerHeight;
+ camera.updateProjectionMatrix();
  renderer.setSize(innerWidth,innerHeight);
 });
 </script>
